@@ -1456,9 +1456,73 @@ function register(event) {
   event.preventDefault();
 
 
-  showToast(
-    "登録処理は本番版でメール認証と接続します。"
+  const name =
+    document.getElementById(
+      "registerName"
+    ).value.trim();
+
+  const age =
+    document.getElementById(
+      "registerAge"
+    ).value;
+
+  const country =
+    document.getElementById(
+      "registerCountry"
+    ).value.trim();
+
+  const level =
+    document.getElementById(
+      "registerLevel"
+    ).value;
+
+  const email =
+    document.getElementById(
+      "registerEmail"
+    ).value.trim()
+    .toLowerCase();
+
+  const password =
+    document.getElementById(
+      "registerPassword"
+    ).value;
+
+
+  const student = {
+
+    role: "student",
+
+    name: name,
+
+    age: age,
+
+    country: country,
+
+    level: level,
+
+    email: email,
+
+    password: password
+
+  };
+
+
+  localStorage.setItem(
+    "kotobaStudent",
+    JSON.stringify(student)
   );
+
+
+  showToast(
+    "生徒登録が完了しました。ログインしてください。"
+  );
+
+
+  setTimeout(() => {
+
+    showPage("login");
+
+  }, 1000);
 
 }
 
@@ -1472,9 +1536,100 @@ function login(event) {
   event.preventDefault();
 
 
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim()
+    .toLowerCase();
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+
+  /*
+    -----------------------------------------
+    先生アカウント
+    -----------------------------------------
+
+    今回は動作確認用の固定アカウント。
+
+    メール：
+    teacher@example.com
+
+    パスワード：
+    Teacher123!
+  */
+
+  if (
+    email === "teacher@example.com" &&
+    password === "Teacher123!"
+  ) {
+
+    setUserRole("teacher");
+
+    showPage("teacher");
+
+    return;
+
+  }
+
+
+  /*
+    -----------------------------------------
+    生徒アカウント
+    -----------------------------------------
+  */
+
+  const savedStudent =
+    localStorage.getItem(
+      "kotobaStudent"
+    );
+
+
+  if (!savedStudent) {
+
+    showToast(
+      "生徒登録が見つかりません。先に登録してください。"
+    );
+
+    return;
+
+  }
+
+
+  const student =
+    JSON.parse(savedStudent);
+
+
+  if (
+    email !== student.email ||
+    password !== student.password
+  ) {
+
+    showToast(
+      "メールアドレスまたはパスワードが違います。"
+    );
+
+    return;
+
+  }
+
+
+  setUserRole("student");
+
+
   showToast(
-    "ログイン処理は本番版で安全な認証システムと接続します。"
+    "生徒としてログインしました。"
   );
+
+
+  setTimeout(() => {
+
+    showPage("mypage");
+
+  }, 500);
 
 }
 

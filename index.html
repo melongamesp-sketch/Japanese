@@ -40,12 +40,12 @@
       ホーム
     </button>
 
-    <button onclick="showPage('lesson')">
-      第1回
-    </button>
-
     <button onclick="showPage('mypage')">
       マイページ
+    </button>
+
+    <button onclick="showPage('lesson')">
+      第1回
     </button>
 
     <button onclick="showPage('teacher')">
@@ -1103,6 +1103,7 @@
         メールアドレス
 
         <input
+          id="loginEmail"
           type="email"
           required
           placeholder="example@email.com"
@@ -1117,6 +1118,7 @@
         パスワード
 
         <input
+          id="loginPassword"
           type="password"
           required
           placeholder="パスワード"
@@ -1184,6 +1186,7 @@
         名前
 
         <input
+          id="registerName"
           type="text"
           required
           placeholder="Alex"
@@ -1198,13 +1201,13 @@
         年齢
 
         <input
+          id="registerAge"
           type="number"
           min="1"
           max="120"
           required
           placeholder="22"
-        >
-
+>
       </label>
 
 
@@ -1214,6 +1217,7 @@
         国・地域
 
         <input
+          id="registerCountry"
           type="text"
           required
           placeholder="Vietnam"
@@ -1227,7 +1231,7 @@
 
         日本語レベル
 
-        <select>
+        <selectid="registerLevel">
 
           <option>
             はじめて
@@ -1256,6 +1260,7 @@
         メールアドレス
 
         <input
+          id="registerEmail"
           type="email"
           required
         >
@@ -1269,6 +1274,7 @@
         パスワード
 
         <input
+          id="registerPassword"
           type="password"
           minlength="8"
           required
