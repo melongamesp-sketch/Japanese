@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="海外の日本語学習者向けオンライン日本語学習サイト"
+  >
+
+  <title>ことばの旅｜日本語学習</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+  <div class="logo">
+    ことばの旅
+  </div>
+
+
+  <nav class="nav">
+
+    <button onclick="showPage('home')">
+      ホーム
+    </button>
+
+    <button onclick="showPage('lesson')">
+      第1回
+    </button>
+
+    <button onclick="showPage('mypage')">
+      マイページ
+    </button>
+
+    <button onclick="showPage('teacher')">
+      先生ページ
+    </button>
+
+  </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main>
+
+
+<!-- =========================================================
+     HOME
+========================================================= -->
+
+<section
+  id="home"
+  class="page active"
+>
+
+  <div class="hero">
+
+    <div class="eyebrow">
+      JAPANESE LESSON / LESSON 01
+    </div>
+
+
+    <h1>
+      初めて日本に来る外国人
+    </h1>
+
+
+    <p class="hero-description">
+      日本に来たばかりのAlexと一緒に、
+      日本語を読んで、理解して、考えて、
+      書いてみましょう。
+    </p>
+
+
+    <div class="hero-meta">
+
+      <span>
+        第1回
+      </span>
+
+      <span>
+        初級
+      </span>
+
+      <span>
+        約90分
+      </span>
+
+    </div>
+
+
+    <button
+      class="button primary"
+      onclick="showPage('lesson')"
+    >
+      第1回を始める
+    </button>
+
+  </div>
+
+
+
+  <!-- LEARNING FLOW -->
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <div class="eyebrow">
+        LEARNING FLOW
+      </div>
+
+      <h2>
+        今日の学習
+      </h2>
+
+    </div>
+
+
+    <div class="flow-grid">
+
+
+      <div class="flow-card">
+
+        <span>
+          01
+        </span>
+
+        <h3>
+          読む
+        </h3>
+
+        <p>
+          日本に来たAlexの話を読みます。
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-card">
+
+        <span>
+          02
+        </span>
+
+        <h3>
+          理解する
+        </h3>
+
+        <p>
+          読んだ内容を確認します。
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-card">
+
+        <span>
+          03
+        </span>
+
+        <h3>
+          考える
+        </h3>
+
+        <p>
+          自分ならどうするか考えます。
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-card">
+
+        <span>
+          04
+        </span>
+
+        <h3>
+          書く
+        </h3>
+
+        <p>
+          簡単な日本語で文章を書きます。
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-card">
+
+        <span>
+          05
+        </span>
+
+        <h3>
+          読み直す
+        </h3>
+
+        <p>
+          自分の文章を確認します。
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     LESSON
+========================================================= -->
+
+<section
+  id="lesson"
+  class="page"
+>
+
+
+  <!-- LESSON HEADER -->
+
+  <div class="lesson-header">
+
+    <div>
+
+      <div class="eyebrow">
+        LESSON 01 / BEGINNER
+      </div>
+
+
+      <h1>
+        初めて日本に来る外国人
+      </h1>
+
+
+      <p>
+        第1回 / 初級 / 約90分
+      </p>
+
+    </div>
+
+
+    <div class="lesson-progress">
+
+      <span id="progressText">
+        Part 1 / 5
+      </span>
+
+
+      <div class="progress-bar">
+
+        <div
+          id="progress"
+          class="progress"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PART NAVIGATION -->
+
+  <div class="part-navigation">
+
+
+    <button
+      class="part-button active"
+      onclick="changePart(0)"
+    >
+      Part 1
+    </button>
+
+
+    <button
+      class="part-button"
+      onclick="changePart(1)"
+    >
+      Part 2
+    </button>
+
+
+    <button
+      class="part-button"
+      onclick="changePart(2)"
+    >
+      Part 3
+    </button>
+
+
+    <button
+      class="part-button"
+      onclick="changePart(3)"
+    >
+      Part 4
+    </button>
+
+
+    <button
+      class="part-button"
+      onclick="changePart(4)"
+    >
+      Part 5
+    </button>
+
+
+  </div>
+
+
+
+  <!-- LEARNING STEPS -->
+
+  <div class="learning-steps">
+
+
+    <button
+      class="learning-step active"
+      onclick="changeStep('read')"
+    >
+      ① 読む
+    </button>
+
+
+    <button
+      class="learning-step"
+      onclick="changeStep('understand')"
+    >
+      ② 理解する
+    </button>
+
+
+    <button
+      class="learning-step"
+      onclick="changeStep('think')"
+    >
+      ③ 考える
+    </button>
+
+
+    <button
+      class="learning-step"
+      onclick="changeStep('write')"
+    >
+      ④ 書く
+    </button>
+
+
+    <button
+      class="learning-step"
+      onclick="changeStep('review')"
+    >
+      ⑤ 読み直す
+    </button>
+
+
+  </div>
+
+
+
+  <!-- DYNAMIC LESSON CONTENT -->
+
+  <div id="lessonContent">
+
+  </div>
+
+
+
+  <!-- LESSON CONTROLS -->
+
+  <div class="lesson-controls">
+
+
+    <button
+      class="button secondary"
+      onclick="previousPart()"
+    >
+      ← 前のPart
+    </button>
+
+
+    <button
+      class="button primary"
+      onclick="nextPart()"
+    >
+      次のPart →
+    </button>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     QUIZ
+========================================================= -->
+
+<section
+  id="quiz"
+  class="page"
+>
+
+
+  <div class="quiz-header">
+
+    <div class="eyebrow">
+      LESSON 01 / TEST
+    </div>
+
+
+    <h1>
+      第1回 小テスト
+    </h1>
+
+
+    <p>
+      全15問です。
+      読解・語彙・文法・漢字・作文を確認します。
+    </p>
+
+  </div>
+
+
+
+  <!-- DYNAMIC QUIZ -->
+
+  <div id="quizContent">
+
+  </div>
+
+
+
+  <button
+    class="button primary quiz-submit"
+    onclick="submitQuiz()"
+  >
+    小テストを提出する
+  </button>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     QUIZ RESULT
+========================================================= -->
+
+<section
+  id="quizResult"
+  class="page"
+>
+
+
+  <div class="result-card">
+
+    <div class="eyebrow">
+      RESULT
+    </div>
+
+
+    <h1>
+      小テスト結果
+    </h1>
+
+
+    <div
+      id="score"
+      class="score"
+    >
+      0 / 12
+    </div>
+
+
+    <p id="resultMessage">
+
+    </p>
+
+
+    <button
+      class="button primary"
+      onclick="showPage('mypage')"
+    >
+      マイページへ
+    </button>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     MY PAGE
+========================================================= -->
+
+<section
+  id="mypage"
+  class="page"
+>
+
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      STUDENT
+    </div>
+
+
+    <h1>
+      マイページ
+    </h1>
+
+  </div>
+
+
+
+  <!-- STUDENT INFORMATION -->
+
+  <div class="student-card">
+
+
+    <div class="avatar">
+      A
+    </div>
+
+
+    <div>
+
+      <h2>
+        Alex
+      </h2>
+
+
+      <p>
+        ベトナム
+      </p>
+
+
+      <p>
+        22歳
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- DASHBOARD -->
+
+  <div class="dashboard-grid">
+
+
+    <div class="dashboard-card">
+
+      <span>
+        現在のレベル
+      </span>
+
+
+      <strong>
+        初級
+      </strong>
+
+    </div>
+
+
+
+    <div class="dashboard-card">
+
+      <span>
+        学習回数
+      </span>
+
+
+      <strong>
+        1回
+      </strong>
+
+    </div>
+
+
+
+    <div class="dashboard-card">
+
+      <span>
+        第1回
+      </span>
+
+
+      <strong>
+        学習中
+      </strong>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- LEARNING HISTORY -->
+
+  <div class="section">
+
+    <h2>
+      学習履歴
+    </h2>
+
+
+    <div class="history-card">
+
+
+      <div>
+
+        <span class="badge">
+          第1回
+        </span>
+
+
+        <h3>
+          初めて日本に来る外国人
+        </h3>
+
+
+        <p>
+          初級 / 約90分
+        </p>
+
+      </div>
+
+
+      <button
+        class="button primary"
+        onclick="showPage('lesson')"
+      >
+        続きから始める
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     TEACHER PAGE
+========================================================= -->
+
+<section
+  id="teacher"
+  class="page"
+>
+
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      TEACHER
+    </div>
+
+
+    <h1>
+      先生ページ
+    </h1>
+
+  </div>
+
+
+
+  <!-- TEACHER INFORMATION -->
+
+  <div class="teacher-info">
+
+
+    <div class="teacher-card">
+
+      <span>
+        ログイン中の先生
+      </span>
+
+
+      <strong>
+        先生A
+      </strong>
+
+    </div>
+
+
+
+    <div class="teacher-card">
+
+      <span>
+        登録生徒
+      </span>
+
+
+      <strong>
+        8人
+      </strong>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- CLASS ROOM -->
+
+  <div class="section">
+
+
+    <h2>
+      授業ルーム
+    </h2>
+
+
+    <div class="class-room-card">
+
+
+      <div>
+
+        <span class="badge">
+          第1回
+        </span>
+
+
+        <h3>
+          初めて日本に来る外国人
+        </h3>
+
+
+        <p>
+          生徒に以下の授業コードを伝えてください。
+        </p>
+
+
+        <div class="room-code">
+          A7K92
+        </div>
+
+      </div>
+
+
+
+      <div class="room-actions">
+
+
+        <button
+          class="button primary"
+          onclick="startClass()"
+        >
+          授業を開始
+        </button>
+
+
+        <button
+          class="button danger"
+          onclick="finishClass()"
+        >
+          授業終了
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- STUDENT LIST -->
+
+  <div class="section">
+
+
+    <h2>
+      生徒一覧
+    </h2>
+
+
+    <div class="student-table">
+
+
+      <div class="student-row header-row">
+
+        <span>
+          名前
+        </span>
+
+
+        <span>
+          年齢
+        </span>
+
+
+        <span>
+          国
+        </span>
+
+
+        <span>
+          進捗
+        </span>
+
+
+        <span>
+          小テスト
+        </span>
+
+      </div>
+
+
+
+      <div class="student-row">
+
+        <span>
+          Alex
+        </span>
+
+
+        <span>
+          22歳
+        </span>
+
+
+        <span>
+          ベトナム
+        </span>
+
+
+        <span>
+          80%
+        </span>
+
+
+        <span>
+          12 / 15
+        </span>
+
+      </div>
+
+
+
+      <div class="student-row">
+
+        <span>
+          Minh
+        </span>
+
+
+        <span>
+          25歳
+        </span>
+
+
+        <span>
+          ベトナム
+        </span>
+
+
+        <span>
+          65%
+        </span>
+
+
+        <span>
+          10 / 15
+        </span>
+
+      </div>
+
+
+
+      <div class="student-row">
+
+        <span>
+          Jin
+        </span>
+
+
+        <span>
+          21歳
+        </span>
+
+
+        <span>
+          韓国
+        </span>
+
+
+        <span>
+          100%
+        </span>
+
+
+        <span>
+          15 / 15
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- CLASS PROGRESS -->
+
+  <div class="section">
+
+
+    <h2>
+      授業の進行
+    </h2>
+
+
+    <div class="teacher-controls">
+
+
+      <button
+        class="teacher-step active"
+        onclick="teacherStep(0)"
+      >
+        ① 読む
+      </button>
+
+
+      <button
+        class="teacher-step"
+        onclick="teacherStep(1)"
+      >
+        ② 理解する
+      </button>
+
+
+      <button
+        class="teacher-step"
+        onclick="teacherStep(2)"
+      >
+        ③ 考える
+      </button>
+
+
+      <button
+        class="teacher-step"
+        onclick="teacherStep(3)"
+      >
+        ④ 書く
+      </button>
+
+
+      <button
+        class="teacher-step"
+        onclick="teacherStep(4)"
+      >
+        ⑤ 読み直す
+      </button>
+
+
+    </div>
+
+
+    <p class="teacher-note">
+
+      ※ 本番版では、先生がここで進行を変更すると、
+      授業ルームに参加している生徒の画面にも反映されます。
+
+    </p>
+
+
+  </div>
+
+
+
+  <!-- SUBMISSIONS -->
+
+  <div class="section">
+
+
+    <h2>
+      生徒の提出
+    </h2>
+
+
+    <div class="submission-card">
+
+
+      <div>
+
+        <span class="badge">
+          NEW
+        </span>
+
+
+        <h3>
+          Alexさんが第1回を提出しました
+        </h3>
+
+
+        <p>
+          小テスト：12 / 15
+        </p>
+
+      </div>
+
+
+      <button
+        class="button secondary"
+        onclick="alert('本番版では答案の詳細を表示します。')"
+      >
+        答案を見る
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<section
+  id="login"
+  class="page"
+>
+
+
+  <div class="auth-card">
+
+
+    <div class="eyebrow">
+      ACCOUNT
+    </div>
+
+
+    <h1>
+      ログイン
+    </h1>
+
+
+    <form onsubmit="login(event)">
+
+
+      <label>
+
+        メールアドレス
+
+        <input
+          type="email"
+          required
+          placeholder="example@email.com"
+        >
+
+      </label>
+
+
+
+      <label>
+
+        パスワード
+
+        <input
+          type="password"
+          required
+          placeholder="パスワード"
+        >
+
+      </label>
+
+
+
+      <button
+        class="button primary full"
+        type="submit"
+      >
+        ログイン
+      </button>
+
+
+    </form>
+
+
+
+    <button
+      class="link-button"
+      onclick="showPage('register')"
+    >
+      新しく登録する
+    </button>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     REGISTER
+========================================================= -->
+
+<section
+  id="register"
+  class="page"
+>
+
+
+  <div class="auth-card">
+
+
+    <div class="eyebrow">
+      STUDENT ACCOUNT
+    </div>
+
+
+    <h1>
+      生徒登録
+    </h1>
+
+
+    <form onsubmit="register(event)">
+
+
+      <label>
+
+        名前
+
+        <input
+          type="text"
+          required
+          placeholder="Alex"
+        >
+
+      </label>
+
+
+
+      <label>
+
+        年齢
+
+        <input
+          type="number"
+          min="1"
+          max="120"
+          required
+          placeholder="22"
+        >
+
+      </label>
+
+
+
+      <label>
+
+        国・地域
+
+        <input
+          type="text"
+          required
+          placeholder="Vietnam"
+        >
+
+      </label>
+
+
+
+      <label>
+
+        日本語レベル
+
+        <select>
+
+          <option>
+            はじめて
+          </option>
+
+          <option>
+            初級
+          </option>
+
+          <option>
+            中級
+          </option>
+
+          <option>
+            上級
+          </option>
+
+        </select>
+
+      </label>
+
+
+
+      <label>
+
+        メールアドレス
+
+        <input
+          type="email"
+          required
+        >
+
+      </label>
+
+
+
+      <label>
+
+        パスワード
+
+        <input
+          type="password"
+          minlength="8"
+          required
+        >
+
+      </label>
+
+
+
+      <button
+        class="button primary full"
+        type="submit"
+      >
+        登録する
+      </button>
+
+
+    </form>
+
+
+  </div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
