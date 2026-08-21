@@ -6,1220 +6,1425 @@
 
 
 /* =========================================================
-   LESSON DATA
+   RESET
 ========================================================= */
 
-const lessonData = [
-
-  {
-    title: "日本に到着",
-
-    text:
-      "Alexさんは、初めて日本に来ました。" +
-      "飛行機を降りて、空港に着きました。" +
-      "Alexさんは少し緊張しています。" +
-      "でも、日本でいろいろなことをしたいと思っています。",
-
-    english:
-      "Alex has come to Japan for the first time. " +
-      "After getting off the airplane, Alex arrives at the airport. " +
-      "Alex is a little nervous, but wants to do many things in Japan.",
-
-    vietnamese:
-      "Alex lần đầu tiên đến Nhật Bản. " +
-      "Sau khi xuống máy bay, Alex đến sân bay. " +
-      "Alex hơi hồi hộp, nhưng muốn làm nhiều điều ở Nhật Bản.",
-
-    korean:
-      "Alex는 처음으로 일본에 왔습니다. " +
-      "비행기에서 내린 후 공항에 도착했습니다. " +
-      "Alex는 조금 긴장했지만 일본에서 여러 가지 일을 해 보고 싶어 합니다.",
-
-    dialogue: [
-      ["Alex", "こんにちは。すみません。"],
-      ["Staff", "こんにちは。どうしましたか？"],
-      ["Alex", "駅はどこですか？"]
-    ],
-
-    thinking:
-      "あなたが初めて日本に来たら、どんな気持ちになると思いますか？",
-
-    writing:
-      "「私は〜です」「私は〜したいです」を使って、" +
-      "自分について2〜3文書いてみましょう。"
-  },
+* {
+  box-sizing: border-box;
+}
 
 
-  {
-    title: "駅を探す",
-
-    text:
-      "Alexさんは、空港の中で駅を探します。" +
-      "案内板を見つけました。" +
-      "「電車」という漢字があります。" +
-      "Alexさんは「電車」という言葉を覚えました。",
-
-    english:
-      "Alex looks for the station inside the airport. " +
-      "Alex finds a sign with the kanji 電車. " +
-      "Alex learns the word 電車, meaning train.",
-
-    vietnamese:
-      "Alex tìm nhà ga trong sân bay. " +
-      "Alex nhìn thấy một bảng hướng dẫn có chữ 電車. " +
-      "Alex học từ 電車, nghĩa là tàu điện.",
-
-    korean:
-      "Alex는 공항 안에서 역을 찾습니다. " +
-      "안내판을 발견하고 電車라는 한자를 봅니다. " +
-      "Alex는 電車라는 단어를 배웠습니다.",
-
-    dialogue: [
-      ["Alex", "東京駅へ行きたいです。"],
-      ["Staff", "この電車に乗ってください。"],
-      ["Alex", "ありがとうございます。"]
-    ],
-
-    thinking:
-      "日本で電車に乗るとき、何を確認したいですか？",
-
-    writing:
-      "「私は〜へ行きたいです。」を使って、" +
-      "行きたい場所を書いてみましょう。"
-  },
+html {
+  scroll-behavior: smooth;
+}
 
 
-  {
-    title: "電車に乗る",
-
-    text:
-      "Alexさんは、電車に乗りました。" +
-      "席に座って、窓の外を見ます。" +
-      "日本の町が見えます。" +
-      "Alexさんは「きれいですね」と言いました。",
-
-    english:
-      "Alex gets on the train. " +
-      "Alex sits down and looks outside the window. " +
-      "Alex can see a Japanese town.",
-
-    vietnamese:
-      "Alex lên tàu. " +
-      "Alex ngồi xuống và nhìn ra ngoài cửa sổ. " +
-      "Alex nhìn thấy một thành phố của Nhật Bản.",
-
-    korean:
-      "Alex는 전철을 탔습니다. " +
-      "자리에 앉아서 창밖을 봅니다. " +
-      "일본의 거리가 보입니다.",
-
-    dialogue: [
-      ["Alex", "この電車は東京駅に行きますか？"],
-      ["Passenger", "はい、行きますよ。"],
-      ["Alex", "よかったです。"]
-    ],
-
-    thinking:
-      "日本の電車で困ったとき、誰に質問したいですか？",
-
-    writing:
-      "「〜ですか？」を使って質問文を1つ作りましょう。"
-  },
+body {
+  margin: 0;
+  background: #f7f8f6;
+  color: #27322d;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans JP",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+  line-height: 1.8;
+}
 
 
-  {
-    title: "ホテル",
-
-    text:
-      "東京駅に着いたあと、Alexさんはホテルへ行きました。" +
-      "ホテルの人に名前を言いました。" +
-      "「Alexです。予約しています。」" +
-      "ホテルの人は笑顔で「はい、お待ちしていました」と言いました。",
-
-    english:
-      "After arriving at Tokyo Station, Alex goes to a hotel. " +
-      "Alex gives the name and says, 'I have a reservation.'",
-
-    vietnamese:
-      "Sau khi đến ga Tokyo, Alex đi đến khách sạn. " +
-      "Alex nói tên của mình và nói rằng đã đặt phòng.",
-
-    korean:
-      "도쿄역에 도착한 후 Alex는 호텔에 갑니다. " +
-      "호텔 직원에게 이름을 말하고 예약했다고 이야기합니다.",
-
-    dialogue: [
-      ["Alex", "こんばんは。Alexです。予約しています。"],
-      ["Hotel", "はい。お待ちしていました。"],
-      ["Alex", "ありがとうございます。"]
-    ],
-
-    thinking:
-      "ホテルに着いたら、何を伝える必要がありますか？",
-
-    writing:
-      "ホテルの人に自分の名前を伝える文章を書きましょう。"
-  },
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
 
 
-  {
-    title: "コンビニ",
+button {
+  cursor: pointer;
+}
 
-    text:
-      "ホテルで少し休んだあと、Alexさんはコンビニへ行きました。" +
-      "水とおにぎりを買いました。" +
-      "店員さんが「袋はどうしますか？」と聞きました。" +
-      "Alexさんは「大丈夫です」と答えました。",
 
-    english:
-      "After resting at the hotel, Alex goes to a convenience store. " +
-      "Alex buys water and an onigiri. " +
-      "The clerk asks if Alex wants a bag.",
+img {
+  max-width: 100%;
+}
 
-    vietnamese:
-      "Sau khi nghỉ một lúc ở khách sạn, Alex đi đến cửa hàng tiện lợi. " +
-      "Alex mua nước và cơm nắm. " +
-      "Nhân viên hỏi Alex có cần túi không.",
 
-    korean:
-      "호텔에서 잠시 쉰 후 Alex는 편의점에 갑니다. " +
-      "물과 주먹밥을 삽니다. " +
-      "점원이 봉투가 필요한지 물어봅니다.",
+/* =========================================================
+   COLOR VARIABLES
+========================================================= */
 
-    dialogue: [
-      ["Clerk", "袋はどうしますか？"],
-      ["Alex", "大丈夫です。"],
-      ["Clerk", "ありがとうございます。"]
-    ],
+:root {
 
-    thinking:
-      "日本のコンビニで何を買ってみたいですか？",
+  --green-dark: #24483b;
+  --green: #3f725d;
+  --green-light: #e8f1ec;
 
-    writing:
-      "「私は〜を買いたいです。」を使って文章を書きましょう。"
-  }
+  --cream: #fbfaf5;
+  --white: #ffffff;
 
-];
+  --text: #27322d;
+  --text-light: #68746e;
+
+  --border: #dce4df;
+
+  --gold: #c59b4a;
+  --gold-light: #f7efdc;
+
+  --danger: #b95b5b;
+
+  --shadow:
+    0 12px 35px rgba(34, 58, 47, 0.08);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 72px;
+
+  padding:
+    0
+    5%;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom:
+    1px solid var(--border);
+
+  backdrop-filter: blur(10px);
+
+}
+
+
+.logo {
+
+  color: var(--green-dark);
+
+  font-size: 1.35rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+}
+
+
+.nav {
+
+  display: flex;
+  gap: 8px;
+
+}
+
+
+.nav button {
+
+  padding:
+    8px
+    14px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  border-radius: 8px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+}
+
+
+.nav button:hover {
+
+  background: var(--green-light);
+
+  color: var(--green-dark);
+
+}
+
+
+/* =========================================================
+   PAGE SYSTEM
+========================================================= */
+
+.page {
+
+  display: none;
+
+  min-height:
+    calc(100vh - 72px);
+
+}
+
+
+.page.active {
+
+  display: block;
+
+}
+
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+.hero,
+.section,
+.lesson-header,
+.lesson-card,
+.quiz-header,
+.result-card,
+.auth-card {
+
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
+
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+.eyebrow {
+
+  margin-bottom: 10px;
+
+  color: var(--gold);
+
+  font-size: 0.76rem;
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+
+}
+
+
+h1,
+h2,
+h3 {
+
+  margin-top: 0;
+
+  color: var(--green-dark);
+
+  line-height: 1.35;
+
+}
+
+
+p {
+
+  color: var(--text);
+
+}
+
+
+button {
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+button:hover {
+
+  transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+  margin-top: 60px;
+  margin-bottom: 80px;
+
+  padding:
+    80px
+    70px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f0f6f2 100%
+    );
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 28px;
+
+  box-shadow: var(--shadow);
+
+}
+
+
+.hero h1 {
+
+  max-width: 750px;
+
+  margin-bottom: 24px;
+
+  font-size:
+    clamp(
+      2.1rem,
+      5vw,
+      4rem
+    );
+
+}
+
+
+.hero-description {
+
+  max-width: 700px;
+
+  margin-bottom: 30px;
+
+  color: var(--text-light);
+
+  font-size: 1.05rem;
+
+}
+
+
+.hero-meta {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 30px;
+
+}
+
+
+.hero-meta span {
+
+  display: inline-block;
+
+  padding:
+    6px
+    14px;
+
+  background: var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 999px;
+
+  color: var(--green-dark);
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.button {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 46px;
+
+  padding:
+    10px
+    22px;
+
+  border-radius: 10px;
+
+  border: 1px solid transparent;
+
+  font-weight: 700;
+
+}
+
+
+.button.primary {
+
+  background: var(--green-dark);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(36, 72, 59, 0.18);
+
+}
+
+
+.button.primary:hover {
+
+  background: var(--green);
+
+}
+
+
+.button.secondary {
+
+  background: #ffffff;
+
+  color: var(--green-dark);
+
+  border-color: var(--border);
+
+}
+
+
+.button.danger {
+
+  background: #fff3f3;
+
+  color: var(--danger);
+
+  border-color: #eccaca;
+
+}
+
+
+.button.full {
+
+  width: 100%;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+
+  margin-bottom: 70px;
+
+}
+
+
+.section-heading {
+
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
+
+  margin:
+    0
+    auto
+    35px;
+
+}
+
+
+.section-heading h2 {
+
+  margin-bottom: 0;
+
+  font-size: 2rem;
+
+}
+
+
+/* =========================================================
+   LEARNING FLOW
+========================================================= */
+
+.flow-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      5,
+      1fr
+    );
+
+  gap: 16px;
+
+}
+
+
+.flow-card {
+
+  padding: 24px;
+
+  background: var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(34, 58, 47, 0.05);
+
+}
+
+
+.flow-card span {
+
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: var(--gold);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+
+}
+
+
+.flow-card h3 {
+
+  margin-bottom: 8px;
+
+  font-size: 1.15rem;
+
+}
+
+
+.flow-card p {
+
+  margin: 0;
+
+  color: var(--text-light);
+
+  font-size: 0.9rem;
+
+}
+
+
+/* =========================================================
+   LESSON HEADER
+========================================================= */
+
+.lesson-header {
+
+  display: flex;
+
+  align-items: end;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding-top: 50px;
+  padding-bottom: 30px;
+
+}
+
+
+.lesson-header h1 {
+
+  margin-bottom: 8px;
+
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      3rem
+    );
+
+}
+
+
+.lesson-header p {
+
+  margin: 0;
+
+  color: var(--text-light);
+
+}
+
+
+.lesson-progress {
+
+  width: 230px;
+
+}
+
+
+.lesson-progress span {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--text-light);
+
+  font-size: 0.85rem;
+
+}
+
+
+.progress-bar {
+
+  width: 100%;
+
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #e2e8e4;
+
+  border-radius: 999px;
+
+}
+
+
+.progress {
+
+  width: 20%;
+
+  height: 100%;
+
+  background: var(--green);
+
+  border-radius: inherit;
+
+  transition: width 0.3s ease;
+
+}
+
+
+/* =========================================================
+   PART NAVIGATION
+========================================================= */
+
+.part-navigation {
+
+  display: flex;
+
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
+
+  margin:
+    0
+    auto
+    18px;
+
+  gap: 8px;
+
+  overflow-x: auto;
+
+}
+
+
+.part-button {
+
+  flex:
+    0 0 auto;
+
+  padding:
+    9px
+    18px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 999px;
+
+  color: var(--text-light);
+
+}
+
+
+.part-button.active {
+
+  background: var(--green-dark);
+
+  border-color: var(--green-dark);
+
+  color: #ffffff;
+
+}
+
+
+/* =========================================================
+   LEARNING STEPS
+========================================================= */
+
+.learning-steps {
+
+  display: flex;
+
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
+
+  margin:
+    0
+    auto
+    25px;
+
+  padding: 6px;
+
+  background: #e9eeeb;
+
+  border-radius: 14px;
+
+}
+
+
+.learning-step {
+
+  flex: 1;
+
+  padding:
+    11px
+    8px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 9px;
+
+  color: var(--text-light);
+
+  font-size: 0.9rem;
+
+}
+
+
+.learning-step.active {
+
+  background: #ffffff;
+
+  color: var(--green-dark);
+
+  font-weight: 800;
+
+  box-shadow:
+    0 3px 10px
+    rgba(0, 0, 0, 0.05);
+
+}
+
+
+/* =========================================================
+   LESSON CARD
+========================================================= */
+
+.lesson-card {
+
+  margin-bottom: 30px;
+
+  padding:
+    45px;
+
+  background: var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 22px;
+
+  box-shadow: var(--shadow);
+
+}
+
+
+.lesson-card h2 {
+
+  margin-bottom: 30px;
+
+  font-size: 2rem;
+
+}
+
+
+.lesson-card h3 {
+
+  margin-top: 30px;
+
+  font-size: 1.35rem;
+
+}
+
+
+/* =========================================================
+   READING
+========================================================= */
+
+.reading-text {
+
+  padding:
+    30px;
+
+  background: var(--cream);
+
+  border-left:
+    4px solid var(--green);
+
+  border-radius: 12px;
+
+  font-size: 1.08rem;
+
+  line-height: 2.1;
+
+}
+
+
+.translation-controls {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin:
+    20px
+    0
+    10px;
+
+}
+
+
+.translation-controls button {
+
+  padding:
+    8px
+    14px;
+
+  background: var(--green-light);
+
+  border:
+    1px solid #cdded5;
+
+  border-radius: 8px;
+
+  color: var(--green-dark);
+
+  font-weight: 700;
+
+}
+
+
+.translation {
+
+  display: none;
+
+  margin-bottom: 25px;
+
+  padding: 20px;
+
+  background: #f5f7f5;
+
+  border-radius: 12px;
+
+  color: var(--text-light);
+
+}
+
+
+.translation.active {
+
+  display: block;
+
+}
+
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+.dialogue {
+
+  margin-top: 30px;
+
+  padding: 25px;
+
+  background: #f6f8f7;
+
+  border-radius: 15px;
+
+}
+
+
+.dialogue h3 {
+
+  margin-top: 0;
+
+}
+
+
+.dialogue-line {
+
+  padding:
+    12px
+    0;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+
+.dialogue-line:last-child {
+
+  border-bottom: none;
+
+}
+
+
+.speaker {
+
+  display: inline-block;
+
+  min-width: 90px;
+
+  color: var(--green-dark);
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.write-note {
+
+  margin-top: 25px;
+
+  padding:
+    18px
+    20px;
+
+  background: var(--gold-light);
+
+  border:
+    1px solid #eadcb9;
+
+  border-radius: 12px;
+
+  color: #65532b;
+
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+textarea {
+
+  width: 100%;
+
+  min-height: 170px;
+
+  margin-top: 15px;
+
+  padding: 15px;
+
+  resize: vertical;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 12px;
+
+  outline: none;
+
+}
+
+
+textarea:focus {
+
+  border-color: var(--green);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(63, 114, 93, 0.1);
+
+}
+
+
+/* =========================================================
+   LESSON CONTROLS
+========================================================= */
+
+.lesson-controls {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
+
+  margin:
+    0
+    auto
+    70px;
+
+}
 
 
 /* =========================================================
    QUIZ
 ========================================================= */
 
-const quizData = [
+.quiz-header {
 
-  {
-    question:
-      "Alexさんは、どこに初めて来ましたか？",
+  padding-top: 55px;
 
-    choices: [
-      "日本",
-      "韓国",
-      "アメリカ"
-    ],
+}
 
-    answer: 0
-  },
 
+.quiz-header h1 {
 
-  {
-    question:
-      "Alexさんは空港で何を探しましたか？",
+  font-size: 2.8rem;
 
-    choices: [
-      "ホテル",
-      "駅",
-      "レストラン"
-    ],
+}
 
-    answer: 1
-  },
 
+.quiz-header p {
 
-  {
-    question:
-      "「電車」は何ですか？",
+  color: var(--text-light);
 
-    choices: [
-      "Train",
-      "Hotel",
-      "Airport"
-    ],
+}
 
-    answer: 0
-  },
 
+#quizContent {
 
-  {
-    question:
-      "Alexさんは電車で何を見ましたか？",
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
 
-    choices: [
-      "海",
-      "日本の町",
-      "学校"
-    ],
+  margin:
+    30px
+    auto
+    0;
 
-    answer: 1
-  },
+}
 
 
-  {
-    question:
-      "「東京駅＿＿行きたいです。」",
+.quiz-question {
 
-    choices: [
-      "に",
-      "を",
-      "が"
-    ],
+  margin-bottom: 22px;
 
-    answer: 0
-  },
+  padding: 28px;
 
+  background: #ffffff;
 
-  {
-    question:
-      "「ホテル」は英語で何ですか？",
+  border:
+    1px solid var(--border);
 
-    choices: [
-      "Station",
-      "Hotel",
-      "Store"
-    ],
+  border-radius: 18px;
 
-    answer: 1
-  },
+  box-shadow:
+    0 6px 20px
+    rgba(34, 58, 47, 0.04);
 
+}
 
-  {
-    question:
-      "「日本」の読み方は？",
 
-    choices: [
-      "にほん",
-      "にちほん",
-      "にほんご"
-    ],
+.quiz-number {
 
-    answer: 0
-  },
+  margin-bottom: 8px;
 
+  color: var(--gold);
 
-  {
-    question:
-      "「電車」の読み方は？",
+  font-size: 0.8rem;
 
-    choices: [
-      "でんしゃ",
-      "でんくるま",
-      "でんしゃあ"
-    ],
+  font-weight: 800;
 
-    answer: 0
-  },
+}
 
 
-  {
-    question:
-      "「にほん」を漢字で書いてください。",
+.quiz-question h3 {
 
-    type: "text",
+  margin-bottom: 18px;
 
-    answerText: "日本"
-  },
+  font-size: 1.1rem;
 
+}
 
-  {
-    question:
-      "「がくせい」を漢字で書いてください。",
 
-    type: "text",
+.quiz-choice {
 
-    answerText: "学生"
-  },
+  display: block;
 
+  width: 100%;
 
-  {
-    question:
-      "「私は水＿＿買いました。」",
+  margin-bottom: 9px;
 
-    choices: [
-      "を",
-      "に",
-      "で"
-    ],
+  padding:
+    12px
+    15px;
 
-    answer: 0
-  },
+  background: #ffffff;
 
+  border:
+    1px solid var(--border);
 
-  {
-    question:
-      "「Alexさんは日本に来た＿＿です。」",
+  border-radius: 10px;
 
-    choices: [
-      "ばかり",
-      "まで",
-      "だけ"
-    ],
+  color: var(--text);
 
-    answer: 0
-  },
+  text-align: left;
 
+}
 
-  {
-    question:
-      "日本に来たら、何をしたいですか？",
 
-    type: "text"
-  },
+.quiz-choice:hover {
 
+  background: var(--green-light);
 
-  {
-    question:
-      "日本で食べてみたいものは何ですか？",
+}
 
-    type: "text"
-  },
 
+.quiz-choice.selected {
 
-  {
-    question:
-      "今日覚えた日本語を1つ書いてください。",
+  background: var(--green-light);
 
-    type: "text"
-  }
+  border-color: var(--green);
 
-];
+  color: var(--green-dark);
 
+  font-weight: 700;
 
-/* =========================================================
-   STATE
-========================================================= */
+}
 
-let currentPage = "home";
 
-let currentPart = 0;
+.quiz-input {
 
-let currentStep = "read";
+  width: 100%;
 
-let answers = {};
+  padding:
+    12px
+    14px;
 
-let quizScore = 0;
+  background: #ffffff;
 
+  border:
+    1px solid var(--border);
 
-/* =========================================================
-   PAGE
-========================================================= */
+  border-radius: 10px;
 
-function showPage(page) {
+  outline: none;
 
-  currentPage = page;
+}
 
-  document
-    .querySelectorAll(".page")
-    .forEach(section => {
 
-      section.classList.remove("active");
+.quiz-input:focus {
 
-    });
+  border-color: var(--green);
 
+}
 
-  const target =
-    document.getElementById(page);
 
-  if (target) {
+.quiz-submit {
 
-    target.classList.add("active");
+  display: flex;
 
-  }
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
 
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-
-  if (page === "lesson") {
-
-    renderLesson();
-
-  }
-
-
-  if (page === "quiz") {
-
-    renderQuiz();
-
-  }
+  margin:
+    30px
+    auto
+    70px;
 
 }
 
 
 /* =========================================================
-   LESSON
+   RESULT
 ========================================================= */
 
-function renderLesson() {
+.result-card {
 
-  const data =
-    lessonData[currentPart];
+  margin-top: 80px;
 
-  const container =
-    document.getElementById("lessonContent");
+  padding:
+    70px
+    40px;
 
+  background: #ffffff;
 
-  document
-    .querySelectorAll(".part-button")
-    .forEach((button, index) => {
+  border:
+    1px solid var(--border);
 
-      button.classList.toggle(
-        "active",
-        index === currentPart
-      );
+  border-radius: 25px;
 
-    });
+  box-shadow: var(--shadow);
 
+  text-align: center;
 
-  document
-    .querySelectorAll(".learning-step")
-    .forEach(button => {
-
-      button.classList.remove("active");
-
-    });
+}
 
 
-  const stepIndex = {
+.score {
 
-    read: 0,
-    understand: 1,
-    think: 2,
-    write: 3,
-    review: 4
+  margin:
+    25px
+    0;
 
-  };
+  color: var(--green-dark);
 
+  font-size: 4rem;
 
-  document
-    .querySelectorAll(".learning-step")
-    [stepIndex[currentStep]]
-    .classList.add("active");
-
-
-  document.getElementById(
-    "progressText"
-  ).textContent =
-    `Part ${currentPart + 1} / ${lessonData.length}`;
-
-
-  document.getElementById(
-    "progress"
-  ).style.width =
-    `${((currentPart + 1) / lessonData.length) * 100}%`;
-
-
-  let content = "";
-
-
-  if (currentStep === "read") {
-
-    content = renderRead(data);
-
-  }
-
-  else if (currentStep === "understand") {
-
-    content = renderUnderstand(data);
-
-  }
-
-  else if (currentStep === "think") {
-
-    content = renderThink(data);
-
-  }
-
-  else if (currentStep === "write") {
-
-    content = renderWrite(data);
-
-  }
-
-  else if (currentStep === "review") {
-
-    content = renderReview();
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="lesson-card">
-
-      <div class="eyebrow">
-        PART ${currentPart + 1}
-      </div>
-
-      <h2>
-        ${data.title}
-      </h2>
-
-      ${content}
-
-    </div>
-
-  `;
+  font-weight: 900;
 
 }
 
 
 /* =========================================================
-   READ
+   MY PAGE
 ========================================================= */
 
-function renderRead(data) {
+.student-card {
 
-  const dialogue =
-    data.dialogue
-      .map(line => `
+  display: flex;
 
-        <div class="dialogue-line">
+  align-items: center;
 
-          <span class="speaker">
-            ${line[0]}
-          </span>
+  gap: 20px;
 
-          ：${line[1]}
+  width: min(
+    1100px,
+    calc(100% - 40px)
+  );
 
-        </div>
+  margin:
+    40px
+    auto;
 
-      `)
-      .join("");
+  padding: 30px;
 
+  background: #ffffff;
 
-  return `
+  border:
+    1px solid var(--border);
 
-    <h3>
-      文章を読んでみよう
-    </h3>
-
-    <div class="reading-text">
-
-      ${data.text}
-
-    </div>
-
-
-    <div class="translation-controls">
-
-      <button
-        onclick="showTranslation('english')"
-      >
-        English
-      </button>
-
-      <button
-        onclick="showTranslation('vietnamese')"
-      >
-        Tiếng Việt
-      </button>
-
-      <button
-        onclick="showTranslation('korean')"
-      >
-        한국어
-      </button>
-
-    </div>
-
-
-    <div
-      id="translation"
-      class="translation"
-    ></div>
-
-
-    <div class="dialogue">
-
-      <h3>
-        会話を読んでみよう
-      </h3>
-
-      ${dialogue}
-
-    </div>
-
-
-    <div class="write-note">
-
-      🔊
-      先生と一緒に音読してみましょう。
-
-      カメラがなくても、
-      マイクだけで参加できます。
-
-    </div>
-
-  `;
+  border-radius: 20px;
 
 }
 
 
-/* =========================================================
-   TRANSLATION
-========================================================= */
+.avatar {
 
-function showTranslation(language) {
+  display: flex;
 
-  const data =
-    lessonData[currentPart];
+  align-items: center;
+  justify-content: center;
 
-  const translation =
-    document.getElementById(
-      "translation"
+  width: 70px;
+  height: 70px;
+
+  flex:
+    0 0 70px;
+
+  background: var(--green-dark);
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  font-size: 1.6rem;
+
+  font-weight: 800;
+
+}
+
+
+.student-card h2 {
+
+  margin-bottom: 2px;
+
+}
+
+
+.student-card p {
+
+  margin:
+    2px
+    0;
+
+  color: var(--text-light);
+
+}
+
+
+.dashboard-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
     );
 
+  gap: 18px;
 
-  if (language === "english") {
-
-    translation.textContent =
-      data.english;
-
-  }
-
-  else if (language === "vietnamese") {
-
-    translation.textContent =
-      data.vietnamese;
-
-  }
-
-  else if (language === "korean") {
-
-    translation.textContent =
-      data.korean;
-
-  }
-
-
-  translation.classList.add("active");
-
-}
-
-
-/* =========================================================
-   UNDERSTAND
-========================================================= */
-
-function renderUnderstand(data) {
-
-  return `
-
-    <h3>
-      内容を理解しよう
-    </h3>
-
-    <p>
-      先生と一緒に、次のことを確認しましょう。
-    </p>
-
-
-    <div class="quiz-question">
-
-      <strong>
-        Alexさんは、今どこにいますか？
-      </strong>
-
-      <button
-        class="quiz-choice"
-        onclick="selectUnderstanding(this)"
-      >
-        日本です。
-      </button>
-
-      <button
-        class="quiz-choice"
-        onclick="selectUnderstanding(this)"
-      >
-        アメリカです。
-      </button>
-
-      <button
-        class="quiz-choice"
-        onclick="selectUnderstanding(this)"
-      >
-        韓国です。
-      </button>
-
-    </div>
-
-
-    <div class="write-note">
-
-      💡
-      わからないときは、
-      もう一度①「読む」に戻ってみましょう。
-
-    </div>
-
-  `;
-
-}
-
-
-function selectUnderstanding(button) {
-
-  document
-    .querySelectorAll(".quiz-choice")
-    .forEach(button => {
-
-      button.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  button.classList.add(
-    "selected"
+  width: min(
+    1100px,
+    calc(100% - 40px)
   );
 
-}
-
-
-/* =========================================================
-   THINK
-========================================================= */
-
-function renderThink(data) {
-
-  return `
-
-    <h3>
-      考えてみよう
-    </h3>
-
-    <p>
-      ${data.thinking}
-    </p>
-
-
-    <textarea
-      id="thinkingAnswer"
-      placeholder="日本語で書いてみましょう。"
-    ></textarea>
-
-
-    <div class="write-note">
-
-      すぐに正しい答えを考えなくても大丈夫です。
-      自分の考えを日本語にしてみましょう。
-
-    </div>
-
-  `;
+  margin:
+    0
+    auto
+    50px;
 
 }
 
 
-/* =========================================================
-   WRITE
-========================================================= */
+.dashboard-card {
 
-function renderWrite(data) {
+  padding: 25px;
 
-  return `
+  background: #ffffff;
 
-    <h3>
-      書いてみよう
-    </h3>
+  border:
+    1px solid var(--border);
 
-    <p>
-      ${data.writing}
-    </p>
-
-
-    <textarea
-      id="writingAnswer"
-      placeholder="ここに日本語を書いてください。"
-    ></textarea>
-
-
-    <div class="write-note">
-
-      ✏️
-      書き終わったら、
-      先生と一緒に確認しましょう。
-
-    </div>
-
-  `;
+  border-radius: 16px;
 
 }
 
 
-/* =========================================================
-   REVIEW
-========================================================= */
+.dashboard-card span {
 
-function renderReview() {
+  display: block;
 
-  return `
+  margin-bottom: 8px;
 
-    <h3>
-      読み直そう
-    </h3>
+  color: var(--text-light);
 
-    <div class="quiz-question">
+  font-size: 0.85rem;
 
-      <h3>
-        チェックポイント
-      </h3>
-
-      <p>
-        □ 助詞を確認しましたか？
-      </p>
-
-      <p>
-        □ 漢字を確認しましたか？
-      </p>
-
-      <p>
-        □ 文の最後を確認しましたか？
-      </p>
-
-      <p>
-        □ 自分が言いたいことを書けていますか？
-      </p>
-
-    </div>
+}
 
 
-    <div class="write-note">
+.dashboard-card strong {
 
-      先生に見てもらう準備ができたら、
-      次のPartへ進みましょう。
+  color: var(--green-dark);
 
-    </div>
+  font-size: 1.5rem;
 
-  `;
+}
+
+
+.history-card {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 25px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+}
+
+
+.history-card h3 {
+
+  margin:
+    10px
+    0
+    4px;
+
+}
+
+
+.history-card p {
+
+  margin: 0;
+
+  color: var(--text-light);
 
 }
 
 
 /* =========================================================
-   STEP
+   BADGE
 ========================================================= */
 
-function changeStep(step) {
+.badge {
 
-  currentStep = step;
+  display: inline-block;
 
-  renderLesson();
+  padding:
+    4px
+    10px;
 
-}
+  background: var(--green-light);
 
+  border-radius: 999px;
 
-/* =========================================================
-   PART
-========================================================= */
+  color: var(--green-dark);
 
-function changePart(index) {
+  font-size: 0.75rem;
 
-  currentPart = index;
-
-  currentStep = "read";
-
-  renderLesson();
-
-}
-
-
-function nextPart() {
-
-  if (
-    currentPart <
-    lessonData.length - 1
-  ) {
-
-    currentPart++;
-
-    currentStep = "read";
-
-    renderLesson();
-
-  }
-
-  else {
-
-    showPage("quiz");
-
-  }
-
-}
-
-
-function previousPart() {
-
-  if (currentPart > 0) {
-
-    currentPart--;
-
-    currentStep = "read";
-
-    renderLesson();
-
-  }
-
-}
-
-
-/* =========================================================
-   QUIZ RENDER
-========================================================= */
-
-function renderQuiz() {
-
-  const container =
-    document.getElementById(
-      "quizContent"
-    );
-
-
-  container.innerHTML =
-    quizData
-      .map((question, index) => {
-
-        return `
-
-          <div class="quiz-question">
-
-            <div class="quiz-number">
-              Q${index + 1}
-            </div>
-
-            <h3>
-              ${question.question}
-            </h3>
-
-
-            ${
-              question.type === "text"
-
-              ?
-
-              `
-
-                <input
-                  class="quiz-input"
-                  id="answer-${index}"
-                  type="text"
-                  placeholder="日本語で入力してください"
-                >
-
-              `
-
-              :
-
-              question.choices
-                .map((choice, choiceIndex) => `
-
-                  <button
-                    class="quiz-choice"
-                    onclick="
-                      selectQuizAnswer(
-                        ${index},
-                        ${choiceIndex},
-                        this
-                      )
-                    "
-                  >
-
-                    ${choice}
-
-                  </button>
-
-                `)
-                .join("")
-
-            }
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-}
-
-
-/* =========================================================
-   QUIZ ANSWER
-========================================================= */
-
-function selectQuizAnswer(
-  questionIndex,
-  answerIndex,
-  button
-) {
-
-  answers[questionIndex] =
-    answerIndex;
-
-
-  const parent =
-    button.parentElement;
-
-
-  parent
-    .querySelectorAll(".quiz-choice")
-    .forEach(button => {
-
-      button.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  button.classList.add(
-    "selected"
-  );
-
-}
-
-
-/* =========================================================
-   QUIZ SUBMIT
-========================================================= */
-
-function submitQuiz() {
-
-  quizScore = 0;
-
-
-  quizData.forEach(
-    (question, index) => {
-
-      if (
-        question.type === "text"
-      ) {
-
-        const input =
-          document.getElementById(
-            `answer-${index}`
-          );
-
-
-        if (
-          question.answerText &&
-          input &&
-          input.value.trim() ===
-          question.answerText
-        ) {
-
-          quizScore++;
-
-        }
-
-        /*
-          作文問題は先生が採点するため、
-          自動採点には含めません。
-        */
-
-      }
-
-      else {
-
-        if (
-          answers[index] ===
-          question.answer
-        ) {
-
-          quizScore++;
-
-        }
-
-      }
-
-    }
-  );
-
-
-  showPage("quizResult");
-
-
-  document.getElementById(
-    "score"
-  ).textContent =
-    `${quizScore} / 12`;
-
-
-  let message = "";
-
-
-  if (quizScore >= 10) {
-
-    message =
-      "よくできました！";
-
-  }
-
-  else if (quizScore >= 7) {
-
-    message =
-      "いい調子です。間違えた問題を復習してみましょう。";
-
-  }
-
-  else {
-
-    message =
-      "大丈夫です。もう一度教材を読んで復習してみましょう。";
-
-  }
-
-
-  document.getElementById(
-    "resultMessage"
-  ).textContent =
-    message;
-
-}
-
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-function register(event) {
-
-  event.preventDefault();
-
-
-  showToast(
-    "登録処理は本番版でメール認証と接続します。"
-  );
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-function login(event) {
-
-  event.preventDefault();
-
-
-  showToast(
-    "ログイン処理は本番版で安全な認証システムと接続します。"
-  );
+  font-weight: 800;
 
 }
 
@@ -1228,59 +1433,406 @@ function login(event) {
    TEACHER
 ========================================================= */
 
-function teacherStep(index) {
+.teacher-info {
 
-  document
-    .querySelectorAll(".teacher-step")
-    .forEach(button => {
+  display: grid;
 
-      button.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  document
-    .querySelectorAll(".teacher-step")
-    [index]
-    .classList.add("active");
-
-
-  showToast(
-    `授業の進行を ${index + 1} に変更しました。`
-  );
-
-}
-
-
-function startClass() {
-
-  showToast(
-    "授業を開始しました。生徒に授業コードを伝えてください。"
-  );
-
-}
-
-
-function finishClass() {
-
-  const confirmed =
-    confirm(
-      "授業を終了しますか？"
+  grid-template-columns:
+    repeat(
+      2,
+      1fr
     );
 
+  gap: 18px;
 
-  if (!confirmed) {
-
-    return;
-
-  }
-
-
-  showToast(
-    "授業を終了しました。"
+  width: min(
+    1100px,
+    calc(100% - 40px)
   );
+
+  margin:
+    40px
+    auto;
+
+}
+
+
+.teacher-card {
+
+  padding: 25px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+}
+
+
+.teacher-card span {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--text-light);
+
+}
+
+
+.teacher-card strong {
+
+  color: var(--green-dark);
+
+  font-size: 1.4rem;
+
+}
+
+
+/* =========================================================
+   CLASS ROOM
+========================================================= */
+
+.class-room-card {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 20px;
+
+}
+
+
+.class-room-card h3 {
+
+  margin:
+    10px
+    0;
+
+}
+
+
+.room-code {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding:
+    10px
+    18px;
+
+  background: var(--green-dark);
+
+  border-radius: 10px;
+
+  color: #ffffff;
+
+  font-size: 1.5rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+}
+
+
+.room-actions {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+}
+
+
+/* =========================================================
+   STUDENT TABLE
+========================================================= */
+
+.student-table {
+
+  overflow-x: auto;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+}
+
+
+.student-row {
+
+  display: grid;
+
+  grid-template-columns:
+    1.3fr
+    0.7fr
+    1fr
+    0.8fr
+    0.9fr;
+
+  min-width: 650px;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+
+.student-row:last-child {
+
+  border-bottom: none;
+
+}
+
+
+.student-row span {
+
+  padding:
+    15px
+    18px;
+
+}
+
+
+.header-row {
+
+  background: #f2f5f3;
+
+  color: var(--green-dark);
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================================
+   TEACHER CONTROLS
+========================================================= */
+
+.teacher-controls {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  padding: 6px;
+
+  background: #e9eeeb;
+
+  border-radius: 14px;
+
+}
+
+
+.teacher-step {
+
+  flex: 1;
+
+  min-width: 130px;
+
+  padding:
+    12px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 9px;
+
+  color: var(--text-light);
+
+}
+
+
+.teacher-step.active {
+
+  background: #ffffff;
+
+  color: var(--green-dark);
+
+  font-weight: 800;
+
+  box-shadow:
+    0 3px 10px
+    rgba(0, 0, 0, 0.05);
+
+}
+
+
+.teacher-note {
+
+  margin-top: 15px;
+
+  color: var(--text-light);
+
+  font-size: 0.85rem;
+
+}
+
+
+/* =========================================================
+   SUBMISSION
+========================================================= */
+
+.submission-card {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 25px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+}
+
+
+.submission-card h3 {
+
+  margin:
+    10px
+    0
+    4px;
+
+}
+
+
+.submission-card p {
+
+  margin: 0;
+
+  color: var(--text-light);
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-card {
+
+  max-width: 520px;
+
+  margin-top: 70px;
+  margin-bottom: 70px;
+
+  padding:
+    45px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 22px;
+
+  box-shadow: var(--shadow);
+
+}
+
+
+.auth-card h1 {
+
+  margin-bottom: 30px;
+
+}
+
+
+.auth-card label {
+
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: var(--green-dark);
+
+  font-weight: 700;
+
+}
+
+
+.auth-card input,
+.auth-card select {
+
+  display: block;
+
+  width: 100%;
+
+  margin-top: 7px;
+
+  padding:
+    12px
+    14px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 10px;
+
+  outline: none;
+
+}
+
+
+.auth-card input:focus,
+.auth-card select:focus {
+
+  border-color: var(--green);
+
+}
+
+
+.link-button {
+
+  display: block;
+
+  margin:
+    20px
+    auto
+    0;
+
+  padding: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--green);
+
+  text-decoration: underline;
 
 }
 
@@ -1289,43 +1841,357 @@ function finishClass() {
    TOAST
 ========================================================= */
 
-function showToast(message) {
+.toast {
 
-  const toast =
-    document.getElementById(
-      "toast"
-    );
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  z-index: 999;
+
+  max-width: 360px;
+
+  padding:
+    14px
+    18px;
+
+  background: var(--green-dark);
+
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.15);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translateY(20px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+}
 
 
-  toast.textContent =
-    message;
+.toast.show {
 
+  opacity: 1;
 
-  toast.classList.add(
-    "show"
-  );
-
-
-  setTimeout(() => {
-
-    toast.classList.remove(
-      "show"
-    );
-
-  }, 3000);
+  transform:
+    translateY(0);
 
 }
 
 
 /* =========================================================
-   INITIAL
+   RESPONSIVE
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+@media (
+  max-width: 900px
+) {
 
-    showPage("home");
+  .flow-grid {
+
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
 
   }
-);
+
+
+  .lesson-header {
+
+    align-items: start;
+
+    flex-direction: column;
+
+  }
+
+
+  .lesson-progress {
+
+    width: 100%;
+
+  }
+
+
+  .dashboard-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (
+  max-width: 700px
+) {
+
+  .header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding:
+      14px
+      20px;
+
+  }
+
+
+  .nav {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+  }
+
+
+  .nav button {
+
+    white-space: nowrap;
+
+  }
+
+
+  .hero {
+
+    margin-top: 25px;
+
+    padding:
+      40px
+      25px;
+
+    border-radius: 20px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 2.1rem;
+
+  }
+
+
+  .section-heading h2 {
+
+    font-size: 1.6rem;
+
+  }
+
+
+  .flow-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .learning-steps {
+
+    overflow-x: auto;
+
+  }
+
+
+  .learning-step {
+
+    min-width: 100px;
+
+    white-space: nowrap;
+
+  }
+
+
+  .lesson-card {
+
+    padding:
+      28px
+      20px;
+
+  }
+
+
+  .lesson-card h2 {
+
+    font-size: 1.65rem;
+
+  }
+
+
+  .reading-text {
+
+    padding: 20px;
+
+    font-size: 1rem;
+
+  }
+
+
+  .lesson-controls {
+
+    gap: 10px;
+
+  }
+
+
+  .lesson-controls .button {
+
+    flex: 1;
+
+  }
+
+
+  .history-card {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+
+  .teacher-info {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .class-room-card {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+
+  .submission-card {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+
+  .auth-card {
+
+    padding:
+      30px
+      20px;
+
+  }
+
+
+  .result-card {
+
+    padding:
+      50px
+      25px;
+
+  }
+
+
+  .score {
+
+    font-size: 3rem;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (
+  max-width: 430px
+) {
+
+  .hero,
+  .section,
+  .lesson-header,
+  .lesson-card,
+  .quiz-header,
+  .result-card,
+  .auth-card {
+
+    width:
+      calc(100% - 24px);
+
+  }
+
+
+  .part-navigation,
+  .learning-steps,
+  #quizContent,
+  .quiz-submit,
+  .student-card,
+  .dashboard-grid,
+  .teacher-info {
+
+    width:
+      calc(100% - 24px);
+
+  }
+
+
+  .hero {
+
+    padding:
+      32px
+      20px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 1.8rem;
+
+  }
+
+
+  .button {
+
+    padding:
+      9px
+      15px;
+
+  }
+
+
+  .lesson-controls {
+
+    width:
+      calc(100% - 24px);
+
+  }
+
+}

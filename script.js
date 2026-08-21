@@ -410,24 +410,193 @@ let quizScore = 0;
 
 
 /* =========================================================
-   PAGE
+   USER ROLE
+========================================================= */
+
+/*
+  現在ログインしているユーザーの種類。
+
+  student = 生徒
+  teacher = 先生
+
+  今はPrototypeなので、
+  初期状態は生徒にしています。
+
+  先生ページを確認するときは、
+  ブラウザのコンソールから
+
+  setUserRole("teacher")
+
+  と入力できます。
+*/
+
+let currentUserRole =
+  localStorage.getItem("kotobaUserRole") || "student";
+
+
+function setUserRole(role) {
+
+  if (
+    role !== "student" &&
+    role !== "teacher"
+  ) {
+
+    return;
+
+  }
+
+
+  currentUserRole = role;
+
+  localStorage.setItem(
+    "kotobaUserRole",
+    role
+  );
+
+
+  updateNavigation();
+
+  updateTeacherAccess();
+
+
+  if (role === "teacher") {
+
+    showToast(
+      "先生としてログインしました。"
+    );
+
+  }
+
+  else {
+
+    showToast(
+      "生徒としてログインしました。"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ROLE CHECK
+========================================================= */
+
+function isTeacher() {
+
+  return currentUserRole === "teacher";
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function updateNavigation() {
+
+  const teacherNav =
+    document.getElementById(
+      "teacherNav"
+    );
+
+
+  if (!teacherNav) {
+
+    return;
+
+  }
+
+
+  if (isTeacher()) {
+
+    teacherNav.style.display =
+      "inline-flex";
+
+  }
+
+  else {
+
+    teacherNav.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   TEACHER ACCESS
+========================================================= */
+
+function updateTeacherAccess() {
+
+  const teacherPage =
+    document.getElementById(
+      "teacher"
+    );
+
+
+  if (!teacherPage) {
+
+    return;
+
+  }
+
+
+  if (!isTeacher()) {
+
+    teacherPage.classList.remove(
+      "active"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SHOW PAGE
 ========================================================= */
 
 function showPage(page) {
 
+  /*
+    生徒が先生ページを開こうとした場合、
+    アクセスを拒否する。
+  */
+
+  if (
+    page === "teacher" &&
+    !isTeacher()
+  ) {
+
+    showToast(
+      "先生ページは先生のみ利用できます。"
+    );
+
+    return;
+
+  }
+
+
   currentPage = page;
+
 
   document
     .querySelectorAll(".page")
     .forEach(section => {
 
-      section.classList.remove("active");
+      section.classList.remove(
+        "active"
+      );
 
     });
 
 
   const target =
     document.getElementById(page);
+
 
   if (target) {
 
@@ -457,6 +626,92 @@ function showPage(page) {
 
 }
 
+
+/* =========================================================
+   INITIAL ROLE SETUP
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    updateNavigation();
+
+    updateTeacherAccess();
+
+    showPage("home");
+
+  }
+);
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+function showPage(page) {
+
+  /*
+    生徒が先生ページへアクセスするのを防ぐ
+  */
+
+  if (
+    page === "teacher" &&
+    !isTeacher()
+  ) {
+
+    showToast(
+      "先生ページは先生のみ利用できます。"
+    );
+
+    return;
+
+  }
+
+
+  currentPage = page;
+
+
+  document
+    .querySelectorAll(".page")
+    .forEach(section => {
+
+      section.classList.remove("active");
+
+    });
+
+
+  const target =
+    document.getElementById(page);
+
+
+  if (target) {
+
+    target.classList.add("active");
+
+  }
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+
+  if (page === "lesson") {
+
+    renderLesson();
+
+  }
+
+
+  if (page === "quiz") {
+
+    renderQuiz();
+
+  }
+
+}
 
 /* =========================================================
    LESSON
