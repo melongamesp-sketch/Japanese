@@ -556,78 +556,6 @@ function updateTeacherAccess() {
 
 
 /* =========================================================
-   SHOW PAGE
-========================================================= */
-
-function showPage(page) {
-
-  /*
-    生徒が先生ページを開こうとした場合、
-    アクセスを拒否する。
-  */
-
-  if (
-    page === "teacher" &&
-    !isTeacher()
-  ) {
-
-    showToast(
-      "先生ページは先生のみ利用できます。"
-    );
-
-    return;
-
-  }
-
-
-  currentPage = page;
-
-
-  document
-    .querySelectorAll(".page")
-    .forEach(section => {
-
-      section.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  const target =
-    document.getElementById(page);
-
-
-  if (target) {
-
-    target.classList.add("active");
-
-  }
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-
-  if (page === "lesson") {
-
-    renderLesson();
-
-  }
-
-
-  if (page === "quiz") {
-
-    renderQuiz();
-
-  }
-
-}
-
-
-/* =========================================================
    INITIAL ROLE SETUP
 ========================================================= */
 
@@ -1488,6 +1416,86 @@ function register(event) {
     ).value;
 
 
+  /* -----------------------------------------
+     入力チェック
+  ----------------------------------------- */
+
+  if (
+    !name ||
+    !age ||
+    !country ||
+    !level ||
+    !email ||
+    !password
+  ) {
+
+    showToast(
+      "すべての項目を入力してください。"
+    );
+
+    return;
+
+  }
+
+
+  if (password.length < 8) {
+
+    showToast(
+      "パスワードは8文字以上にしてください。"
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     既存アカウント確認
+  ----------------------------------------- */
+
+  const savedStudent =
+    localStorage.getItem(
+      "kotobaStudent"
+    );
+
+
+  if (savedStudent) {
+
+    try {
+
+      const existingStudent =
+        JSON.parse(savedStudent);
+
+
+      if (
+        existingStudent.email === email
+      ) {
+
+        showToast(
+          "このメールアドレスはすでに登録されています。"
+        );
+
+        return;
+
+      }
+
+    }
+
+    catch (error) {
+
+      localStorage.removeItem(
+        "kotobaStudent"
+      );
+
+    }
+
+  }
+
+
+  /* -----------------------------------------
+     生徒データ作成
+  ----------------------------------------- */
+
   const student = {
 
     role: "student",
@@ -1512,6 +1520,10 @@ function register(event) {
     JSON.stringify(student)
   );
 
+
+  /* -----------------------------------------
+     登録完了
+  ----------------------------------------- */
 
   showToast(
     "生徒登録が完了しました。ログインしてください。"
@@ -1548,19 +1560,29 @@ function login(event) {
     ).value;
 
 
-  /*
-    -----------------------------------------
-    先生アカウント
-    -----------------------------------------
+  /* -----------------------------------------
+     入力チェック
+  ----------------------------------------- */
 
-    今回は動作確認用の固定アカウント。
+  if (
+    !email ||
+    !password
+  ) {
 
-    メール：
-    teacher@example.com
+    showToast(
+      "メールアドレスとパスワードを入力してください。"
+    );
 
-    パスワード：
-    Teacher123!
-  */
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     先生アカウント
+     
+     Prototype用固定アカウント
+  ----------------------------------------- */
 
   if (
     email === "teacher@example.com" &&
@@ -1569,18 +1591,26 @@ function login(event) {
 
     setUserRole("teacher");
 
-    showPage("teacher");
+    showToast(
+      "先生としてログインしました。"
+    );
+
+
+    setTimeout(() => {
+
+      showPage("teacher");
+
+    }, 500);
+
 
     return;
 
   }
 
 
-  /*
-    -----------------------------------------
-    生徒アカウント
-    -----------------------------------------
-  */
+  /* -----------------------------------------
+     生徒アカウント
+  ----------------------------------------- */
 
   const savedStudent =
     localStorage.getItem(
@@ -1591,7 +1621,7 @@ function login(event) {
   if (!savedStudent) {
 
     showToast(
-      "生徒登録が見つかりません。先に登録してください。"
+      "生徒アカウントがありません。先に登録してください。"
     );
 
     return;
@@ -1599,9 +1629,34 @@ function login(event) {
   }
 
 
-  const student =
-    JSON.parse(savedStudent);
+  let student;
 
+
+  try {
+
+    student =
+      JSON.parse(savedStudent);
+
+  }
+
+  catch (error) {
+
+    localStorage.removeItem(
+      "kotobaStudent"
+    );
+
+    showToast(
+      "アカウント情報を読み込めませんでした。もう一度登録してください。"
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     生徒ログイン確認
+  ----------------------------------------- */
 
   if (
     email !== student.email ||
@@ -1617,11 +1672,15 @@ function login(event) {
   }
 
 
+  /* -----------------------------------------
+     生徒ログイン成功
+  ----------------------------------------- */
+
   setUserRole("student");
 
 
   showToast(
-    "生徒としてログインしました。"
+    `ようこそ、${student.name}さん！`
   );
 
 
@@ -1635,62 +1694,34 @@ function login(event) {
 
 
 /* =========================================================
-   TEACHER
+   LOGOUT
 ========================================================= */
 
-function teacherStep(index) {
+function logout() {
 
-  document
-    .querySelectorAll(".teacher-step")
-    .forEach(button => {
-
-      button.classList.remove(
-        "active"
-      );
-
-    });
+  currentUserRole = "student";
 
 
-  document
-    .querySelectorAll(".teacher-step")
-    [index]
-    .classList.add("active");
+  localStorage.removeItem(
+    "kotobaUserRole"
+  );
+
+
+  updateNavigation();
+
+  updateTeacherAccess();
 
 
   showToast(
-    `授業の進行を ${index + 1} に変更しました。`
+    "ログアウトしました。"
   );
 
-}
 
+  setTimeout(() => {
 
-function startClass() {
+    showPage("home");
 
-  showToast(
-    "授業を開始しました。生徒に授業コードを伝えてください。"
-  );
-
-}
-
-
-function finishClass() {
-
-  const confirmed =
-    confirm(
-      "授業を終了しますか？"
-    );
-
-
-  if (!confirmed) {
-
-    return;
-
-  }
-
-
-  showToast(
-    "授業を終了しました。"
-  );
+  }, 500);
 
 }
 
@@ -1726,16 +1757,3 @@ function showToast(message) {
 
 }
 
-
-/* =========================================================
-   INITIAL
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    showPage("home");
-
-  }
-);
