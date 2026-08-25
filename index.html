@@ -178,6 +178,22 @@
   }
   .toast.show{opacity:1;}
 
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
   footer.config-note{
     margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
     font-size:.72rem; color:var(--ink-soft); line-height:1.7;
@@ -192,7 +208,7 @@
   <header class="masthead">
     <div class="kicker">言語知識（文字・語彙・文法）</div>
     <h1>日本語テスト 答案用紙</h1>
-    <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開きます。そのまま送信すれば先生に解答が届きます。</p>
+    <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
   </header>
 
   <div class="progress-wrap">
@@ -216,6 +232,11 @@
     <div class="meta-row">
       送信先: <strong id="targetEmailLabel"></strong><br>
       <span id="unansweredLabel"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
     </div>
   </section>
 
@@ -254,7 +275,7 @@
           key: 'm2', title: '問題２',
           instruction: '＿＿＿＿の言葉はどう書きますか。１・２・３・４から一番良いものを一つ選んでください。',
           items: [
-            { text: 'このカメラのつかいかたをせつめいしてください。', options: ['訳名','設名','説名','記名'] },
+            { text: 'このカメラのつかいかたをせつめいしてください。', options: ['訳名','設名','説明','記名'] },
             { text: 'わたしはいつもあさ７時におきます。', options: ['起きます','置きます','措ます','押きます'] },
             { text: 'ちかてつのえきはここからとおいです。', options: ['近い','遠い','違い','通い'] },
             { text: '毎日やさいを食べます。', options: ['理菜','也菜','果菜','野菜'] },
@@ -269,7 +290,7 @@
             { text: '大学の（　）がこの会社につとめています。', options: ['せんぱい','しゃいん','てんいん','しゃちょう'] },
             { text: 'いえを出る前に、でんきをけしたか（　）しました。', options: ['スタート','オープン','スイッチ','チェック'] },
             { text: 'りょうしんが来たので東京を（　）しました。', options: ['うけつけ','あんない','れんらく','しょうたい'] },
-            { text: 'ともだちはやくそくの時間におくれましたが、みんなに（　）しました。', options: ['いけませんでした','すみませんでした','あやまりませんでした','まにあいませんでした'] },
+            { text: 'ともだちはやくそくの時間におくれましたが、みんなに（　）。', options: ['いけませんでした','すみませんでした','あやまりませんでした','まにあいませんでした'] },
             { text: 'このねこは（　）いるのでおもいです。', options: ['たりて','ふとって','ふえて','のこって'] },
             { text: 'みんなでかんがえれば、いい（　）が出るかもしれません。', options: ['アイデア','ニュース','クラブ','シーズン'] },
             { text: '日本で買った本を国へ（　）。', options: ['おとしました','かけました','おくりました','なげました'] },
@@ -322,7 +343,7 @@
             { text: '学生「先生、作文で間違えたところを直しました」\n先生「はい。では見せてください」\n学生「お願いします。（　）。」\n先生「ええ。よくなりましたね」', options: ['どうしますか','どうしましょうか','どうでしょうか','どうしましたか'] },
             { text: 'A「何回も電話（　）、どうして出てくれなかったんですか」\nB「すみません」', options: ['すれば','したら','したので','したのに'] },
             { text: '田中「山川さん、今日の夕食は何にするんですか」\n山川「これから買い物に行って、カレーを（　）と思います」', options: ['作ろう','作ります','作っています','作った'] },
-            { text: '私のジュースを弟に全部（　）。', options: ['飲みそうです','飲むでしょう','飲まれてしました','飲んでみました'] },
+            { text: '私のジュースを弟に全部（　）。', options: ['飲みそうです','飲むでしょう','飲まれてしまいました','飲んでみました'] },
             { text: 'A「すみません、このファクスの使い方を教えてください」\nB「ええと、ちょっと今忙しいので、他の人に（　）。」', options: ['聞いてみたのですが','聞きたいんですが','聞こうと思いますか','聞いてもらえますか'] }
           ]
         },
@@ -333,13 +354,27 @@
             { text: 'このパーティーは___ ___ ⭐︎ ___入れません。', options: ['を','しか','チケット','買った人'] },
             { text: '明日は会議があるので___ ___ ⭐︎ ___に行きます。', options: ['早く','いつも','会社','より'] },
             { text: 'A「すみません。日曜日は図書館は何時まで___ ___ ⭐︎ ___」\nB「日曜日は５時までです」', options: ['開いて','教えて','くださいませんか','いるか'] },
-            { text: '（廊下で）\n学生「さようなら」\n先生「さようなら。教室には、もう___ ___ ⭐︎ ___」\n学生「いいえ。田中さんが勉強しています」', options: ['かならず','を','聞く','と'] },
+            { text: '（廊下で）\n学生「さようなら」\n先生「さようなら。教室には、もう___ ___ ⭐︎ ___」\n学生「いいえ。田中さんが勉強しています」', options: ['も','か','いません','だれ'] },
             { text: '私はこの音楽___ ___ ⭐︎ ___ねむくなります。', options: ['かならず','を','聞く','と'] }
           ]
         }
       ]
     }
   ];
+
+  // Claudeの日本語知識をもとに推定した正解データ。
+  // m7_4 は選択肢が本文と一致しないため採点対象外（原文の誤植の可能性）。
+  const ANSWER_KEY = {
+    m1_1:2, m1_2:3, m1_3:2, m1_4:4, m1_5:4, m1_6:3, m1_7:4, m1_8:1, m1_9:1,
+    m2_1:3, m2_2:1, m2_3:2, m2_4:4, m2_5:3, m2_6:2,
+    m3_1:1, m3_2:4, m3_3:2, m3_4:3, m3_5:2, m3_6:1, m3_7:3, m3_8:3, m3_9:4, m3_10:1,
+    m4_1:4, m4_2:1, m4_3:1, m4_4:3, m4_5:2,
+    m5_1:4, m5_2:3, m5_3:2, m5_4:1, m5_5:2,
+    m6_1:1, m6_2:2, m6_3:3, m6_4:3, m6_5:1, m6_6:2, m6_7:2, m6_8:3, m6_9:1, m6_10:4, m6_11:3, m6_12:4, m6_13:1, m6_14:3, m6_15:4,
+    m7_1:4, m7_2:1, m7_3:2, m7_4:3, m7_5:4
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
 
   function escapeHtml(s){
     return s.replace(/[&<>"']/g, function(c){
@@ -435,6 +470,8 @@
     lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
     lines.push('');
     let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
     TEST_DATA.forEach(part => {
       lines.push('■ ' + part.title);
       part.mondai.forEach(m => {
@@ -442,22 +479,51 @@
         m.items.forEach((item, idx) => {
           const qid = m.key + '_' + (idx + 1);
           const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
-          if (checked) {
-            answered++;
-            lines.push('(' + (idx + 1) + ') → ' + checked.value + '. ' + checked.dataset.text);
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
           } else {
-            lines.push('(' + (idx + 1) + ') → 未回答');
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
           }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※';
+
+          lines.push('(' + (idx + 1) + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
         });
         lines.push('');
       });
     });
     lines.push('----');
     lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
     return {
-      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名'),
-      body: lines.join('\n')
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
     };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   const sendBtn = document.getElementById('sendBtn');
@@ -467,12 +533,14 @@
       + '?subject=' + encodeURIComponent(report.subject)
       + '&body=' + encodeURIComponent(report.body);
     this.href = href;
+    showResult(report);
   });
 
   const copyBtn = document.getElementById('copyBtn');
   const toast = document.getElementById('toast');
   copyBtn.addEventListener('click', function(){
     const report = buildReport();
+    showResult(report);
     const text = '件名: ' + report.subject + '\n\n' + report.body;
     function showToast(){
       toast.classList.add('show');
@@ -488,3 +556,4 @@
   });
 })();
 </script>
+
