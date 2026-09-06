@@ -1,0 +1,701 @@
+<title>日本語N4模擬テスト（読解）答案用紙</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --q-bg:#F5ECDA;
+    --q-border:#E6D6B8;
+    --mondai-ink:#4A3728;
+    --page-bg:#6B4A32;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F;
+      --paper-2:#1C222C;
+      --paper-3:#2A3242;
+      --ink:#E7EBF3;
+      --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5;
+      --indigo-deep:#9CC0FF;
+      --vermillion:#FF8A5B;
+      --line:#2E3646;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --q-bg:#2A2115;
+      --q-border:#4A3B26;
+      --mondai-ink:#E8D5B4;
+      --page-bg:#2A1D12;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181F;
+    --paper-2:#1C222C;
+    --paper-3:#2A3242;
+    --ink:#E7EBF3;
+    --ink-soft:#9AA5B8;
+    --indigo:#6FA0F5;
+    --indigo-deep:#9CC0FF;
+    --vermillion:#FF8A5B;
+    --line:#2E3646;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --q-bg:#2A2115;
+    --q-border:#4A3B26;
+    --mondai-ink:#E8D5B4;
+    --page-bg:#2A1D12;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.5rem;
+  }
+  .masthead-main{flex:1; min-width:0;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--indigo-deep); background:var(--paper-2);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .level-badge{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:.85rem; letter-spacing:.06em; color:var(--paper);
+    background:var(--vermillion); padding:.28rem .85rem; border-radius:999px;
+  }
+  .brand-logo{
+    flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.55rem .9rem;
+    border-radius:.65rem;
+    background:var(--indigo-deep); color:var(--paper);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; letter-spacing:.1em;
+    box-shadow:var(--shadow);
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .6rem;
+    text-wrap:balance;
+    color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.65rem 1.25rem;
+    display:flex; align-items:center; gap:.85rem;
+    margin:0 -1.25rem 2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.3rem; font-weight:600;
+    color:var(--light-accent);
+    margin:2.6rem 0 1.3rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--light-accent);
+  }
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.6rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+
+  .passage{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    font-size:1rem;
+    line-height:1.9;
+  }
+  .passage-p{margin:0 0 1em;}
+  .passage-p:last-child{margin-bottom:0;}
+  .pnum{color:var(--vermillion); font-weight:700; border-bottom:2px solid var(--vermillion); padding:0 .15em;}
+
+  .table-wrap{overflow-x:auto; margin:0 0 1.3rem;}
+  .schedule-table{width:100%; border-collapse:collapse; font-size:.92rem; background:var(--paper);}
+  .schedule-table th, .schedule-table td{border:1px solid var(--line); padding:.6rem .75rem; text-align:left; vertical-align:top;}
+  .schedule-table th{background:var(--paper-2); font-weight:700; color:var(--ink); font-size:.82rem;}
+  .schedule-table td{color:var(--ink-soft); line-height:1.6;}
+
+  .q{
+    display:flex; gap:1rem;
+    padding:1.3rem 1.3rem;
+    border:1px solid var(--q-border);
+    border-radius:.9rem;
+    margin-bottom:.9rem;
+    background:var(--q-bg);
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:var(--q-border); color:var(--mondai-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .star{color:var(--vermillion); font-weight:700;}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:var(--ink);}
+  .uncertain-flag{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
+    padding:.05rem .5rem; vertical-align:middle;
+  }
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.7rem;
+    padding:.6rem .75rem; border-radius:.7rem;
+    cursor:pointer; border:1px solid transparent;
+    background:transparent;
+  }
+  .opt:hover{background:var(--q-border);}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
+    border:1.5px solid var(--q-border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:var(--ink-soft);
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+  .opt input:checked ~ .opt-text{color:var(--ink); font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:var(--ink-soft);}
+
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--paper-3); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--indigo); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.65rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
+  .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
+  .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--light-accent);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">読解</div>
+        <div class="level-badge">N4</div>
+      </div>
+      <h1>日本語N4模擬テスト（読解） 答案用紙</h1>
+      <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+    <div class="brand-logo" title="PHAM">PHAM</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 8</div>
+  </div>
+
+  <main id="form"></main>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'phamkyphung@gmail.com',
+    testName: '日本語N4模擬テスト【2024年07月・読解】'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '読解',
+      mondai: [
+        {
+          key: 'm1', title: '問題１',
+          instruction: '次の（１）（２）の文章を読んで、質問に答えてください。答えは、１・２・３・４から、いちばんいいものを一つ選んでください。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '（会社で）\nこれはなかむらさんがヤンさんに書いたメールです。\n\nヤンさん\n大会議室の予約のことですが、来週の木曜日で2時間使えるのは、10時からと14時からの2回です。どちらがいいでしょうか。会議の時間が決まったら、知らせてください。すぐに予約します。\n中村' }
+              ],
+              items: [
+                { text: 'このメールを読んで、ヤンさんは何をしなければなりませんか。', options: ['来週の木曜日に大会議室が使える時間を調べます。','来週の木曜日に会議が2回あることを、みんなに知らせます。','会議の時間は10時と14時のどちらがいいか、中村さんに知らせます。','会議の時間を決めて、自分で会議室を予約します。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '「①今日は、新聞は休みだから、ないよ。」\n昨日コンビニで、店員さんがお客さんに言った言葉を聞いて、私は②びっくりしました。\n先週の日本語の授業で、先生が「質問がありますか。」と聞いたとき、友達が「ないよ。」と答えました。すると、先生は「『ありません』と答えましょう。先生は友達ではないので、失礼な言い方ですよ。」と注意したからです。\nでも、店員さんは次のお客さんには「新聞は休みなので、ありません。」と答えていました。最初のお客さんは店員の友達だったのかもしれません。' }
+              ],
+              items: [
+                { text: '「①今日は、新聞は休みだから、ないよ。」といったのは誰ですか。', options: ['「私」','店員','先生','友達'] },
+                { text: '②びっくりしましたとありますが、なぜですか。', options: ['店員が失礼な言い方をしたと思ったから','店員が言ったことがわからなかった','店員が先生に注意されているのを見たから','店員が友達と話していると思ったから。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm2', title: '問題２',
+          instruction: '次の文章を読んで、質問に答えてください。答えは、１・２・３・４から、一番いいものを一つ選んでください。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '日本の大学入学して半年が過ぎました。日本に来たら、たくさん旅行をしたかったのですが、①なかなか行けません。日本の電車や飛行機は便利ですが、りょきんが高いのです。だから、普通の旅行には行けませんが、最近いいやり方を見つけました。私だけの小さな「バス旅行」です。\n\n私の「バス旅行」は、町を走る普通のバスに乗って、最後のバス停まで行ってみる旅行です。東京の町の中を走る普通のバスは、最後まで乗っても210円です、片道は長くても1時間ぐらいです。私はいつも、窓から外の景色を見たり、乗っている人の会話を聞いたりしています。最後のバス停に着いたら、近くをゆっくり散歩します。そして、またバスに乗って戻ってきます。変な旅行ですが、日本のことがいろいろわかって、楽しいです。\n\n先週の「バス旅行」では、バスの中で寝てしまいました。最後のバス停に着いたとき、運転手が起こしてくれるので、急いでバスを降りました。降りるとき、運転手が心配して「大丈夫ですか。これからどこへ行くんですか。」と聞いてくれました。特に行く場所を考えていない私は、質問にうまく答えられませんでした。②困ってしまって、自分でちょっと笑ってしまいました。' }
+              ],
+              items: [
+                { text: 'どうして①なかなか行けませんか。', options: ['大学の勉強が忙しくて時間がないから。','日本の電車や飛行機があまり便利ではないから。','日本の電車や飛行機は乗り方が難しいから。','日本の電車や飛行機は料金が高いから。'] },
+                { text: '「私」は、いつもどんな「バス旅行」をしていますか。', options: ['バスに乗っている人たちと会話を楽しむ旅行。','バスに乗って、降りたくなって所で降りて、散歩を楽しむ旅行。','バスに乗っている時間や、最後のバス停の近くの散歩を楽しむ旅行。','行きたい場所を調べてバスで行って、バスを降りて散歩を楽しむ旅行。'] },
+                { text: '②困ってしまったとありますが、どうして「私」は困りますか。', options: ['寝てしまって、最後のバス停まで来てしまったから。','行く場所を決めない旅行をしているので、質問に答えられなかったから。','運転手の質問の意味が分からなくて、答えられなかったから。','行きたい場所の名前が思い出せなくて、質問に答えられなかったから。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm3', title: '問題３',
+          instruction: '右のページのピザ教室のお知らせを見て、下の質問に答えてください。答えは、１・２・３・４から、いちばんいいものを一つ選んでください。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: 'ピザ教室のお知らせ\nレストラン「アラセ」\n\nレストラン「アラセ」では、店が休みの日に、ピザ教室を開いています。おいしいピザを一緒に作りませんか。作ったピザは、お店で食べることも、持って帰ることもできます。\n\n作るピザ　20cmのピザ（一人1枚作ります。）\n\n料金：' },
+                { table: {
+                    headers: ['大人', '中学生・高校生', '小学生以下'],
+                    rows: [
+                      ['1,500円', '1,200円', '1,000円']
+                    ]
+                  }
+                },
+                { text: '・小学生以下のお子様は、大人の方と一緒に来てください。\n・エプロンが必要です。店のエプロンを借りることもできます（一人200円）。\n\nサービス：' },
+                { table: {
+                    headers: ['店で食べるお客様', '持って帰るお客様'],
+                    rows: [
+                      ['・飲み物とサラダ\n・アイスクリーム（5人以上のお客様）', '500円チケット（今度、お店に来たときに使ってください。）']
+                    ]
+                  }
+                },
+                { text: '教室の日と予約：\n・ピザ教室は、1か月に1回、午後3時から5時までです。\n・ピザ教室の日は、ホームページで見てください。\n・予約は、1週間前までに電話でお願いします。\n\nレストラン「アラセ」\n花山市南町1-6　電話：051-818-9723\nホームページ https://pizza-arose/yuukibuibiensoan' }
+              ],
+              items: [
+                { text: 'ジェイさんは、小学生の娘と二人でピザを作りに行きたいです。ジェイさんのエプロンは持っていきますが、娘のものは借りるつもりです。ジェイさんたちが、ピザ教室に払う料金はどうなりますか。', options: ['ジェイさん1,000円だけ、娘1,000円と200円','ジェイさん1,500円だけ、娘1,000円だけ','ジェイさん1,500円だけ、娘1,000円と200円','ジェイさん1,500円と200円、娘1,000円と200円'] },
+                { text: 'ナムさんは、大学の友達と3人で、ピザ教室の予約をしました。ナムさんたちはピザ教室のあと、作ったピザを食べて帰ろうと思っています。ピザを食べるときに、何をサービスしてもらえますか。', options: ['飲み物とサラダ','飲み物とサラダとアイスクリーム','アイスクリーム','4500円チケット'] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // 公式解答をもとに判断した正解データ
+  const ANSWER_KEY = {
+    m1_1:3, m1_2:2, m1_3:1,
+    m2_1:4, m2_2:3, m2_3:2,
+    m3_1:3, m3_2:1
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>')
+      .replace(/_{2,}/g, '<span class="blank">＿＿＿</span>')
+      .replace(/★/g, '<span class="star">★</span>')
+      .replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderPassageHtml(text){
+    return text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/([①②③④⑤⑥⑦⑧⑨⑩])/g, '<span class="pnum">$1</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function renderTableHtml(table){
+    let html = '<div class="table-wrap"><table class="schedule-table"><thead><tr>';
+    table.headers.forEach(h => { html += '<th>' + escapeHtml(h) + '</th>'; });
+    html += '</tr></thead><tbody>';
+    table.rows.forEach(row => {
+      html += '<tr>';
+      row.forEach(cell => { html += '<td>' + escapeHtml(cell).replace(/\n/g,'<br>') + '</td>'; });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    return html;
+  }
+
+  function renderBlocksHtml(blocks){
+    let html = '';
+    blocks.forEach(b => {
+      if (b.text) html += '<div class="passage">' + renderPassageHtml(b.text) + '</div>';
+      if (b.table) html += renderTableHtml(b.table);
+    });
+    return html;
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    const sources = m.clusters
+      ? m.clusters.reduce((acc, c) => acc.concat(c.items), [])
+      : m.items;
+    sources.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    const flag = UNCERTAIN_QIDS.has(qid) ? '<span class="uncertain-flag">要確認</span>' : '';
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + flag + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + escapeHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      if (m.clusters) {
+        let idx = 0;
+        m.clusters.forEach(cluster => {
+          if (cluster.blocks) {
+            html += renderBlocksHtml(cluster.blocks);
+          }
+          cluster.items.forEach(item => {
+            idx++;
+            totalQuestions++;
+            html += renderQuestionHtml(m, { item: item, idx: idx, qid: m.key + '_' + idx });
+          });
+        });
+      } else {
+        flattenMondaiItems(m).forEach(entry => {
+          totalQuestions++;
+          html += renderQuestionHtml(m, entry);
+        });
+      }
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', updateProgress);
+  updateProgress();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      lines.push('■ ' + part.title);
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
+          }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※要確認';
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+  sendBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject,
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
