@@ -172,6 +172,10 @@
   .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--ink-soft); line-height:1.7;}
   .meta-row strong{color:var(--ink);}
   .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--indigo-deep);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
   .toast{
     display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--indigo-deep);
     opacity:0; transition:opacity .2s;
@@ -224,14 +228,19 @@
       <label for="studentName">お名前</label>
       <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
     </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
     <div class="actions">
-      <a href="#" id="sendBtn" class="btn btn-send">先生にメール送信</a>
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
       <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
       <span class="toast" id="toast">コピーしました</span>
     </div>
     <div class="meta-row">
       送信先: <strong id="targetEmailLabel"></strong><br>
-      <span id="unansweredLabel"></span>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
     </div>
 
     <div class="result-panel" id="resultPanel" hidden>
@@ -248,7 +257,7 @@
 <script>
 (function(){
   const CONFIG = {
-    teacherEmail: 'sakananname@gmail.com',
+    teacherEmail: 'phamkyphung@gmail.com',
     testName: '日本語テスト（模擬）'
   };
 
@@ -526,13 +535,44 @@
   }
 
   const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
   sendBtn.addEventListener('click', function(){
     const report = buildReport();
-    const href = 'mailto:' + CONFIG.teacherEmail
-      + '?subject=' + encodeURIComponent(report.subject)
-      + '&body=' + encodeURIComponent(report.body);
-    this.href = href;
     showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject,
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
   });
 
   const copyBtn = document.getElementById('copyBtn');
