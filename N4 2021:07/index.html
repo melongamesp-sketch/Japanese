@@ -15,6 +15,10 @@
     --q-bg:#F5ECDA;
     --q-border:#E6D6B8;
     --mondai-ink:#4A3728;
+    --page-bg:#6B4A32;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -31,6 +35,10 @@
       --q-bg:#2A2115;
       --q-border:#4A3B26;
       --mondai-ink:#E8D5B4;
+      --page-bg:#2A1D12;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
     }
   }
   :root[data-theme="dark"]{
@@ -47,12 +55,16 @@
     --q-bg:#2A2115;
     --q-border:#4A3B26;
     --mondai-ink:#E8D5B4;
+    --page-bg:#2A1D12;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
   }
 
   *{box-sizing:border-box;}
   body{
     margin:0;
-    background:var(--paper);
+    background:var(--page-bg);
     color:var(--ink);
     font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
     font-size:17px;
@@ -90,13 +102,13 @@
     font-size:clamp(1.5rem,4vw,2.05rem);
     margin:.4rem 0 .6rem;
     text-wrap:balance;
-    color:var(--ink);
+    color:var(--light-ink);
   }
-  .masthead p{color:var(--ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
 
   .progress-wrap{
     position:sticky; top:0; z-index:20;
-    background:var(--paper);
+    background:var(--page-bg);
     border-bottom:1px solid var(--line);
     padding:.65rem 1.25rem;
     display:flex; align-items:center; gap:.85rem;
@@ -104,15 +116,15 @@
   }
   .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
   .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
-  .progress-label{font-size:.78rem; color:var(--ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
 
   .part h2{
     font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
     font-size:1.3rem; font-weight:600;
-    color:var(--indigo-deep);
+    color:var(--light-accent);
     margin:2.6rem 0 1.3rem;
     padding-bottom:.5rem;
-    border-bottom:2px solid var(--indigo-deep);
+    border-bottom:2px solid var(--light-accent);
   }
   .part:first-of-type h2{margin-top:0;}
 
@@ -120,12 +132,12 @@
   .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
   .mondai-badge{
     flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
-    border:1.5px solid var(--mondai-ink); color:var(--mondai-ink);
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
     font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
     display:flex; align-items:center; justify-content:center;
   }
-  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--mondai-ink);}
-  .mondai-instruction{font-size:.9rem; color:var(--ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
 
   .passage{
     margin:0 0 1.3rem;
@@ -198,12 +210,12 @@
   .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
   .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:var(--ink-soft);}
 
-  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--indigo-deep);}
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
   .submit-area h2{
-    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--ink);
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
   }
   .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
-  .field label{font-size:.78rem; color:var(--ink-soft); letter-spacing:.02em;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
   .field input[type=text]{
     font:inherit; font-size:1rem; padding:.6rem .75rem;
     border:1px solid var(--paper-3); border-radius:.5rem;
@@ -220,19 +232,19 @@
   }
   .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
   .btn-send:active{transform:scale(.97);}
-  .btn-copy{background:transparent; border-color:var(--paper-3); color:var(--ink);}
-  .btn-copy:hover{background:var(--paper-2);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
   .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
 
-  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--ink-soft); line-height:1.7;}
-  .meta-row strong{color:var(--ink);}
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
   .unanswered-note{color:var(--vermillion); font-weight:600;}
   .send-status{display:inline-block; font-weight:600;}
-  .send-status-ok{color:var(--indigo-deep);}
+  .send-status-ok{color:var(--light-accent);}
   .send-status-error{color:var(--vermillion);}
   .btn:disabled{opacity:.6; cursor:default;}
   .toast{
-    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--indigo-deep);
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
     opacity:0; transition:opacity .2s;
   }
   .toast.show{opacity:1;}
@@ -255,7 +267,7 @@
 
   footer.config-note{
     margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
-    font-size:.72rem; color:var(--ink-soft); line-height:1.7;
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
   }
 
   @media (prefers-reduced-motion: reduce){
