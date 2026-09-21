@@ -1,0 +1,793 @@
+<title>N3 2023/07　読解等</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --q-bg:#F5ECDA;
+    --q-border:#E6D6B8;
+    --mondai-ink:#4A3728;
+    --page-bg:#7A5940;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F;
+      --paper-2:#1C222C;
+      --paper-3:#2A3242;
+      --ink:#E7EBF3;
+      --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5;
+      --indigo-deep:#9CC0FF;
+      --vermillion:#FF8A5B;
+      --line:#2E3646;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --q-bg:#2A2115;
+      --q-border:#4A3B26;
+      --mondai-ink:#E8D5B4;
+      --page-bg:#35261A;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181F;
+    --paper-2:#1C222C;
+    --paper-3:#2A3242;
+    --ink:#E7EBF3;
+    --ink-soft:#9AA5B8;
+    --indigo:#6FA0F5;
+    --indigo-deep:#9CC0FF;
+    --vermillion:#FF8A5B;
+    --line:#2E3646;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --q-bg:#2A2115;
+    --q-border:#4A3B26;
+    --mondai-ink:#E8D5B4;
+    --page-bg:#35261A;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.5rem;
+  }
+  .masthead-main{flex:1; min-width:0;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--indigo-deep); background:var(--paper-2);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .level-badge{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:.85rem; letter-spacing:.06em; color:var(--paper);
+    background:var(--vermillion); padding:.28rem .85rem; border-radius:999px;
+  }
+  .brand-logo{
+    flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.55rem .9rem;
+    border-radius:.65rem;
+    background:var(--indigo-deep); color:var(--paper);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; letter-spacing:.1em;
+    box-shadow:var(--shadow);
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .6rem;
+    text-wrap:balance;
+    color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.65rem 1.25rem;
+    display:flex; align-items:center; gap:.85rem;
+    margin:0 -1.25rem 2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.3rem; font-weight:600;
+    color:var(--light-accent);
+    margin:2.6rem 0 1.3rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--light-accent);
+  }
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.6rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+
+  .passage{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    font-size:1rem;
+    line-height:1.9;
+  }
+  .passage-p{margin:0 0 1em;}
+  .passage-p:last-child{margin-bottom:0;}
+  .pnum{color:var(--vermillion); font-weight:700; border-bottom:2px solid var(--vermillion); padding:0 .15em;}
+
+  .table-wrap{overflow-x:auto; margin:0 0 1.3rem;}
+  .schedule-table{width:100%; border-collapse:collapse; font-size:.92rem; background:var(--paper);}
+  .schedule-table th, .schedule-table td{border:1px solid var(--line); padding:.6rem .75rem; text-align:left; vertical-align:top;}
+  .schedule-table th{background:var(--paper-2); font-weight:700; color:var(--ink); font-size:.82rem;}
+  .schedule-table td{color:var(--ink-soft); line-height:1.6;}
+
+  .q{
+    display:flex; gap:1rem;
+    padding:1.3rem 1.3rem;
+    border:1px solid #E6D6B8;
+    border-radius:.9rem;
+    margin-bottom:.9rem;
+    background:#F5ECDA;
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:#E6D6B8; color:#4A3728;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem; color:#20242B;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .star{color:var(--vermillion); font-weight:700;}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:#20242B;}
+  .uncertain-flag{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
+    padding:.05rem .5rem; vertical-align:middle;
+  }
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.7rem;
+    padding:.6rem .75rem; border-radius:.7rem;
+    cursor:pointer; border:1px solid transparent;
+    background:transparent;
+  }
+  .opt:hover{background:#E6D6B8;}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
+    border:1.5px solid #E6D6B8;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:#5B6472;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:#5B6472;}
+
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--paper-3); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--indigo); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.65rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
+  .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
+  .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--light-accent);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
+  }
+
+  .test-id-badge{
+    display:inline-block; font-size:1.05rem; font-weight:700; letter-spacing:.04em;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.7rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--vermillion); border-color:var(--vermillion);}
+  .timer-badge.timer-over{color:var(--paper); background:var(--vermillion); border-color:var(--vermillion);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="test-id-badge">N3 2023/07　読解等</div>
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">読解</div>
+        <div class="level-badge">N3</div>
+      </div>
+      <h1>日本語N3模擬テスト（読解） 答案用紙</h1>
+      <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+    <div class="brand-logo" title="PHAMKY">PHAMKY</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 16</div>
+    <div class="timer-badge" id="timerBadge">残り時間 50:00</div>
+  </div>
+
+  <main id="form"></main>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'phamkyphung@gmail.com',
+    testName: '日本語N3模擬テスト【2023年07月・読解】'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '読解',
+      mondai: [
+        {
+          key: 'm1', title: '問題１',
+          instruction: '次の（１）から（４）の文章を読んで、質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: 'これは、あるホテルにチェックインした人が、フロントでもらったちらしである。\n\n8月11日・12日にホテル岩中にお泊まりのお客様\n\n「岩中村夏祭り」のご案内\n\n8月11日（土）・12日（日）に、岩中公園で夏祭りが行われます。\n\n会場とホテルの間は、ホテルのバスのご利用が可能です（約5分）。\n\n浴衣を着ている方は、会場内のどの店でもドリンクが1杯無料になります。皆様も、浴衣を着て出かけてみてはいかがでしょうか。\n\nホテルでは、お好きな浴衣と帯を特別料金【1日2,000円】でお貸しします（浴衣の着方がわからない方は、お手伝いいたします）。\n\nご希望の方は、フロントでお申し込みください。\n\nホテル岩中' }
+              ],
+              items: [
+                { text: '夏祭りの日にホテル岩中に泊まっている人が、ホテルから受けられるサービスとして合っているのはどれか。', options: ['浴衣を着れば、夏祭り会場まで、ホテルのバスが利用できる。','ホテルのレストランで、ドリンクが1杯無料で飲める。','ホテルから、好きな浴衣と帯が特別料金で借りられる。','浴衣と帯の料金のほかに2,000円払えば、ホテルの人に着るのを手伝ってもらえる。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '先月、留学していたアメリカから帰国した。そして、知り合いに頼まれ、4月から大学で数学を教えることになった。働き始める前に、実家の部屋を整理しようと思って掃除をしていたら、小学生のときに書いた「私の夢」という作文が出てきた。そこには、先生になりたいと書いてあった。そんなことはすっかり忘れていたが、小さいときにそう書いていたのだ。とても驚いたが、子供のころの夢が本当になったのだし、頑張ろうと思う。' }
+              ],
+              items: [
+                { text: '頑張ろうとあるが、どうしてそう思ったのか。', options: ['自分でも忘れていた、アメリカに留学したいという夢が本当になったから。','自分でも忘れていた、先生になりたいという夢が本当になったから。','子供のころからずっと行きたいと思い続けていたアメリカに留学できたから。','子供のころからずっとなりたいと思い続けていた先生になれたから。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: 'これはある日本語学校から学生に届いたメールである。\n\n学校がもらった招待券の試合は今週末です。\n日時：2月27日（土）　開場13時　試合開始14時\n場所：春山公園野球場\n\nまだ招待券を受け取っていない人は、26日（金）までに事務室に取りに来てください。\n自分だけで行くのが不安だと言う人がいたので、中川先生が一緒に行くことになりました。\n一緒に行きたい人は、12時に学校に集合してください。その場合、招待券は当日、中川先生からもらってもいいです。\n自分で行く人は、学校にも野球場にも集合する必要はありません。\n寒いですから、暖かい服装で行きましょう。\n\n川野日本語学校' }
+              ],
+              items: [
+                { text: 'このメールによると、自分で野球場に行こうと思っている学生が、必ずしなければならないことは何か。', options: ['26日までに学校で招待券を受け取っておく。','26日までに学校で招待券を受け取って、当日、13時に野球場の前に集合する。','当日、12時に学校に行って、招待券を中川先生から受け取る。','当日、13時に野球場に行って、招待券を中川先生から受け取る。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '面白い実験を行った研究者がいる。その実験では、ある魚の顔に汚れをつけて鏡を見せた。すると、その魚は砂で汚れを落とすような動きをしてから、また鏡を見た。これは、自分の顔についた汚れを落とし、その後、汚れが消えたかどうかを確認する動作なのだそうだ。鏡の中にいる自分を見て、それが自分自身だとわかるのは、サルなどの頭のいい動物だけだと考えられていた。しかし、魚にもそれができるものがいるのだと、この研究者は言っている。' }
+              ],
+              items: [
+                { text: 'この実験から、魚の中には、どのようなものがいることがわかったか。', options: ['鏡を見て、自分に汚れをつけるものがいる。','鏡の中の魚が自分だとわかるものがいる。','鏡に気づくと、すぐに鏡の前に行きたがるものがいる。','鏡が汚れていたら、きれいにしようとするものがいる。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm2', title: '問題２',
+          instruction: '次の（１）と（２）の文章を読んで、質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '最近、私と同じ70歳の友人が、自宅の車庫の壁に車をぶつけてしまったそうだ。私は運転に自信があったが、その話を聞いて、安全に運転が続けられるか不安になってきた。それで、①運転をやめることにして、車を売った。\n\nただ、一つ②困ったことがあった。私は妻と二人で丘の上の家に住んでいる。毎日の買い物はこれまでと変わらず、二人で坂の下のスーパーまで行く。初めは、運動にもなるし、スーパーまで歩けばいいと考えていた。しかし、車を使わず荷物を持って坂を上がって帰るのは、思ったより大変だったのだ。\n\n引っ越そうかと話すようになったとき、近所にスーパーの車がとまっているのを見た。インターネットで注文すると、店の商品は何でも届けてくれるそうだ。直接見て選べないので不安もあったが、まずは、肉と野菜を注文してみた。\n\n翌日届いた品物はどれもとても良かった。配達料はかかるが、便利さのほうが重要だ。いい方法が見つかった。これで引っ越しをしなくてもよさそうである。' }
+              ],
+              items: [
+                { text: '①運転をやめることにしてとあるが、それはなぜか。', options: ['運転に自信があったのに、車をぶつけてしまったから。','自分も安全に運転が続けられるか心配になったから。','若いころから自分の運転技術に不安があったから。','車の運転をやめたほうがいいと妻に言われたから。'] },
+                { text: '②困ったこととあるが、どんなことか。', options: ['毎日、妻と二人でスーパーに買い物に行かなければならなくなったこと。','今までより遠くのスーパーまで、買い物に行かなければならなくなったこと。','スーパーに行くとき、ついでにしていた運動ができなくなり、運動不足になったこと。','スーパーで買った物を歩いて持って帰ってくるのが、予想ほど楽ではなかったこと。'] },
+                { text: 'スーパーのサービスを利用して、「私」は今、引っ越しについてどう考えているか。', options: ['買った商品を持って帰るのが大変なので、スーパーの近くに引っ越したほうがいいかもしれない。','買った商品を届けてもらうと配達料がかかるので、スーパーの近くに引っ越したほうがいいかもしれない。','届けてもらった商品に満足したし、今後はこのサービスを利用すれば、引っ越す必要はない。','届けてもらった商品の中には満足できないものもあったが、このサービスを利用すれば、引っ越す必要はないだろう。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '日本では、音楽を聞きに行ったり、絵や映画を見に行ったりすることが好きな人でも、子供が小さいうちは、①行くのを我慢してしまうことがあります。子供は、騒いでしまう心配があるので連れて行けないし、人に預けることも簡単ではないからです。\n\nしかし、最近は少しずつですが、子供を預かってくれる音楽会場や美術館、映画館などが増えてきました。また、②親子が楽しめるように工夫をするところも出てきています。例えば、ある映画館では、映画の間も会場を少し明るくしておくそうです。暗いと、怖がって泣いてしまう子供がいるからです。大きな音を聞くと、びっくりする子供もいるので、音も大きすぎないようにしてあります。\n\nこのように、最近は、小さな子供がいる人が安心して、出かけて楽しめる場所が増えてきています。' }
+              ],
+              items: [
+                { text: '①行くのを我慢してしまうことがありますとあるが、どうしてか。', options: ['音楽や絵や映画などを楽しめる場所が、近くにないことが多いから。','子供の世話をするのに忙しくて、時間がないから。','子供を連れて行くのも、親だけで出かけるのも難しいから。','大人だけでなく、子供の料金も払わなければならないから。'] },
+                { text: '②親子が楽しめるように工夫をするとあるが、どのようなことをしている映画館があると言っているか。', options: ['子供と親が話しながら映画が見られる特別な席を用意する。','子供が騒ぐ音が気にならないように、映画の音を大きくする。','子供にも大人にも楽しんで見てもらえるような映画を選ぶ。','子供が怖がったり驚いたりしないような明るさや音量にする。'] },
+                { text: 'この文章のテーマは何か。', options: ['日本で、子供がいる親も音楽や映画を楽しめる環境ができてきたこと。','日本で、大人と子供が一緒に楽しめる音楽や映画が減ってきたこと。','日本で、大人だけで音楽会や映画に出かける親が増えてきたこと。','日本で、音楽や映画を楽しむ子供が増えてきたこと。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm3', title: '問題３',
+          instruction: '次の文章を読んで、質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '1年に2万通も感謝の手紙がくる会社がある。\n\n四国にある①靴の会社だ。初めはスリッパを作っていたのだが、約10年前、お年寄りのための介護施設（注）の経営者から、こんな相談をされた。\n\n「施設内でお年寄りがよく転ぶので、困っているんです。いろいろ工夫しても解決できません。靴に問題がありそうなんです。」\n\nそれで、お年寄りのための安全な靴を作ることにしたそうだ。社長はまず、約500人のお年寄りの足を観察して、歩き方を調査することにした。そうして作った靴を履いてもらい、意見を聞きながら悪いところを直していった。2年後、「お年寄りのための靴」が完成したが、初めはあまり売れなかった。\n\nそこで、②調査結果をもう一度確認することにした。すると、あることがわかった。お年寄りの中には年をとって片方の足だけが悪くなったり、足の形が変わってしまい左右の足の大きさが違ってきたりして、困っている人が少なくない。左右のセットではなく、片方の靴だけが必要な人もいるのだ。そこで、「お年寄りのための靴」を片方でも買えるようにした。\n\n靴の会社を経営しているある先輩からは、③そんなことをしたら経営がうまくいかなくなると反対されたが、社長はこの新しい販売方法を実行した。困っている人の問題を解決するためにいいものを作り、今までの靴の売り方とは全く違った売り方で、それが必要な人のところに届けようとしたのである。\n\n今では、この靴は1年に18万足以上も売れている。2万通も感謝の手紙がくるのは、④このような会社の姿勢があるからではないだろうか。\n\n（注）お年寄りのための介護施設：お年寄りが世話を受けながら生活する場所' }
+              ],
+              items: [
+                { text: '①靴の会社は、どうしてお年寄りのための靴を作ることにしたか。', options: ['お年寄りから、いい靴を作ってほしいという手紙がたくさんきたから。','お年寄りが室内でスリッパを履かなくなり、靴を履くようになったから。','お年寄りのための介護施設の経営者から、靴について相談されたから。','お年寄りの歩き方を調査して、靴の問題点を見つけた'] },
+                { text: '②調査結果をもう一度確認することにしたとあるが、その結果、例えばどんなことがわかったか。', options: ['お年寄りには、転びやすい人がいること。','お年寄りには、靴の値段が高いと思っている人がいること。','お年寄りになると、靴を履く機会が減る人がいること。','お年寄りになると、右と左で足の形が変わる人がいること。'] },
+                { text: '③そんなこととあるが、それは何かか。', options: ['調査にお金をかけること。','左右の大きさが同じ靴だけを売ること。','「お年寄りのための靴」だけを作ること。','片方ずつでも靴を売ること。'] },
+                { text: '④このような会社とあるが、どのようなものか。', options: ['困っている人のことを一生懸命に考えて、商品を作って売ること。','自分の会社の商品の良さを信じて、売れなくても商品を売り続けること。','人がしないことを探して、周りの人に反対されても実行すること。','客のことをよくわかっている社員だけで、いいものを作り続けること。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm4', title: '問題４',
+          instruction: '右のページは、ある大学のホームページに書かれた、食堂・カフェの案内である。これを読んで、下の質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '丸川大学\n食堂・カフェのご案内' },
+                { table: {
+                    headers: ['食堂・カフェ', '営業時間', '特徴'],
+                    rows: [
+                      ['①丸川食堂（300席）', '平日 11時〜15時\n土・日 11時〜14時', '大きくて、メニューが多い食堂です'],
+                      ['②朝花食堂（100席）', '平日 8時〜15時\n土・日 8時〜14時', '大学でいちばん新しい食堂です'],
+                      ['③カフェ南川（60席）', '平日 8時〜19時\n土・日 8時〜14時', '南川カレーが人気です'],
+                      ['④花丸食堂（50席）', '平日 11時〜20時\n土・日 11時〜14時', '教師や大学で働く関係者のための食堂です。学生は利用できません']
+                    ]
+                  }
+                },
+                { text: '※大学の休暇期間中の営業について\n①と②は休み、③と④は平日11時〜14時に営業します。\n\n【パーティーについて】\n丸川大学の学生や関係者の皆様は、食堂・カフェの営業がない日や時間にパーティーを開くことができます。\n※①〜③は学生が申し込めますが、④は教師か事務所の人の申し込みが必要です。\n\n▶料理について\n●メニューは相談して決められます。\n●①〜③では一人2000円以上（土曜、日曜、祝日は、2,500円以上）、④では一人4000円以上の注文で予約受付をします。\n\n▶人数\n●①は18人、②は40人、③と④は20人から予約受付をします。\n●最大の人数は、各食堂・カフェの席の数と同じです。\n\n▶時間\n●①〜③は20時まで、④は21時までに終えてください。\n●営業がある日は、各営業終了時間の1時間後からパーティーに利用できます。\n\n▶予約連絡先\n●パーティー係　YuukiBuiTNN（190-234-5678）\nホームページ https://www.facebook.com/bui.yuuki.9/' }
+              ],
+              items: [
+                { text: '今日は大学の休暇期間中の平日である。テイムさんは、13時に大学の食堂かカフェで食事をしようと考えている。学生のテイムさんが行ける食堂・カフェはどれか。', options: ['①と②と③。','①と②。','③と④。','③。'] },
+                { text: '丸川大学の学生のオウさんは、10月23日（土）に②の食堂でクラスのパーティーを開きたいと考えている。10月23日に②の食堂かパーティーに利用できることは確認できたが、そのほかに気をつけなければならないこととして、合っているのはどれか。', options: ['学生が申し込みをすることはできない。','料理は、一人2500円以上注文しなければならない。','予約できる最少の人数は、20人である。','パーティーは21時までに終える必要がある。'] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // 解答PDF（Đáp án đề N3 T7-2023答え.pdf）の解答表より
+  const ANSWER_KEY = {
+    m1_1:3, m1_2:2, m1_3:1, m1_4:2,
+    m2_1:2, m2_2:4, m2_3:3, m2_4:3, m2_5:4, m2_6:1,
+    m3_1:3, m3_2:4, m3_3:4, m3_4:1,
+    m4_1:4, m4_2:2
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>')
+      .replace(/_{2,}/g, '<span class="blank">＿＿＿</span>')
+      .replace(/★/g, '<span class="star">★</span>')
+      .replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderPassageHtml(text){
+    return text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/([①②③④⑤⑥⑦⑧⑨⑩])/g, '<span class="pnum">$1</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function renderTableHtml(table){
+    let html = '<div class="table-wrap"><table class="schedule-table"><thead><tr>';
+    table.headers.forEach(h => { html += '<th>' + escapeHtml(h) + '</th>'; });
+    html += '</tr></thead><tbody>';
+    table.rows.forEach(row => {
+      html += '<tr>';
+      row.forEach(cell => { html += '<td>' + escapeHtml(cell).replace(/\n/g,'<br>') + '</td>'; });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    return html;
+  }
+
+  function renderBlocksHtml(blocks){
+    let html = '';
+    blocks.forEach(b => {
+      if (b.text) html += '<div class="passage">' + renderPassageHtml(b.text) + '</div>';
+      if (b.table) html += renderTableHtml(b.table);
+    });
+    return html;
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    const sources = m.clusters
+      ? m.clusters.reduce((acc, c) => acc.concat(c.items), [])
+      : m.items;
+    sources.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    const flag = UNCERTAIN_QIDS.has(qid) ? '<span class="uncertain-flag">要確認</span>' : '';
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + flag + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + escapeHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      if (m.clusters) {
+        let idx = 0;
+        m.clusters.forEach(cluster => {
+          if (cluster.blocks) {
+            html += renderBlocksHtml(cluster.blocks);
+          }
+          cluster.items.forEach(item => {
+            idx++;
+            totalQuestions++;
+            html += renderQuestionHtml(m, { item: item, idx: idx, qid: m.key + '_' + idx });
+          });
+        });
+      } else {
+        flattenMondaiItems(m).forEach(entry => {
+          totalQuestions++;
+          html += renderQuestionHtml(m, entry);
+        });
+      }
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', updateProgress);
+  updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 50 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 300);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      lines.push('■ ' + part.title);
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
+          }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※要確認';
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+
+  function sendReport(auto){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
