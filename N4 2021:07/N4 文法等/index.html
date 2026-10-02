@@ -1,4 +1,4 @@
-<title>日本語N4模擬テスト答案用紙</title>
+<title>N4 2021/07　文法等</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
   :root{
@@ -15,7 +15,7 @@
     --q-bg:#F5ECDA;
     --q-border:#E6D6B8;
     --mondai-ink:#4A3728;
-    --page-bg:#6B4A32;
+    --page-bg:#7A5940;
     --light-ink:#F3E9D6;
     --light-ink-soft:#D8C3A0;
     --light-accent:#9FC4FF;
@@ -35,7 +35,7 @@
       --q-bg:#2A2115;
       --q-border:#4A3B26;
       --mondai-ink:#E8D5B4;
-      --page-bg:#2A1D12;
+      --page-bg:#35261A;
       --light-ink:#F5ECDA;
       --light-ink-soft:#C9B08A;
       --light-accent:#9CC0FF;
@@ -55,7 +55,7 @@
     --q-bg:#2A2115;
     --q-border:#4A3B26;
     --mondai-ink:#E8D5B4;
-    --page-bg:#2A1D12;
+    --page-bg:#35261A;
     --light-ink:#F5ECDA;
     --light-ink-soft:#C9B08A;
     --light-accent:#9CC0FF;
@@ -163,30 +163,42 @@
   .q{
     display:flex; gap:1rem;
     padding:1.3rem 1.3rem;
-    border:1px solid var(--q-border);
+    border:1px solid #E6D6B8;
     border-radius:.9rem;
     margin-bottom:.9rem;
-    background:var(--q-bg);
+    background:#F5ECDA;
     box-shadow:var(--shadow);
   }
   .qnum{
     flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
-    background:var(--q-border); color:var(--mondai-ink);
+    background:#E6D6B8; color:#4A3728;
     display:flex; align-items:center; justify-content:center;
     font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
     transition:background .15s, color .15s;
   }
   .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
   .qbody{flex:1; min-width:0;}
-  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem; color:#20242B;}
   .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
-  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:var(--ink);}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:#20242B;}
   .star{color:var(--vermillion); font-weight:700;}
   .uncertain-flag{
     display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
     color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
     padding:.05rem .5rem; vertical-align:middle;
   }
+  .q-result-badge{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    padding:.08rem .55rem; border-radius:999px; vertical-align:middle;
+  }
+  .q-result-badge.correct{color:#2E7D32; background:#E5F3E7; border:1px solid #2E7D32;}
+  .q-result-badge.wrong{color:var(--vermillion); background:#FBEAE3; border:1px solid var(--vermillion);}
+  .q.q-correct{border-color:#2E7D32;}
+  .q.q-wrong{border-color:var(--vermillion);}
+  .opt.opt-correct-answer{background:#E5F3E7; border-color:#2E7D32;}
+  .opt.opt-correct-answer .bubble{background:#2E7D32; border-color:#2E7D32; color:var(--paper);}
+  .opt.opt-wrong-selected{background:#FBEAE3; border-color:var(--vermillion);}
+  .opt.opt-wrong-selected .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
 
   .options{display:flex; flex-direction:column; gap:.5rem;}
   .opt{
@@ -196,19 +208,19 @@
     cursor:pointer; border:1px solid transparent;
     background:transparent;
   }
-  .opt:hover{background:var(--q-border);}
+  .opt:hover{background:#E6D6B8;}
   .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
   .bubble{
     flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
-    border:1.5px solid var(--q-border);
+    border:1.5px solid #E6D6B8;
     display:flex; align-items:center; justify-content:center;
-    font-size:.82rem; font-weight:700; color:var(--ink-soft);
+    font-size:.82rem; font-weight:700; color:#5B6472;
     transition:background .15s, border-color .15s, color .15s;
   }
   .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
-  .opt input:checked ~ .opt-text{color:var(--ink); font-weight:600;}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
   .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
-  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:var(--ink-soft);}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:#5B6472;}
 
   .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
   .submit-area h2{
@@ -270,6 +282,21 @@
     font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
   }
 
+  .test-id-badge{
+    display:inline-block; font-size:1.05rem; font-weight:700; letter-spacing:.04em;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.7rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--vermillion); border-color:var(--vermillion);}
+  .timer-badge.timer-over{color:var(--paper); background:var(--vermillion); border-color:var(--vermillion);}
+
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important; animation:none !important;}
   }
@@ -277,6 +304,7 @@
 
 <div class="page">
   <header class="masthead">
+    <div class="test-id-badge">N4 2021/07　文法等</div>
     <div class="masthead-main">
       <div class="masthead-top">
         <div class="kicker">言語知識（文字・語彙・文法・読解）</div>
@@ -285,12 +313,13 @@
       <h1>日本語N4模擬テスト 答案用紙</h1>
       <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
     </div>
-    <div class="brand-logo" title="PHAM">PHAM</div>
+    <div class="brand-logo" title="PHAMKY">PHAMKY</div>
   </header>
 
   <div class="progress-wrap">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-label" id="progressLabel">回答済み: 0 / 49</div>
+    <div class="timer-badge" id="timerBadge">残り時間 35:00</div>
   </div>
 
   <main id="form"></main>
@@ -319,6 +348,7 @@
     <div class="result-panel" id="resultPanel" hidden>
       <div class="result-label">採点結果</div>
       <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+      <p class="result-note">下の各問題にも正解・不正解が表示されます。選択肢を選び直すと、表示が自動的に更新されます。</p>
     </div>
   </section>
 
@@ -556,8 +586,39 @@
     return answered;
   }
 
-  formEl.addEventListener('change', updateProgress);
+  formEl.addEventListener('change', function(){
+    updateProgress();
+    if (graded) gradeQuestions();
+  });
   updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 35 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 300);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
 
   function buildReport(){
     const name = document.getElementById('studentName').value.trim();
@@ -615,29 +676,61 @@
   const resultPanel = document.getElementById('resultPanel');
   const scoreNumEl = document.getElementById('scoreNum');
   const scoreTotalEl = document.getElementById('scoreTotal');
+  let graded = false;
+
+  function gradeQuestions(){
+    graded = true;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (!qEl || EXCLUDED_QIDS.has(qid)) return;
+      const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+      const answerKey = ANSWER_KEY[qid];
+      const isCorrect = !!checked && parseInt(checked.value, 10) === answerKey;
+
+      qEl.classList.remove('q-correct', 'q-wrong');
+      qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+
+      const oldBadge = qEl.querySelector('.q-result-badge');
+      if (oldBadge) oldBadge.remove();
+      const badge = document.createElement('span');
+      badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+      badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+      qEl.querySelector('.qtext').appendChild(badge);
+
+      qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+        optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+        const optValue = i + 1;
+        if (optValue === answerKey) optEl.classList.add('opt-correct-answer');
+        if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+      });
+    })));
+  }
 
   function showResult(report){
     scoreNumEl.textContent = report.correct;
     scoreTotalEl.textContent = report.scoredTotal;
     resultPanel.hidden = false;
     resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    gradeQuestions();
   }
 
   const sendBtn = document.getElementById('sendBtn');
   const sendStatus = document.getElementById('sendStatus');
   const sendBtnDefaultLabel = sendBtn.textContent;
-  sendBtn.addEventListener('click', function(){
+
+  function sendReport(auto){
     const report = buildReport();
     showResult(report);
 
     sendBtn.disabled = true;
     sendBtn.textContent = '送信中…';
-    sendStatus.textContent = '';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
     sendStatus.className = 'send-status';
 
     const studentEmail = document.getElementById('studentEmail').value.trim();
     const payload = {
-      _subject: report.subject,
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
       _captcha: 'false',
       お名前: document.getElementById('studentName').value.trim() || '無記名',
       得点: report.correct + ' / ' + report.scoredTotal + '点',
@@ -654,7 +747,7 @@
       return res.json();
     }).then(function(){
       sendBtn.textContent = '送信しました ✓';
-      sendStatus.textContent = '先生に送信しました。';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
       sendStatus.className = 'send-status send-status-ok';
     }).catch(function(){
       sendBtn.disabled = false;
@@ -662,6 +755,10 @@
       sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
       sendStatus.className = 'send-status send-status-error';
     });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
   });
 
   const copyBtn = document.getElementById('copyBtn');
