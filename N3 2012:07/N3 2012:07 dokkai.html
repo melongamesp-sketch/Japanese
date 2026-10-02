@@ -1,0 +1,844 @@
+<title>N3 2012/07　読解等</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --q-bg:#F5ECDA;
+    --q-border:#E6D6B8;
+    --mondai-ink:#4A3728;
+    --page-bg:#7A5940;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F;
+      --paper-2:#1C222C;
+      --paper-3:#2A3242;
+      --ink:#E7EBF3;
+      --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5;
+      --indigo-deep:#9CC0FF;
+      --vermillion:#FF8A5B;
+      --line:#2E3646;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --q-bg:#2A2115;
+      --q-border:#4A3B26;
+      --mondai-ink:#E8D5B4;
+      --page-bg:#35261A;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181F;
+    --paper-2:#1C222C;
+    --paper-3:#2A3242;
+    --ink:#E7EBF3;
+    --ink-soft:#9AA5B8;
+    --indigo:#6FA0F5;
+    --indigo-deep:#9CC0FF;
+    --vermillion:#FF8A5B;
+    --line:#2E3646;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --q-bg:#2A2115;
+    --q-border:#4A3B26;
+    --mondai-ink:#E8D5B4;
+    --page-bg:#35261A;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.5rem;
+  }
+  .masthead-main{flex:1; min-width:0;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--indigo-deep); background:var(--paper-2);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .level-badge{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:.85rem; letter-spacing:.06em; color:var(--paper);
+    background:var(--vermillion); padding:.28rem .85rem; border-radius:999px;
+  }
+  .brand-logo{
+    flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.55rem .9rem;
+    border-radius:.65rem;
+    background:var(--indigo-deep); color:var(--paper);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; letter-spacing:.1em;
+    box-shadow:var(--shadow);
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .6rem;
+    text-wrap:balance;
+    color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.65rem 1.25rem;
+    display:flex; align-items:center; gap:.85rem;
+    margin:0 -1.25rem 2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.3rem; font-weight:600;
+    color:var(--light-accent);
+    margin:2.6rem 0 1.3rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--light-accent);
+  }
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.6rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+
+  .passage{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    font-size:1rem;
+    line-height:1.9;
+  }
+  .passage-p{margin:0 0 1em;}
+  .passage-p:last-child{margin-bottom:0;}
+  .pnum{color:var(--vermillion); font-weight:700; border-bottom:2px solid var(--vermillion); padding:0 .15em;}
+  .ptable{width:100%; border-collapse:collapse; margin:0 0 1em; font-size:.94rem;}
+  .ptable th, .ptable td{border:1px solid var(--line); padding:.5rem .6rem; text-align:left; vertical-align:top;}
+  .ptable th{background:var(--paper-3);}
+
+  .q{
+    display:flex; gap:1rem;
+    padding:1.3rem 1.3rem;
+    border:1px solid #E6D6B8;
+    border-radius:.9rem;
+    margin-bottom:.9rem;
+    background:#F5ECDA;
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:#E6D6B8; color:#4A3728;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem; color:#20242B;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .star{color:var(--vermillion); font-weight:700;}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:#20242B;}
+  .uncertain-flag{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
+    padding:.05rem .5rem; vertical-align:middle;
+  }
+  .q-result-badge{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    padding:.08rem .55rem; border-radius:999px; vertical-align:middle;
+  }
+  .q-result-badge.correct{color:#2E7D32; background:#E5F3E7; border:1px solid #2E7D32;}
+  .q-result-badge.wrong{color:var(--vermillion); background:#FBEAE3; border:1px solid var(--vermillion);}
+  .q.q-correct{border-color:#2E7D32;}
+  .q.q-wrong{border-color:var(--vermillion);}
+  .opt.opt-correct-answer{background:#E5F3E7; border-color:#2E7D32;}
+  .opt.opt-correct-answer .bubble{background:#2E7D32; border-color:#2E7D32; color:var(--paper);}
+  .opt.opt-wrong-selected{background:#FBEAE3; border-color:var(--vermillion);}
+  .opt.opt-wrong-selected .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.7rem;
+    padding:.6rem .75rem; border-radius:.7rem;
+    cursor:pointer; border:1px solid transparent;
+    background:transparent;
+  }
+  .opt:hover{background:#E6D6B8;}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
+    border:1.5px solid #E6D6B8;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:#5B6472;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:#5B6472;}
+
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--paper-3); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--indigo); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.65rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
+  .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
+  .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--light-accent);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
+  }
+
+  .test-id-badge{
+    display:inline-block; font-size:1.05rem; font-weight:700; letter-spacing:.04em;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.7rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--vermillion); border-color:var(--vermillion);}
+  .timer-badge.timer-over{color:var(--paper); background:var(--vermillion); border-color:var(--vermillion);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="test-id-badge">N3 2012/07　読解等</div>
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">読解</div>
+        <div class="level-badge">N3</div>
+      </div>
+      <h1>日本語N3模擬テスト（読解） 答案用紙</h1>
+      <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+    <div class="brand-logo" title="PHAMKY">PHAMKY</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 16</div>
+    <div class="timer-badge" id="timerBadge">残り時間 50:00</div>
+  </div>
+
+  <main id="form"></main>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+      <p class="result-note">下の各問題にも正解・不正解が表示されます。選択肢を選び直すと、表示が自動的に更新されます。</p>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'phamkyphung@gmail.com',
+    testName: '日本語N3模擬テスト【2012年07月・読解】'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '読解',
+      mondai: [
+        {
+          key: 'm1', title: '問題１',
+          instruction: '次の（１）から（４）の文章を読んで、質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '次の文章は、20年以上寿司を握っている林さんについてのものである。\n\n「三日、三月、三年」と言う言葉がある。何事も（注）三日我慢できれば三ヵ月、三ヵ月我慢できれば三年、そして三年我慢できればずっと続けられるという意味だ。林さんも三年を過ぎた頃「（　）」と思えるようになった。\n\n（注）我慢：辛いことに耐えること' }
+              ],
+              items: [
+                { text: '「（　）」に入ることばはどれか。', options: ['お客が増えたな','20年は続けよう','一生の仕事だな','三年間がんばろう'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '山田図書館では、本の貸し出しの他に毎月第3土曜日に「おもちゃ病院」を開いています。「おもちゃ病院」では、壊れたり動かなくなったりしてしまったおもちゃを、プロが無料で修理します。直すのに時間がかかる場合は、預かってゆっくり修理することもあります。大事なおもちゃを渡すのが不安そうな子供には「ちょっと重い病気だから入院しないとね」と言うと、安心して渡してくれます。' }
+              ],
+              items: [
+                { text: 'この「おもちゃ病院」について、正しい説明はどれか。', options: ['おもちゃも一緒に「入院」できるので、子供たちが入院するとき安心する。','動かなくなったりこわれたりしたおもちゃは、その場で直るものだけ修理してくれる。','すぐ直せない物は、預かって直してくれることもあり、その場合もお金はかからない。','山田図書館は第3土曜日におもちゃ病院になるので、一日中、本を借りられない。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: 'これは、ピアノ教室の広告である。\n\n大人のためのピアノ教室\n子供のころに習っていた方、もう一度ピアノを始めてみませんか。初めての方にも、丁寧にレッスンいたします。\n・レッスンの日時や回数、時間の長さはご都合に合わせて決められます。\n・レッスン料は、30分2,000円（初級）と2,500円（中級）です。\n・ご自宅でのレッスンもいたします。\n・レッスン時間以外にご利用可能な練習室があります。（有料）\nご質問がある方は、お電話ください。また、レッスンの見学をご希望の方は、まずお電話でご予約をお願いします。\n寺前音楽教室　市区増山1-1-1　01-2345-6789' }
+              ],
+              items: [
+                { text: 'この広告の内容に合っているものはどれか。', options: ['レッスンの時間は、1回30分と決まっている。','レッスンの料金は、30分2,000円と決まっている。','レッスンは、自分の家でも受けることができる。','レッスンは、音楽教室に行けばいつでも見学できる。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '最近ろうそくが一年中売れていて、その明かりを楽しむ人が増えている。なぜ今、ろうそくに人気が集まっているのだろうか。蛍光灯の白い光は、人を活動的にさせるが、緊張を解くことはできないそうだ。ろうそくなどのオレンジ色の光は、心を落ち着かせ、ストレスや体の疲れを取ってくれるらしい。不安の多い社会の中で、こういう効果に期待してろうそくに火をつける人が増えているようである。' }
+              ],
+              items: [
+                { text: '「ろうそくに人気が集まっている」とあるが、その理由は、何だと言っているか。', options: ['ろうそくの明かりを楽しむ人が増えて、一年中売るようになってきたから','ろうそくの明かりに、人を活動的にさせる効果があることが分かってきたから','ろうそくの光で、不安の多い社会を明るくしようとする人が増えているから','ろうそくの光によって、心や体を休ませようとする人が多くなっているから'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm2', title: '問題２',
+          instruction: '次の（１）と（２）の文章を読んで、質問に答えなさい。答えは、１・２・３・４から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '娘がまだ3歳の時、田舎の小さなホテルに泊まった。朝早く、一人さきに目覚めた娘に起こされた。「おとうさん、早く起きて、ねえ、起きてよ。」\n\nまだまだ目が覚めない私は、①「もうすこし」と言ってふとんをかぶる。窓のところへ走っていく娘の足音。しばらくして、「お父さん、ねえ、こっちへ来て。」「ねえ、お父さん、きれいだよ。夕焼けの朝だよ。」\n\nこの言葉に起き上がった私は、「えっ、何？」娘のところに行き、窓から外を見た。そこには、赤い赤い、空が広がっていた。美しい朝焼けの空だ。\n\n「ねっ、きれいでしょ。おとうさん。」\n\n「うん、きれいだね。」娘はまだ3歳。「朝焼け」ということばは知らなかったが、②自分の知っている日本語で目の前に広がる美しい景色を上手に伝えることができた。\n\n人はだれでも、言葉を使って自分の気持ちを表す力を持っている、私はそう感じた。' }
+              ],
+              items: [
+                { text: '①「もうすこし」の後に続くことばとして、「私」の気持ちをよく表すのはどれか。', options: ['早く起こしてほしい','早く起きてほしい','寝させてほしい','寝ないでほしい'] },
+                { text: '②自分の知っている日本語にあたるのはどれか。', options: ['「朝焼け」','「夕焼け」','「きれい」','「おとうさん」'] },
+                { text: 'この文章の内容と合っているのはどれか。', options: ['「私」は、娘に起こされてもなかなか目が覚めず、夕方になってやっと起きた。','「私」は、娘が自分の知っていることばできれいな景色を伝えたことに感動した。','「私」は、娘が窓の外が美しい夕焼けであることを知らせてくれてうれしかった。','「私」は、娘もいつか自分の気持ちを表すことができるようになるだろうと強く思った。'] }
+              ]
+            },
+            {
+              boxed: true,
+              blocks: [
+                { text: '最近、仕事の連絡をする時にメールを利用することが多くなりました。メールは時間を選んで読めますから、相手の都合がいい時に相手に読んでもらうことができます。しかし、分かりやすいメールを書くのは意外に難しいものです。読みやすいメールを書くには、どのような工夫が必要でしょうか。\n\nまず、一行の文字数を多くしないで、短く切って次の行に進むようにしましょう。そして、一つの内容を書き終わったら、次の一行は何も書かないで、その次の行から書き始めます。また、約束の時間や場所など、特に重要なことは文章の最後にもう一度書いた方がいい。\n\n文章を全部書き終わったら、自分の名前と連絡先を書きます。メールで返事をもらうつもりでも、メールアドレスの他に自分の電話番号とFAX番号も知らせておきましょう。' }
+              ],
+              items: [
+                { text: 'この文章では、メールについて、どのように言っているか。', options: ['メールは、都合のいい時に送ることができて便利だ。','メールをもらった人は、読みたいものを選んで読める。','メールは、手で書かれた手紙やFAXより読みにくい。','メールは、読みやすいように工夫して書いた方がいい。'] },
+                { text: 'この文章で、言っていないことはどれか。', options: ['一行が長くなりすぎないようにする。','特に重要なことは、メールの一番最初に書く。','話の内容を途中で変える時は、一行あけておく。','最後に名前、メールアドレス、電話・FAX番号を書く。'] },
+                { text: 'この文章によると、下のメールはどう直せばいいか。', options: ['同じ内容について2回書かない。','一行の長さをもっと短くする。','電話やFAX番号などを書かない。','行と行の間をもっと広くあける。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm3', title: '問題３',
+          instruction: '次の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '11月の初めに名古屋に引っ越して来て、1週間が経ちました。私は日本に住んでもう2年になるので日本についていろいろを知っていると思っていましたが、まだ知らないことが結構あります。\n\n今朝は、近くの公園へ散歩に行ってみました。木の葉が赤や黄色に変わり、とてもきれいでした。歩いていると、遠くに白い雪のようなものがたくさんついている木が見えました。何かと思って、①近くに行ってみると、それは桜に似た小さな花でした。\n\n通りかかった人に「何の木ですか」と聞くと、「桜ですよ。『四季桜』と言って、秋から冬に咲くのです。」と教えてくれました。桜は春にだけ咲くと思っていたので、②とてもびっくりしました。\n\n公園を出ると、喫茶店があったので、入ってみました。コーヒーとトーストを頼むと、ウエイトレスに「モーニング・サービスにしますか。」と聞かれました。私が意味が分からず、黙っていると、ウエイトレスは「朝11時までにコーヒーか紅茶を頼むと、無料でトーストと卵とサラダがつくんです。」と説明してくれました。これは、名古屋で始まったサービスなのだそうです。私はその時まで、喫茶店にそのようなサービスがあることを知りませんでした。お腹がすいていたので、③とても嬉しかったです。\n\nこれからまたどんな経験ができるか、とても楽しみです。' }
+              ],
+              items: [
+                { text: '①近くに行ってみるとあるが、どうして行ってみたのか。', options: ['きれいな木の葉をもっと近くで、見たかったから','白い花の木の名前が何か知りたかったから','もっとそばで、雪を見たかったから','白いものが何か知りたかったから'] },
+                { text: '②とてもびっくりしましたとあるが、どうしてか。', options: ['秋に咲く種類の桜があることを知ったから','いろいろな色の桜があることがわかったから','桜は春にだけ咲くと言うことがわかったから','通りかかった人がその桜の名前を知っていたから'] },
+                { text: '③とても嬉しかったですとあるが、何が嬉しかったのか。', options: ['コーヒー代だけでトーストなども食べられたこと','「モーニング・サービス」と言うのが何か分かったこと','名古屋で「モーニング・サービス」が生まれたこと','トーストを頼んだらコーヒーがただで飲めたこと'] },
+                { text: 'この文章を書いた人は、日本の生活についてどう思っているか。', options: ['まだまだいろいろな発見ができそうで、面白い。','驚くことが結構あって、落ち着かない。','自分の国と似ているところが多く、楽しい。','分からないことがたくさんあって、生活しにくい。'] }
+              ]
+            }
+          ]
+        },
+        {
+          key: 'm4', title: '問題４',
+          instruction: '次のページは、安見市内のパーティー会場案内である。これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。',
+          clusters: [
+            {
+              boxed: true,
+              blocks: [
+                { text: '安見市内のパーティー会場案内' },
+                { table: {
+                    headers: ['会場', '利用時間', '利用人数', '利用料金', '料理', '交通'],
+                    rows: [
+                      ['①安見ホール（新しいビルなので、きれいです。）', '8:00〜23:00（定休日：毎月第3月曜日）', '最大100名', '1時間1,000円', '1人2,000円から（必ず料理を注文してください）', '安見駅から徒歩30分、無料駐車場あり'],
+                      ['②花の家（ばらの花で有名な西公園の中にあります。）', '11:00〜20:00（定休日：木曜日、祝日の場合は水曜日）', '10〜50名', '無料', '1人1,500円から（飲み物だけの注文でも利用できます）', '安見駅から徒歩15分、西公園に駐車場（有料）あり'],
+                      ['③レストラン海パーティールーム（カラオケが無料で利用できます）', '11:00〜22:00（定休日：火曜日）、利用は4時間まで', '10〜30名', '無料', '1人3,000円から（必ず料理を注文してください）', '安見駅から徒歩10分、無料駐車場（15台）あり'],
+                      ['④市民センター（コンサートにも使えます。）', '11:00〜21:00（定休日：月曜日）、利用は4時間まで', '最大40名', '1時間1,000円', '注文はできません（必要な場合は利用者がご用意ください）', '安見駅から徒歩20分（市役所のとなり）、市役所に駐車場（有料）あり']
+                    ]
+                  }
+                }
+              ],
+              items: [
+                { text: '原さんは、来週の木曜日の午後に読書クラブの活動を行う会場を探している。参加者は30名程度で、料理は必要ないので、飲み物だけ買って持っていきたい。原さんの希望に合う会場はいくつか。', options: ['1つ','2つ','3つ','4つ'] },
+                { text: 'マイさんは、友達から「交流会の会場を探してほしい」と下のメモを渡された。友達の希望に合う会場はどれか。\n\nメモ：\n・来週の土曜日のお昼\n・人数は20人ぐらい\n・安見駅から歩いて20分以内\n・料理は2,000円以内で会場で注文したい', options: ['①','②','③','④'] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // 問題冊子内のオレンジ色マークと直接照合して作成（問題38・39は冊子内に色指定なし、文脈から判断）
+  const ANSWER_KEY = {
+    m1_1:3, m1_2:3, m1_3:3, m1_4:4,
+    m2_1:3, m2_2:2, m2_3:2, m2_4:4, m2_5:2, m2_6:2,
+    m3_1:4, m3_2:1, m3_3:1, m3_4:1,
+    m4_1:1, m4_2:2
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>')
+      .replace(/_{2,}/g, '<span class="blank">＿＿＿</span>')
+      .replace(/★/g, '<span class="star">★</span>')
+      .replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderBlockHtml(block){
+    if (block.table) {
+      let html = '<table class="ptable"><thead><tr>';
+      block.table.headers.forEach(function(h){ html += '<th>' + escapeHtml(h) + '</th>'; });
+      html += '</tr></thead><tbody>';
+      block.table.rows.forEach(function(row){
+        html += '<tr>';
+        row.forEach(function(cell){
+          html += '<td>' + escapeHtml(cell).replace(/\n/g, '<br>') + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      return html;
+    }
+    return block.text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/［(\d+)］/g, '<span class="pnum">［$1］</span>')
+        .replace(/([①②③④])/g, '<span class="pnum">$1</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function renderPassageHtml(text){
+    return text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/［(\d+)］/g, '<span class="pnum">［$1］</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    const sources = m.clusters
+      ? m.clusters.reduce((acc, c) => acc.concat(c.items), [])
+      : m.items;
+    sources.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    const flag = UNCERTAIN_QIDS.has(qid) ? '<span class="uncertain-flag">要確認</span>' : '';
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + flag + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + escapeHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      if (m.passage) {
+        html += '<div class="passage">' + renderPassageHtml(m.passage) + '</div>';
+      }
+
+      if (m.clusters) {
+        let idx = 0;
+        m.clusters.forEach(cluster => {
+          if (cluster.blocks) {
+            html += '<div class="passage">' + cluster.blocks.map(renderBlockHtml).join('') + '</div>';
+          } else if (cluster.passage) {
+            html += '<div class="passage">' + renderPassageHtml(cluster.passage) + '</div>';
+          }
+          cluster.items.forEach(item => {
+            idx++;
+            totalQuestions++;
+            html += renderQuestionHtml(m, { item: item, idx: idx, qid: m.key + '_' + idx });
+          });
+        });
+      } else {
+        flattenMondaiItems(m).forEach(entry => {
+          totalQuestions++;
+          html += renderQuestionHtml(m, entry);
+        });
+      }
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', function(){
+    updateProgress();
+    if (graded) gradeQuestions();
+  });
+  updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 50 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 300);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      lines.push('■ ' + part.title);
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
+          }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※要確認';
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+  let graded = false;
+
+  function gradeQuestions(){
+    graded = true;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (!qEl || EXCLUDED_QIDS.has(qid)) return;
+      const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+      const answerKey = ANSWER_KEY[qid];
+      const isCorrect = !!checked && parseInt(checked.value, 10) === answerKey;
+
+      qEl.classList.remove('q-correct', 'q-wrong');
+      qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+
+      const oldBadge = qEl.querySelector('.q-result-badge');
+      if (oldBadge) oldBadge.remove();
+      const badge = document.createElement('span');
+      badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+      badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+      qEl.querySelector('.qtext').appendChild(badge);
+
+      qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+        optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+        const optValue = i + 1;
+        if (optValue === answerKey) optEl.classList.add('opt-correct-answer');
+        if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+      });
+    })));
+  }
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    gradeQuestions();
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+
+  function sendReport(auto){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
