@@ -1,0 +1,356 @@
+<title>受身・使役・使役受身</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --page-bg:#7A5940;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+    --green:#2E7D32;
+    --green-bg:#E5F3E7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F; --paper-2:#1C222C; --paper-3:#2A3242;
+      --ink:#E7EBF3; --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5; --indigo-deep:#9CC0FF; --vermillion:#FF8A5B;
+      --line:#2E3646; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --page-bg:#35261A; --light-ink:#F5ECDA; --light-ink-soft:#C9B08A; --light-accent:#9CC0FF;
+      --green:#6FCB7A; --green-bg:#1E3022;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--page-bg); color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px; -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:860px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:2rem;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft);
+    padding:.32rem .8rem; border-radius:999px; margin-bottom:.8rem;
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.6rem,4vw,2.3rem); margin:.3rem 0 .7rem; color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.95rem; line-height:1.8; margin:0;}
+
+  .section-title{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.4rem; font-weight:700; color:var(--light-accent);
+    margin:3rem 0 1.2rem; padding-bottom:.5rem; border-bottom:2px solid var(--light-accent);
+  }
+  .section-title:first-of-type{margin-top:0;}
+  .sub-title{
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.1rem;
+    color:var(--vermillion); margin:1.8rem 0 .8rem;
+  }
+
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:1rem;
+    padding:1.4rem 1.5rem; margin-bottom:1.2rem; box-shadow:var(--shadow);
+  }
+  .card p{line-height:1.9; margin:0 0 .8rem;}
+  .card p:last-child{margin-bottom:0;}
+  .rule-box{
+    background:var(--paper-2); border-radius:.7rem; padding:1rem 1.2rem;
+    margin:.8rem 0; font-size:.96rem; line-height:1.85;
+  }
+  .ex{
+    display:block; margin:.5rem 0; padding:.6rem .9rem;
+    background:var(--paper-3); border-left:3px solid var(--indigo);
+    border-radius:.4rem; font-size:.96rem; line-height:1.7;
+  }
+  .ex .jp{color:var(--ink); font-weight:600;}
+  .ex .en{color:var(--ink-soft); font-size:.86rem; display:block; margin-top:.2rem;}
+  .nuance{color:var(--vermillion); font-weight:700;}
+
+  table.compare{width:100%; border-collapse:collapse; margin:.8rem 0; font-size:.92rem;}
+  table.compare th, table.compare td{border:1px solid var(--line); padding:.6rem .7rem; text-align:left; vertical-align:top; line-height:1.7;}
+  table.compare th{background:var(--paper-3); font-weight:700;}
+
+  .practice-meta{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    background:rgba(255,255,255,.08); border:1px solid var(--light-ink-soft);
+    border-radius:.8rem; padding:.7rem 1.1rem; margin-bottom:1.4rem;
+  }
+  .practice-meta .score{font-family:"Shippori Mincho",serif; font-weight:700; color:var(--light-ink); font-size:1.05rem;}
+  .practice-meta .score b{color:var(--vermillion); font-size:1.3rem;}
+  .practice-meta .hint{color:var(--light-ink-soft); font-size:.8rem;}
+
+  .q{
+    display:flex; gap:1rem; padding:1.2rem 1.3rem;
+    border:1px solid #E6D6B8; border-radius:.9rem; margin-bottom:.9rem;
+    background:#F5ECDA; box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:#E6D6B8; color:#4A3728;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700;
+  }
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.05rem; line-height:1.85; margin:0 0 .9rem; color:#20242B;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .q-result-badge{display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700; padding:.08rem .55rem; border-radius:999px; vertical-align:middle;}
+  .q-result-badge.correct{color:var(--green); background:var(--green-bg); border:1px solid var(--green);}
+  .q-result-badge.wrong{color:var(--vermillion); background:#FBEAE3; border:1px solid var(--vermillion);}
+  .q.q-correct{border-color:var(--green);}
+  .q.q-wrong{border-color:var(--vermillion);}
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{position:relative; display:flex; align-items:flex-start; gap:.7rem; padding:.55rem .75rem; border-radius:.7rem; cursor:pointer; border:1px solid transparent;}
+  .opt:hover{background:#E6D6B8;}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{flex-shrink:0; width:1.6rem; height:1.6rem; border-radius:50%; border:1.5px solid #E6D6B8; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; color:#5B6472;}
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:#fff;}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
+  .opt-text{font-size:.98rem; line-height:1.6; padding-top:.1rem; color:#5B6472;}
+  .opt.opt-correct-answer{background:var(--green-bg); border-color:var(--green);}
+  .opt.opt-correct-answer .bubble{background:var(--green); border-color:var(--green); color:#fff;}
+  .opt.opt-wrong-selected{background:#FBEAE3; border-color:var(--vermillion);}
+  .opt.opt-wrong-selected .bubble{background:var(--vermillion); border-color:var(--vermillion); color:#fff;}
+
+  .explain-box{
+    margin-top:.9rem; padding:.9rem 1.1rem;
+    background:var(--paper-2); border-left:3px solid var(--indigo);
+    border-radius:.5rem; font-size:.92rem; line-height:1.8; color:#20242B;
+  }
+  .explain-box .explain-label{display:block; font-weight:700; color:var(--indigo-deep); font-size:.78rem; margin-bottom:.3rem; letter-spacing:.03em;}
+
+  footer.config-note{margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line); font-size:.74rem; color:var(--light-ink-soft); line-height:1.8;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important;}}
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="kicker">N3 文法教材</div>
+    <h1>受身形・使役形・使役受身形</h1>
+    <p>N3でとても混同しやすい3つの形を、説明→基本練習→応用問題の順にまとめました。選択肢を選ぶと、その場で正解・不正解が表示されます（送信や制限時間はありません。クラスでゆっくり確認しながら進めてください）。</p>
+  </header>
+
+  <h2 class="section-title">１．説明</h2>
+
+  <div class="card">
+    <p class="sub-title" style="margin-top:0;">① 受身形（うけみけい）</p>
+    <div class="rule-box">
+      <strong>作り方</strong><br>
+      グループ1（う動詞）：語尾の「う段」→「あ段」＋れる　例：書く→書かれる／飲む→飲まれる<br>
+      グループ2（る動詞）：「る」→「られる」　例：食べる→食べられる／見る→見られる<br>
+      不規則：する→される／来る→来られる
+    </div>
+    <p><strong>使い方</strong></p>
+    <span class="ex"><span class="jp">① 直接受身：私は先生に褒められた。</span><span class="en">先生が「私」を褒めた、という動作をそのまま受身にした文。</span></span>
+    <span class="ex"><span class="jp">② 迷惑の受身：雨に降られた。</span><span class="en">自動詞でも使える。「雨が降って、困った・嫌だった」という<span class="nuance">マイナスの気持ち</span>を表す。</span></span>
+    <span class="ex"><span class="jp">③ 客観的な説明：この本は多くの人に読まれている。</span><span class="en">動作をした人をぼかして、客観的に述べる言い方。</span></span>
+  </div>
+
+  <div class="card">
+    <p class="sub-title" style="margin-top:0;">② 使役形（しえきけい）</p>
+    <div class="rule-box">
+      <strong>作り方</strong><br>
+      グループ1（う動詞）：語尾の「う段」→「あ段」＋せる　例：書く→書かせる／飲む→飲ませる<br>
+      グループ2（る動詞）：「る」→「させる」　例：食べる→食べさせる／見る→見させる<br>
+      不規則：する→させる／来る→来させる
+    </div>
+    <p><strong>使い方</strong>　「させる」は<span class="nuance">無理やり</span>とは限らず、3つの意味がある。</p>
+    <span class="ex"><span class="jp">① 強制：先生は学生に宿題をさせた。</span><span class="en">先生が学生に命令して、やらせた。</span></span>
+    <span class="ex"><span class="jp">② 許可：親は子供に好きなことをさせた。</span><span class="en">子供がしたいことを、親が許した。</span></span>
+    <span class="ex"><span class="jp">③ 誘発（感情動詞）：彼のニュースは私を悲しませた。</span><span class="en">「悲しい」のような感情動詞を使役にして、「〜という気持ちにさせる」という意味になる。</span></span>
+  </div>
+
+  <div class="card">
+    <p class="sub-title" style="margin-top:0;">③ 使役受身形（しえきうけみけい）</p>
+    <div class="rule-box">
+      <strong>作り方</strong>　使役形を、さらに受身形にする。<br>
+      グループ1：〜せる→〜せられる（短縮形：〜される）　例：書かせる→書かせられる／書かされる<br>
+      　※「す」で終わる動詞（話す等）は短縮しない：話させる→話させられる（×話さされる）<br>
+      グループ2：〜させる→〜させられる　例：食べさせる→食べさせられる<br>
+      不規則：する→させられる／来る→来させられる
+    </div>
+    <p><strong>使い方</strong>　<span class="nuance">「やりたくないのに、無理やりやらされた」</span>という被害・不満の気持ちを表す。主語は「させられる」人（被害者）。</p>
+    <span class="ex"><span class="jp">私は母に野菜を食べさせられた。</span><span class="en">食べたくなかったのに、母に強制されて食べた、という気持ち。</span></span>
+    <span class="ex"><span class="jp">彼は上司に残業させられた。</span><span class="en">したくなかったのに、上司の命令で残業することになった。</span></span>
+  </div>
+
+  <div class="card">
+    <p class="sub-title" style="margin-top:0;">３つの違いを比べよう</p>
+    <table class="compare">
+      <thead><tr><th>文</th><th>主語は誰？</th><th>気持ち・ニュアンス</th></tr></thead>
+      <tbody>
+        <tr><td>母が子供に野菜を<strong>食べさせる</strong>。（使役）</td><td>母（させる人）</td><td>中立。強制とも許可とも取れる</td></tr>
+        <tr><td>子供は母に野菜を<strong>食べさせられる</strong>。（使役受身）</td><td>子供（させられる人）</td><td>いやいや、仕方なく</td></tr>
+        <tr><td>子供は母に<strong>叱られる</strong>。（受身）</td><td>子供（される人）</td><td>単に動作を受ける側から見た文</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">２．基本練習</h2>
+  <div class="practice-meta">
+    <span class="score">基本練習：<b id="scoreBasic">0</b> / <span id="totalBasic">0</span></span>
+    <span class="hint">選ぶとすぐに答えが分かります</span>
+  </div>
+  <div id="basicForm"></div>
+
+  <h2 class="section-title">３．応用問題</h2>
+  <div class="practice-meta">
+    <span class="score">応用問題：<b id="scoreAdvanced">0</b> / <span id="totalAdvanced">0</span></span>
+    <span class="hint">文の意味・気持ちの違いまで考えてみましょう</span>
+  </div>
+  <div id="advancedForm"></div>
+
+  <footer class="config-note">
+    ※ この教材は送信機能を持たず、その場で自己採点できる練習用シートです。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const BASIC_ITEMS = [
+    { text: '先生は学生に本を（　）。', options: ['読ませた','読まれた','読ませられた','読んだ'], answer: 1,
+      explanation: '「先生が学生に指示して読ませた」という使役の文。動作をさせる側（先生）が主語なので、使役形「読ませた」が正解です。' },
+    { text: '私は電車の中で足を（　）。', options: ['踏ませた','踏まれた','踏ませられた','踏んだ'], answer: 2,
+      explanation: '「誰かに足を踏まれて、嫌だった」という受身文です。される側（私）が主語なので、受身形「踏まれた」が正解です。' },
+    { text: '子供は親に部屋を（　）。', options: ['掃除させた','掃除された','掃除させられた','掃除した'], answer: 3,
+      explanation: '「親に命令されて、いやいや掃除した」という使役受身文です。させられる側（子供）が主語なので、使役受身形「掃除させられた」が正解です。' },
+    { text: '母は子供に薬を（　）。', options: ['飲ませた','飲まれた','飲ませられた','飲んだ'], answer: 1,
+      explanation: '母が子供に指示して飲ませた、という使役の文。動作をさせる側（母）が主語なので「飲ませた」が正解です。' },
+    { text: '私は犬に手を（　）。', options: ['噛ませた','噛まれた','噛ませられた','噛んだ'], answer: 2,
+      explanation: '犬に噛まれた、という受身文（迷惑の受身）。される側（私）が主語なので「噛まれた」が正解です。' },
+    { text: '部長は部下に資料を（　）。', options: ['準備させた','準備された','準備させられた','準備した'], answer: 1,
+      explanation: '部長が部下に指示した、という使役の文。動作をさせる側（部長）が主語なので「準備させた」が正解です。' },
+    { text: '私は上司に遅くまで仕事を（　）。', options: ['させた','された','させられた','した'], answer: 3,
+      explanation: '上司の命令で、したくなかったのに仕事をした、という使役受身文です。させられる側（私）が主語なので「させられた」が正解です。' },
+    { text: 'その歌手は多くの人に（　）。', options: ['愛させた','愛された','愛させられた','愛した'], answer: 2,
+      explanation: '多くの人から愛されている、という客観的な受身文です。される側（その歌手）が主語なので「愛された」が正解です。' }
+  ];
+
+  const ADVANCED_ITEMS = [
+    { text: 'A「どうして疲れた顔をしているの？」\nB「昨日、飲み会で上司にお酒をたくさん（　）んです。」', options: ['飲ませた','飲まれた','飲ませられた','飲んだ'], answer: 3,
+      explanation: '「飲みたくなかったのに、上司に無理に飲まされた」という被害・不満のニュアンスです。「疲れた顔」をしている理由として自然につながるのは使役受身「飲ませられた」です。' },
+    { text: 'この映画は、見る人を必ず（　）と言われている。', options: ['泣かせる','泣かれる','泣かせられる','泣く'], answer: 1,
+      explanation: '「泣く」のような感情動詞を使役にすると、「〜という気持ちにさせる」という意味になります（誘発の使役）。映画が見る人を「泣く気持ちにさせる」ので「泣かせる」が正解です。' },
+    { text: '昨日、出かけようとしたとき、急に雨に（　）、濡れてしまった。', options: ['降らせて','降られて','降らせられて','降って'], answer: 2,
+      explanation: '「降る」は自動詞ですが、「雨が降って困った」というマイナスの気持ちを表す「迷惑の受身」として使えます。「濡れてしまった」という結果からも、迷惑を受けたことが分かります。' },
+    { text: '子供のころ、母によく勉強（　）ものです。今思えば感謝しています。', options: ['させた','された','させられた','した'], answer: 3,
+      explanation: '「したくなかったが、母に強制されてした」という使役受身です。「今思えば感謝している」という文脈は、当時はいやいやだった（使役受身）が今は良かったと思っている、という典型的な流れです。' },
+    { text: '先生は、学生たちに自由に意見を（　）、議論を深めさせた。', options: ['言わせて','言われて','言わせられて','言って'], answer: 1,
+      explanation: 'ここでの使役は「許可」の意味です。先生が学生の自由な発言を許した、というニュアンスなので「言わせて」が正解です（強制ではありません）。' },
+    { text: '彼は行きたくなかったが、上司に無理やり飲み会に（　）。', options: ['行かせた','行かれた','行かされた','行った'], answer: 3,
+      explanation: 'グループ1動詞「行く」の使役受身の短縮形です（行かせられた→行かされた）。「無理やり」「行きたくなかった」という言葉からも、使役受身が適切だと分かります。' },
+    { text: '彼女は子供の頃、嫌いな野菜を無理やり（　）とき、いつも泣いていた。', options: ['食べさせた','食べられた','食べさせられた','食べた'], answer: 3,
+      explanation: '「無理やり」「泣いていた」という文脈から、いやいや食べさせられた、という使役受身「食べさせられた」が適切です。' },
+    { text: '会社の忘年会で、新入社員は全員、一発芸を（　）そうだ。', options: ['させる','される','させられる','する'], answer: 3,
+      explanation: '「忘年会の恒例行事としてやらされる」というニュアンスです。新入社員自身が望んでやるわけではないので、使役受身「させられる」が正解です。' },
+    { text: '次の文の意味として正しいのはどれか。\n「先生は学生に本を読ませた。」', options: ['学生は自分から進んで本を読んだ。','先生は学生に本を読むように言い、学生はそれに従った（命令・許可のニュアンス）。','学生は読みたくなかったのに、無理やり読まされた。','先生自身が本を読んだ。'], answer: 2,
+      explanation: '使役形は必ずしも「無理やり」ではありません。命令・指示・許可など、中立的な意味合いで使われることも多いです。「無理やり」という強いニュアンスは文中にないので、正解は②です（③のような強制の意味は使役受身「読まされた」のときに生まれます）。' },
+    { text: '次の文の意味として正しいのはどれか。\n「学生は先生に本を読まされた（＝読ませられた）。」', options: ['学生は自分から進んで本を読んだ。','先生が本を読んだ。','学生は、読みたくなかったが仕方なく読んだ、という気持ちが含まれている。','先生は学生に本を貸してあげた。'], answer: 3,
+      explanation: '使役受身は「したくなかったが仕方なくした」という被害・不満の気持ちを表します。1つ前の問題（使役形）との違いに注目してください。同じ「読む」でも、形が変わると気持ちが正反対に近くなります。' }
+  ];
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>');
+  }
+
+  function renderSet(containerId, prefix, items, scoreElId, totalElId){
+    const container = document.getElementById(containerId);
+    let html = '';
+    items.forEach((item, idx) => {
+      const qid = prefix + '_' + (idx + 1);
+      html += '<div class="q" data-qid="' + qid + '">';
+      html += '  <div class="qnum">' + (idx + 1) + '</div>';
+      html += '  <div class="qbody">';
+      html += '    <p class="qtext">' + renderPromptHtml(item.text) + '</p>';
+      html += '    <div class="options" role="radiogroup">';
+      item.options.forEach((opt, i) => {
+        html += '<label class="opt">';
+        html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '">';
+        html += '  <span class="bubble">' + (i + 1) + '</span>';
+        html += '  <span class="opt-text">' + escapeHtml(opt) + '</span>';
+        html += '</label>';
+      });
+      html += '    </div>';
+      html += '  </div>';
+      html += '</div>';
+    });
+    container.innerHTML = html;
+    document.getElementById(totalElId).textContent = items.length;
+
+    function grade(){
+      let correct = 0;
+      items.forEach((item, idx) => {
+        const qid = prefix + '_' + (idx + 1);
+        const qEl = container.querySelector('.q[data-qid="' + qid + '"]');
+        const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+        const isCorrect = !!checked && parseInt(checked.value, 10) === item.answer;
+        if (checked) {
+          qEl.classList.remove('q-correct', 'q-wrong');
+          qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+          if (isCorrect) correct++;
+
+          const oldBadge = qEl.querySelector('.q-result-badge');
+          if (oldBadge) oldBadge.remove();
+          const badge = document.createElement('span');
+          badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+          badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+          qEl.querySelector('.qtext').appendChild(badge);
+
+          const oldExplain = qEl.querySelector('.explain-box');
+          if (oldExplain) oldExplain.remove();
+          if (item.explanation) {
+            const explainBox = document.createElement('div');
+            explainBox.className = 'explain-box';
+            explainBox.innerHTML = '<span class="explain-label">解説</span>' + escapeHtml(item.explanation);
+            qEl.querySelector('.options').insertAdjacentElement('afterend', explainBox);
+          }
+        } else {
+          qEl.classList.remove('q-correct', 'q-wrong');
+          const oldBadge = qEl.querySelector('.q-result-badge');
+          if (oldBadge) oldBadge.remove();
+          const oldExplain = qEl.querySelector('.explain-box');
+          if (oldExplain) oldExplain.remove();
+        }
+
+        qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+          optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+          const optValue = i + 1;
+          if (checked) {
+            if (optValue === item.answer) optEl.classList.add('opt-correct-answer');
+            if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+          }
+        });
+      });
+      document.getElementById(scoreElId).textContent = correct;
+    }
+
+    container.addEventListener('change', grade);
+    grade();
+  }
+
+  renderSet('basicForm', 'b', BASIC_ITEMS, 'scoreBasic', 'totalBasic');
+  renderSet('advancedForm', 'a', ADVANCED_ITEMS, 'scoreAdvanced', 'totalAdvanced');
+})();
+</script>
