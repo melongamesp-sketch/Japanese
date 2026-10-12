@@ -1,0 +1,648 @@
+<title>10月9日 復習小テスト</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#F5F7FA;
+    --paper-3:#EBEFF5;
+    --ink:#24282E;
+    --ink-soft:#67707B;
+    --accent:#3D6FD1;
+    --accent-deep:#27509E;
+    --line:#E6E9EE;
+    --shadow: 0 1px 2px rgba(36,40,46,.04), 0 6px 16px rgba(36,40,46,.05);
+    --page-bg:#FFF1F5;
+    --green:#2E7D32;
+    --green-bg:#E8F3EA;
+    --green-fill:#4CAF50;
+    --wrong:#C0392B;
+    --wrong-bg:#FBEAEA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:760px; margin:0 auto; padding:2.5rem 1.25rem 6rem;}
+
+  .masthead{padding-bottom:1.6rem; border-bottom:1px solid var(--line); margin-bottom:1.8rem;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; margin-bottom:.8rem;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--accent-deep); background:var(--paper-2);
+    border:1px solid var(--line);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .8rem;
+    text-wrap:balance;
+    color:var(--ink); font-weight:600;
+  }
+  .masthead p{color:var(--ink-soft); font-size:.92rem; line-height:1.85; margin:0; max-width:58ch;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.75rem 1.25rem;
+    display:flex; align-items:center; gap:.9rem;
+    margin:0 -1.25rem 2.2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--accent); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.2rem; font-weight:700; color:var(--ink);
+    margin:3rem 0 1.4rem; padding-bottom:.55rem; border-bottom:1px solid var(--line);
+    display:flex; align-items:baseline; gap:.5rem;
+  }
+  .part h2::before{content:""; display:inline-block; width:.5rem; height:.5rem; border-radius:50%; background:var(--accent);}
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.8rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.5rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.2rem; height:2.2rem; border-radius:50%;
+    border:1.5px solid var(--accent); color:var(--accent-deep);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.9rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.1rem; color:var(--accent-deep);}
+  .mondai-instruction{font-size:.9rem; color:var(--ink-soft); line-height:1.75; margin:0 0 1.1rem 2.9rem;}
+
+  .q{
+    display:flex; gap:1.1rem;
+    padding:1.35rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.8rem;
+    margin-bottom:1rem;
+    background:var(--paper);
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:var(--paper-3); color:var(--accent-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--accent); color:#fff;}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.06rem; line-height:1.95; margin:0 0 1rem; color:var(--ink);}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--accent); text-align:center; color:var(--accent-deep); font-weight:600;}
+  .q-result-badge{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    padding:.1rem .6rem; border-radius:999px; vertical-align:middle;
+  }
+  .q-result-badge.correct{color:var(--green); background:var(--green-bg); border:1px solid var(--green);}
+  .q-result-badge.wrong{color:var(--wrong); background:var(--wrong-bg); border:1px solid var(--wrong);}
+  .q.q-correct{border-color:var(--green); border-width:1.5px;}
+  .q.q-wrong{border-color:var(--wrong); border-width:1.5px;}
+  .opt.opt-correct-answer{background:var(--green-bg); border-color:var(--green);}
+  .opt.opt-correct-answer .bubble{background:var(--green-fill); border-color:var(--green-fill); color:#fff;}
+  .opt.opt-wrong-selected{background:var(--wrong-bg); border-color:var(--wrong);}
+  .opt.opt-wrong-selected .bubble{background:var(--wrong); border-color:var(--wrong); color:#fff;}
+
+  .options{display:flex; flex-direction:column; gap:.6rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.75rem;
+    padding:.65rem .85rem; border-radius:.65rem;
+    cursor:pointer; border:1px solid var(--line);
+    background:var(--paper);
+  }
+  .opt:hover{background:var(--paper-2); border-color:var(--accent);}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.65rem; height:1.65rem; border-radius:50%;
+    border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:var(--ink-soft);
+    background:var(--paper);
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .opt input:checked ~ .opt-text{color:var(--ink); font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--accent); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.75; padding-top:.15rem; color:var(--ink-soft);}
+
+  .explain-box{
+    margin-top:1.05rem; padding:1rem 1.2rem;
+    background:var(--paper-2); border-left:3px solid var(--accent);
+    border-radius:0 .55rem .55rem 0; font-size:.93rem; line-height:1.9; color:var(--ink);
+  }
+  .explain-box .explain-label{display:block; font-weight:700; color:var(--accent-deep); font-size:.78rem; margin-bottom:.4rem; letter-spacing:.04em;}
+
+  .free-card{
+    background:var(--paper); border:1px dashed var(--line); border-radius:.9rem;
+    padding:1.3rem 1.4rem; margin-bottom:1.2rem;
+  }
+  .free-card p{margin:0 0 .6rem; font-size:.94rem; font-weight:700; color:var(--ink);}
+  .free-card textarea{
+    width:100%; min-height:3.2rem; font:inherit; font-size:.95rem;
+    padding:.6rem .75rem; border:1px solid var(--line); border-radius:.5rem;
+    background:var(--paper-2); color:var(--ink); resize:vertical;
+  }
+
+  .submit-area{margin-top:3.2rem; padding-top:2rem; border-top:1px solid var(--line);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.2rem; color:var(--ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--line); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.6rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--accent); color:#fff; box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--line); color:var(--ink-soft);}
+  .btn-copy:hover{background:var(--paper-2);}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--ink-soft); line-height:1.75;}
+  .meta-row strong{color:var(--ink);}
+  .unanswered-note{color:var(--wrong); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--green);}
+  .send-status-error{color:var(--wrong);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--accent-deep);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.7rem;
+    padding:1.6rem 1.7rem;
+    border:1.5px solid var(--accent);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--accent-deep); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.75; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3.2rem; padding-top:1.3rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--ink-soft); line-height:1.8;
+  }
+
+  .test-id-badge{
+    display:inline-block; font-size:1rem; font-weight:700; letter-spacing:.04em;
+    color:var(--accent-deep); background:var(--paper-3);
+    border:1px solid var(--line); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.9rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--ink-soft); background:var(--paper-3);
+    border:1px solid var(--line); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--wrong); border-color:var(--wrong);}
+  .timer-badge.timer-over{color:#fff; background:var(--wrong); border-color:var(--wrong);}
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="test-id-badge">10月9日 復習小テスト</div>
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">復習テスト</div>
+      </div>
+      <h1>10月9日 復習小テスト</h1>
+      <p>10月9日の授業で扱った「ゆっくり」と「副業」の復習です。すべての問題に答え、最後に「お名前」を入力して送信ボタンを押すとメールアプリが開き、その場で自分の点数と答えも表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 10</div>
+    <div class="timer-badge" id="timerBadge">残り時間 10:00</div>
+  </div>
+
+  <main id="form"></main>
+
+  <div class="free-card">
+    <p>おまけ（採点なし）：「副業」を使って、自分の話で一文作ってみましょう。</p>
+    <textarea id="freeFukugyou" placeholder="例：私は本業のほかに、週末だけ副業をしています。"></textarea>
+  </div>
+  <div class="free-card">
+    <p>おまけ（採点なし）：「ゆっくり」を使って、自分の話で一文作ってみましょう。</p>
+    <textarea id="freeYukkuri" placeholder="例：次の休みは、どこにも行かずにゆっくり過ごしたいです。"></textarea>
+  </div>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+      <p class="result-note">下の各問題にも正解・不正解と解説が表示されます。選択肢を選び直すと、表示が自動的に更新されます。</p>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'galaxys25ultla@gmail.com',
+    testName: '10月9日 復習小テスト'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '復習問題',
+      mondai: [
+        {
+          key: 'm1', title: '「ゆっくり」',
+          instruction: '最もよいものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '「ゆっくり過ごす」の「ゆっくり」の意味に最も近いものはどれですか。', options: ['急いで','のんびりと、焦らずに','真剣に','静かに'],
+              explanation: '「ゆっくり」は時間や心にゆとりがあり、焦らずに過ごす様子を表します。' },
+            { text: '次の文で「ゆっくり」の使い方として自然なのはどれですか。', options: ['今日は仕事が休みだったので、家でゆっくり過ごした。','今日は仕事がゆっくりで大変だった。','彼はゆっくり怒っている。','ゆっくりお金がない。'],
+              explanation: '「ゆっくり過ごす」で「のんびりと時間を使う」という意味になります。②③④は「ゆっくり」の使い方として不自然です。' },
+            { text: '「週末は仕事がなかったので、家で（　）過ごしました。」に入る言葉はどれですか。', options: ['ゆっくり','たっぷり','しっかり','すっかり'],
+              explanation: '「ゆっくり過ごす」は決まった言い方として覚えておくと便利です。' },
+            { text: '「ゆっくり」と似た意味を持ちますが、「急がず、時間をかけて丁寧に行う」というニュアンスが強い言葉はどれですか。', options: ['のんびり','じっくり','のろのろ','だらだら'],
+              explanation: '「じっくり」は「時間をかけて丁寧に、着実に行う」というニュアンスがあります。「のんびり」は気持ちがリラックスしている様子、「のろのろ」「だらだら」は遅すぎる・だらしないというマイナスの意味を含むので、この文脈には合いません。' },
+            { text: '次の文の中で、「ゆっくり」の使い方が最も不自然なものはどれですか。', options: ['もっとゆっくり話してください。','ゆっくりでいいので、丁寧に書いてください。','彼はゆっくりした性格だ。','休みの日は、ゆっくり寝ていたいです。'],
+              explanation: '人の性格を表すときは「のんびりした性格」「おっとりした性格」と言うのが自然で、「ゆっくりした性格」とは言いません。①②④は自然な「ゆっくり」の使い方です。' }
+          ]
+        },
+        {
+          key: 'm2', title: '「副業」',
+          instruction: '最もよいものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '「副業」の意味として正しいものはどれですか。', options: ['本業とは別に行う仕事','会社を辞めること','仕事を休むこと','アルバイトを探すこと'],
+              explanation: '「副業」は、本業（メインの仕事）とは別に行う仕事のことです。' },
+            { text: '次のうち、「副業」の使い方として自然なのはどれですか。', options: ['彼は会社員をしながら、副業でネットショップを経営している。','彼は副業で会社に行かなくなった。','副業は本業より休みが多い。','副業をやめて、本業を探している。'],
+              explanation: '「副業」は「本業＋副業」という組み合わせで使うのが自然です。②③④は副業の使い方として不自然です。' },
+            { text: '「副業」と似た意味で使われることがある、カタカナの言葉はどれですか。', options: ['サイドビジネス','フルタイム','リモートワーク','転職'],
+              explanation: '「サイドビジネス」は「副業」とほぼ同じ意味で使われるカタカナ語です。' },
+            { text: '「副業」の説明として最も正しいものはどれですか。', options: ['副業は学生しか行うことができない。','本業を持つ人が、本業以外に行う仕事全般を指し、アルバイトもその一形態になり得る。','副業をすると、本業を辞めなければならない。','副業とアルバイトは全く同じ意味の言葉である。'],
+              explanation: '「副業」は本業を持つ人が本業以外に行う仕事全般を指す広い概念で、アルバイトやネット販売なども副業の一形態になり得ます。' },
+            { text: '「彼は本業の収入だけでは生活が厳しいという理由（　）、副業を始めることにした。」', options: ['にあたって','にもかまわず','を皮切りに','から'],
+              explanation: '「〜という理由から」で「〜という理由によって」という意味になります。「にあたって」は「〜の際に」、「にもかまわず」は「〜を気にせず」、「を皮切りに」は「〜を最初として」という意味なので、この文脈には合いません。' }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const ANSWER_KEY = {
+    m1_1:2, m1_2:1, m1_3:1, m1_4:2, m1_5:3,
+    m2_1:1, m2_2:1, m2_3:1, m2_4:2, m2_5:4
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>');
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    m.items.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + escapeHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      flattenMondaiItems(m).forEach(entry => {
+        totalQuestions++;
+        html += renderQuestionHtml(m, entry);
+      });
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', function(){
+    updateProgress();
+    if (graded) gradeQuestions();
+  });
+  updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 10 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 120);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '. ' + entry.item.options[answerKey - 1] + '）';
+            }
+          }
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('■ 自由記述（採点なし）');
+    lines.push('副業の例文: ' + (document.getElementById('freeFukugyou').value.trim() || '（未記入）'));
+    lines.push('ゆっくりの例文: ' + (document.getElementById('freeYukkuri').value.trim() || '（未記入）'));
+    lines.push('');
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+  let graded = false;
+
+  function gradeQuestions(){
+    graded = true;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (!qEl || EXCLUDED_QIDS.has(qid)) return;
+      const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+      const answerKey = ANSWER_KEY[qid];
+      const isCorrect = !!checked && parseInt(checked.value, 10) === answerKey;
+
+      qEl.classList.remove('q-correct', 'q-wrong');
+      qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+
+      const oldBadge = qEl.querySelector('.q-result-badge');
+      if (oldBadge) oldBadge.remove();
+      const badge = document.createElement('span');
+      badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+      badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+      qEl.querySelector('.qtext').appendChild(badge);
+
+      qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+        optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+        const optValue = i + 1;
+        if (optValue === answerKey) optEl.classList.add('opt-correct-answer');
+        if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+      });
+
+      const oldExplain = qEl.querySelector('.explain-box');
+      if (oldExplain) oldExplain.remove();
+      if (entry.item.explanation) {
+        const explainBox = document.createElement('div');
+        explainBox.className = 'explain-box';
+        explainBox.innerHTML = '<span class="explain-label">解説</span>' + escapeHtml(entry.item.explanation);
+        qEl.querySelector('.options').insertAdjacentElement('afterend', explainBox);
+      }
+    })));
+  }
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    gradeQuestions();
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+
+  function sendReport(auto){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
