@@ -1,0 +1,367 @@
+<title>発音練習</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#F5F7FA;
+    --paper-3:#EBEFF5;
+    --ink:#24282E;
+    --ink-soft:#67707B;
+    --accent:#3D6FD1;
+    --accent-deep:#27509E;
+    --line:#E6E9EE;
+    --shadow: 0 1px 2px rgba(36,40,46,.04), 0 6px 16px rgba(36,40,46,.05);
+    --page-bg:#FFF1F5;
+    --green:#2E7D32;
+    --green-bg:#E8F3EA;
+    --green-fill:#4CAF50;
+    --wrong:#C0392B;
+    --wrong-bg:#FBEAEA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--page-bg); color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:800px; margin:0 auto; padding:3rem 1.25rem 6rem;}
+
+  .masthead{padding-bottom:1.8rem; border-bottom:1px solid var(--line); margin-bottom:2.6rem;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.16em; font-weight:700;
+    color:var(--accent-deep); padding:0; margin-bottom:.9rem;
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.6rem,4vw,2.25rem); margin:.3rem 0 .9rem; color:var(--ink); font-weight:600;
+  }
+  .masthead p{color:var(--ink-soft); font-size:.95rem; line-height:1.9; margin:0; max-width:58ch;}
+
+  .section-title{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.25rem; font-weight:700; color:var(--ink);
+    margin:3.2rem 0 1.4rem; padding-bottom:.6rem; border-bottom:1px solid var(--line);
+    display:flex; align-items:baseline; gap:.5rem;
+  }
+  .section-title::before{content:""; display:inline-block; width:.5rem; height:.5rem; border-radius:50%; background:var(--accent);}
+  .section-title:first-of-type{margin-top:0;}
+
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:.9rem;
+    padding:1.6rem 1.7rem; margin-bottom:1.4rem; box-shadow:var(--shadow);
+  }
+  .card p{line-height:1.95; margin:0 0 .8rem; color:var(--ink);}
+  .card p:last-child{margin-bottom:0;}
+  .pair-title{
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem;
+    color:var(--accent-deep); margin:0 0 .9rem;
+  }
+  .rule-box{
+    background:var(--paper-2); border-radius:.6rem; padding:1.1rem 1.3rem;
+    margin:.9rem 0; font-size:.96rem; line-height:2; color:var(--ink);
+  }
+  .tip{color:var(--wrong); font-weight:700;}
+
+  .word-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:.6rem;
+    margin:1rem 0;
+  }
+  @media (max-width:560px){ .word-grid{grid-template-columns:1fr;} }
+  .word-col-head{
+    font-size:.78rem; font-weight:700; color:var(--ink-soft); letter-spacing:.04em;
+    margin-bottom:.4rem; grid-column:span 1;
+  }
+  .word-item{
+    display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+    background:var(--paper-2); border-radius:.5rem;
+    padding:.55rem .8rem; font-size:1.02rem;
+  }
+  .word-item .kanji{font-size:.78rem; color:var(--ink-soft); margin-left:.3rem;}
+  .word-play{
+    flex-shrink:0; width:1.8rem; height:1.8rem; border-radius:50%;
+    border:none; background:var(--accent); color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:.8rem;
+  }
+  .word-play:active{transform:scale(.92);}
+  .word-play.playing{background:var(--accent-deep);}
+
+  .sentence-list{list-style:none; margin:1rem 0 0; padding:0;}
+  .sentence-item{
+    display:flex; align-items:flex-start; gap:.8rem;
+    background:var(--paper-2); border-radius:.6rem;
+    padding:.8rem 1rem; margin-bottom:.6rem; font-size:1rem; line-height:1.85;
+  }
+  .sentence-item .word-play{margin-top:.15rem;}
+  .target{color:var(--accent-deep); font-weight:700;}
+
+  .hint-box{
+    background:var(--green-bg); border:1px solid var(--green); border-radius:.7rem;
+    padding:.9rem 1.1rem; font-size:.9rem; margin-top:1rem; color:var(--ink);
+  }
+  .hint-box b{color:var(--green);}
+
+  footer.config-note{margin-top:3.5rem; padding-top:1.4rem; border-top:1px solid var(--line); font-size:.74rem; color:var(--ink-soft); line-height:1.9;}
+
+  .voice-settings{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:.7rem;
+    padding:.9rem 1.1rem; margin-top:1.3rem;
+    display:flex; flex-wrap:wrap; align-items:center; gap:.7rem .9rem;
+  }
+  .voice-settings label{font-size:.76rem; color:var(--ink-soft); font-weight:700; letter-spacing:.02em;}
+  .voice-settings select{
+    font:inherit; font-size:.88rem; padding:.35rem .55rem;
+    border:1px solid var(--line); border-radius:.5rem;
+    background:var(--paper); color:var(--ink); max-width:220px;
+  }
+  .voice-settings .rate-row{display:flex; align-items:center; gap:.5rem;}
+  .voice-settings input[type=range]{width:110px;}
+  .voice-settings .rate-val{font-size:.8rem; color:var(--ink-soft); font-variant-numeric:tabular-nums; min-width:2.6em;}
+  .voice-test-btn{
+    font:inherit; font-size:.8rem; font-weight:700;
+    background:transparent; border:1px solid var(--line); color:var(--accent-deep);
+    border-radius:.5rem; padding:.35rem .85rem; cursor:pointer;
+  }
+  .voice-test-btn:hover{background:var(--paper);}
+  .voice-test-btn.playing{background:var(--accent); border-color:var(--accent); color:#fff;}
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="kicker">発音・聞き分け練習</div>
+    <h1>発音練習：しょ・そ／しゃ・さ／じゃ・ざ／ぞ・じょ／つ</h1>
+    <p>各語の横にある丸いボタンを押すと、その語の正しい発音が音声で流れます。まず音声を聞いて真似して発音し、そのあと「聞き取り小テスト」で聞き分けを確認する、という順番で使うのがおすすめです。</p>
+    <div class="voice-settings" id="voiceSettings" hidden>
+      <div>
+        <label for="voiceSelect">読み上げ音声</label><br>
+        <select id="voiceSelect"></select>
+      </div>
+      <div class="rate-row">
+        <label for="rateRange">速さ</label>
+        <input type="range" id="rateRange" min="0.6" max="1.1" step="0.05" value="0.8">
+        <span class="rate-val" id="rateVal">0.80x</span>
+      </div>
+      <button type="button" class="voice-test-btn" id="voiceTestBtn">▶ テスト再生</button>
+    </div>
+  </header>
+
+  <h2 class="section-title">発音のコツ（共通ルール）</h2>
+  <div class="card">
+    <p class="pair-title">拗音（しょ・しゃ・じょ・じゃ）と直音（そ・さ・ぞ・ざ）の違い</p>
+    <div class="rule-box">
+      <strong>直音「そ・さ・ぞ・ざ」</strong>：舌先を使う、普通の「さしすせそ」の音。<br>
+      <strong>拗音「しょ・しゃ・じょ・じゃ」</strong>：「し／じ」を作るときの口の形（舌の中央を上あごに向かって盛り上げ、唇を少しすぼめる）を保ったまま、小さい「ょ・ゃ」を続けて<span class="tip">1つの音節</span>として発音する。
+    </div>
+    <p>よくある間違い：「し」と「ょ」を別々に2つの音として発音してしまう（×しーよ）。正しくは、1つの音として一気に発音します。</p>
+    <p>練習のコツ：まず「し」の口の形を作り、その口の形を変えずに「しょ」と言ってみてください。口の形が変わってしまうと「そ」に近い音になってしまいます。</p>
+  </div>
+
+  <div class="card">
+    <p class="pair-title">「つ」の発音のコツ</p>
+    <div class="rule-box">
+      「つ」は<strong>破擦音</strong>（舌先を一度歯茎にしっかりつけてから、息を摩擦させながら勢いよく離す音）です。
+    </div>
+    <p>よくある間違い：①「とぅ」のように舌を離した瞬間に終わってしまう　②「す」のように最初から舌を離したまま擦るだけになってしまう</p>
+    <p>練習のコツ：舌先を上の歯の裏（歯茎）にしっかり押しつけて一度完全に止め、そこから息を破裂させるように離してください。「t」の構えから「s」の音へ一気に移る、という意識が大切です。</p>
+  </div>
+
+  <h2 class="section-title">ペアごとの練習</h2>
+
+  <div class="card">
+    <p class="pair-title">① しょ　vs　そ</p>
+    <div class="word-grid">
+      <div class="word-col-head">しょ（拗音）</div>
+      <div class="word-col-head">そ（直音）</div>
+      <div class="word-item"><span>しょうゆ<span class="kanji">（醤油）</span></span><button type="button" class="word-play" data-audio="しょうゆ">▶</button></div>
+      <div class="word-item"><span>そうじ<span class="kanji">（掃除）</span></span><button type="button" class="word-play" data-audio="そうじ">▶</button></div>
+      <div class="word-item"><span>しょくじ<span class="kanji">（食事）</span></span><button type="button" class="word-play" data-audio="しょくじ">▶</button></div>
+      <div class="word-item"><span>そんざい<span class="kanji">（存在）</span></span><button type="button" class="word-play" data-audio="そんざい">▶</button></div>
+      <div class="word-item"><span>しょうてん<span class="kanji">（商店）</span></span><button type="button" class="word-play" data-audio="しょうてん">▶</button></div>
+      <div class="word-item"><span>そうだん<span class="kanji">（相談）</span></span><button type="button" class="word-play" data-audio="そうだん">▶</button></div>
+    </div>
+    <ul class="sentence-list">
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="しょうらいのことをそうぞうすると、すこしふあんになる">▶</button><span><span class="target">将来</span>のことを<span class="target">想像</span>すると、少し不安になる。</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="pair-title">② しゃ　vs　さ</p>
+    <div class="word-grid">
+      <div class="word-col-head">しゃ（拗音）</div>
+      <div class="word-col-head">さ（直音）</div>
+      <div class="word-item"><span>しゃしん<span class="kanji">（写真）</span></span><button type="button" class="word-play" data-audio="しゃしん">▶</button></div>
+      <div class="word-item"><span>さかな<span class="kanji">（魚）</span></span><button type="button" class="word-play" data-audio="さかな">▶</button></div>
+      <div class="word-item"><span>かいしゃ<span class="kanji">（会社）</span></span><button type="button" class="word-play" data-audio="かいしゃ">▶</button></div>
+      <div class="word-item"><span>さむい<span class="kanji">（寒い）</span></span><button type="button" class="word-play" data-audio="さむい">▶</button></div>
+      <div class="word-item"><span>しゃかい<span class="kanji">（社会）</span></span><button type="button" class="word-play" data-audio="しゃかい">▶</button></div>
+      <div class="word-item"><span>さいふ<span class="kanji">（財布）</span></span><button type="button" class="word-play" data-audio="さいふ">▶</button></div>
+    </div>
+    <ul class="sentence-list">
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="しゃこうてきなせいかくのかのじょは、さいてきなほうほうでもんだいをかいけつした">▶</button><span><span class="target">社交的</span>な性格の彼女は、<span class="target">最適</span>な方法で問題を解決した。</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="pair-title">③ じゃ　vs　ざ</p>
+    <div class="word-grid">
+      <div class="word-col-head">じゃ（拗音）</div>
+      <div class="word-col-head">ざ（直音）</div>
+      <div class="word-item"><span>じゃがいも</span><button type="button" class="word-play" data-audio="じゃがいも">▶</button></div>
+      <div class="word-item"><span>ざっし<span class="kanji">（雑誌）</span></span><button type="button" class="word-play" data-audio="ざっし">▶</button></div>
+      <div class="word-item"><span>じゃま<span class="kanji">（邪魔）</span></span><button type="button" class="word-play" data-audio="じゃま">▶</button></div>
+      <div class="word-item"><span>ざんぎょう<span class="kanji">（残業）</span></span><button type="button" class="word-play" data-audio="ざんぎょう">▶</button></div>
+      <div class="word-item"><span>じゃぐち<span class="kanji">（蛇口）</span></span><button type="button" class="word-play" data-audio="じゃぐち">▶</button></div>
+      <div class="word-item"><span>ざせき<span class="kanji">（座席）</span></span><button type="button" class="word-play" data-audio="ざせき">▶</button></div>
+    </div>
+    <ul class="sentence-list">
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="じゃくしゃをほごするため、せいふはざいさんのいちぶをさいぶんぱいするせいどをどうにゅうした">▶</button><span><span class="target">弱者</span>を保護するため、政府は<span class="target">財産</span>の一部を再分配する制度を導入した。</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="pair-title">④ ぞ　vs　じょ</p>
+    <div class="word-grid">
+      <div class="word-col-head">ぞ（直音）</div>
+      <div class="word-col-head">じょ（拗音）</div>
+      <div class="word-item"><span>ぞう<span class="kanji">（象）</span></span><button type="button" class="word-play" data-audio="ぞう">▶</button></div>
+      <div class="word-item"><span>じょせい<span class="kanji">（女性）</span></span><button type="button" class="word-play" data-audio="じょせい">▶</button></div>
+      <div class="word-item"><span>ぞうか<span class="kanji">（増加）</span></span><button type="button" class="word-play" data-audio="ぞうか">▶</button></div>
+      <div class="word-item"><span>じょげん<span class="kanji">（助言）</span></span><button type="button" class="word-play" data-audio="じょげん">▶</button></div>
+      <div class="word-item"><span>ぞうき<span class="kanji">（臓器）</span></span><button type="button" class="word-play" data-audio="ぞうき">▶</button></div>
+      <div class="word-item"><span>じょおう<span class="kanji">（女王）</span></span><button type="button" class="word-play" data-audio="じょおう">▶</button></div>
+    </div>
+    <ul class="sentence-list">
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="せんもんかは、じょせいかんりしょくのぞうかについてじょげんした">▶</button><span>専門家は、<span class="target">女性</span>管理職の<span class="target">増加</span>について<span class="target">助言</span>した。</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="pair-title">⑤ つ（す・ちゅ との聞き分け）</p>
+    <div class="word-grid">
+      <div class="word-col-head">つ</div>
+      <div class="word-col-head">す・ちゅ</div>
+      <div class="word-item"><span>つき<span class="kanji">（月）</span></span><button type="button" class="word-play" data-audio="つき">▶</button></div>
+      <div class="word-item"><span>すき<span class="kanji">（好き）</span></span><button type="button" class="word-play" data-audio="すき">▶</button></div>
+      <div class="word-item"><span>つる<span class="kanji">（鶴）</span></span><button type="button" class="word-play" data-audio="つる">▶</button></div>
+      <div class="word-item"><span>する</span><button type="button" class="word-play" data-audio="する">▶</button></div>
+      <div class="word-item"><span>つな<span class="kanji">（綱）</span></span><button type="button" class="word-play" data-audio="つな">▶</button></div>
+      <div class="word-item"><span>すな<span class="kanji">（砂）</span></span><button type="button" class="word-play" data-audio="すな">▶</button></div>
+      <div class="word-item"><span>つうか<span class="kanji">（通過）</span></span><button type="button" class="word-play" data-audio="つうか">▶</button></div>
+      <div class="word-item"><span>ちゅうか<span class="kanji">（中華）</span></span><button type="button" class="word-play" data-audio="ちゅうか">▶</button></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">総合練習（上級・1文に複数の音が混在）</h2>
+  <div class="card">
+    <ul class="sentence-list">
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="このそしきは、しょるいのしょぶんほうほうについてはなしあった">▶</button><span>この<span class="target">組織</span>は、<span class="target">書類</span>の<span class="target">処分</span>方法について話し合った。</span></li>
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="さぎのひがいにあったひとは、さいばんでしゃざいをもとめた">▶</button><span><span class="target">詐欺</span>の被害に遭った人は、<span class="target">裁判</span>で<span class="target">謝罪</span>を求めた。</span></li>
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="このびょういんでは、ぞうきいしょくにかんするじょうきょうがひびへんかしている">▶</button><span>この病院では、<span class="target">臓器</span>移植に関する<span class="target">状況</span>が日々変化している。</span></li>
+      <li class="sentence-item"><button type="button" class="word-play" data-audio="こうじげんばでじゃまになっていたにもつを、ざいりょうおきばにいどうさせた">▶</button><span>工事現場で<span class="target">邪魔</span>になっていた荷物を、<span class="target">材料</span>置き場に移動させた。</span></li>
+    </ul>
+  </div>
+
+  <div class="hint-box">
+    <b>使い方</b>：①まず各語彙の音声ボタンを押して正しい発音を聞く　②生徒に真似して発音させる　③先生が聞いて直す　④慣れたら「聞き取り小テスト」で聞き分けを確認する、という流れがおすすめです。
+  </div>
+
+  <footer class="config-note">
+    ※ 音声は端末のブラウザが持つ読み上げ機能を使用しています。送信・採点機能はありません。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const voiceSettings = document.getElementById('voiceSettings');
+  const voiceSelect = document.getElementById('voiceSelect');
+  const rateRange = document.getElementById('rateRange');
+  const rateVal = document.getElementById('rateVal');
+  const voiceTestBtn = document.getElementById('voiceTestBtn');
+
+  let selectedVoice = null;
+  let speechRate = 0.8;
+
+  function loadPref(key){
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function savePref(key, value){
+    try { window.localStorage.setItem(key, value); } catch (e) { /* ignore */ }
+  }
+
+  function populateVoices(){
+    if (!('speechSynthesis' in window)) return;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return;
+    const jaVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ja'));
+    const list = jaVoices.length ? jaVoices : voices;
+
+    voiceSelect.innerHTML = '';
+    list.forEach(function(v){
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      opt.textContent = v.name + '（' + v.lang + '）';
+      voiceSelect.appendChild(opt);
+    });
+
+    const savedName = loadPref('pronTestVoiceName');
+    const match = list.find(v => v.name === savedName);
+    selectedVoice = match || list[0];
+    voiceSelect.value = selectedVoice.name;
+    voiceSettings.hidden = false;
+  }
+
+  if ('speechSynthesis' in window) {
+    populateVoices();
+    window.speechSynthesis.onvoiceschanged = populateVoices;
+  }
+
+  const savedRate = parseFloat(loadPref('pronTestRate'));
+  if (!isNaN(savedRate)) {
+    speechRate = savedRate;
+    rateRange.value = String(savedRate);
+  }
+  rateVal.textContent = speechRate.toFixed(2) + 'x';
+
+  voiceSelect.addEventListener('change', function(){
+    const voices = window.speechSynthesis.getVoices();
+    const found = voices.find(v => v.name === voiceSelect.value);
+    if (found) {
+      selectedVoice = found;
+      savePref('pronTestVoiceName', found.name);
+    }
+  });
+
+  rateRange.addEventListener('input', function(){
+    speechRate = parseFloat(rateRange.value);
+    rateVal.textContent = speechRate.toFixed(2) + 'x';
+    savePref('pronTestRate', String(speechRate));
+  });
+
+  voiceTestBtn.addEventListener('click', function(){
+    speak('しょうゆと、そうじです。', voiceTestBtn);
+  });
+
+  function speak(text, btn){
+    if (!('speechSynthesis' in window)) {
+      window.alert('お使いの環境は音声読み上げに対応していません。');
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'ja-JP';
+    utter.rate = speechRate;
+    if (selectedVoice) utter.voice = selectedVoice;
+    if (btn) {
+      btn.classList.add('playing');
+      utter.onend = function(){ btn.classList.remove('playing'); };
+      utter.onerror = function(){ btn.classList.remove('playing'); };
+    }
+    window.speechSynthesis.speak(utter);
+  }
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.word-play');
+    if (!btn) return;
+    speak(btn.dataset.audio, btn);
+  });
+})();
+</script>
