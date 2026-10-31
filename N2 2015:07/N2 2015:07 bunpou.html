@@ -1,0 +1,824 @@
+<title>N2 2015/07　文法等</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --q-bg:#F5ECDA;
+    --q-border:#E6D6B8;
+    --mondai-ink:#4A3728;
+    --page-bg:#7A5940;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F;
+      --paper-2:#1C222C;
+      --paper-3:#2A3242;
+      --ink:#E7EBF3;
+      --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5;
+      --indigo-deep:#9CC0FF;
+      --vermillion:#FF8A5B;
+      --line:#2E3646;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --q-bg:#2A2115;
+      --q-border:#4A3B26;
+      --mondai-ink:#E8D5B4;
+      --page-bg:#35261A;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181F;
+    --paper-2:#1C222C;
+    --paper-3:#2A3242;
+    --ink:#E7EBF3;
+    --ink-soft:#9AA5B8;
+    --indigo:#6FA0F5;
+    --indigo-deep:#9CC0FF;
+    --vermillion:#FF8A5B;
+    --line:#2E3646;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --q-bg:#2A2115;
+    --q-border:#4A3B26;
+    --mondai-ink:#E8D5B4;
+    --page-bg:#35261A;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.5rem;
+  }
+  .masthead-main{flex:1; min-width:0;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--indigo-deep); background:var(--paper-2);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .level-badge{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:.85rem; letter-spacing:.06em; color:var(--paper);
+    background:var(--vermillion); padding:.28rem .85rem; border-radius:999px;
+  }
+  .brand-logo{
+    flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.55rem .9rem;
+    border-radius:.65rem;
+    background:var(--indigo-deep); color:var(--paper);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; letter-spacing:.1em;
+    box-shadow:var(--shadow);
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .6rem;
+    text-wrap:balance;
+    color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.65rem 1.25rem;
+    display:flex; align-items:center; gap:.85rem;
+    margin:0 -1.25rem 2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.3rem; font-weight:600;
+    color:var(--light-accent);
+    margin:2.6rem 0 1.3rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--light-accent);
+  }
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.6rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+
+  .passage{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    font-size:1rem;
+    line-height:1.9;
+  }
+  .passage-p{margin:0 0 1em;}
+  .passage-p:last-child{margin-bottom:0;}
+  .pnum{color:var(--vermillion); font-weight:700; border-bottom:2px solid var(--vermillion); padding:0 .15em;}
+
+  .q{
+    display:flex; gap:1rem;
+    padding:1.3rem 1.3rem;
+    border:1px solid #E6D6B8;
+    border-radius:.9rem;
+    margin-bottom:.9rem;
+    background:#F5ECDA;
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:#E6D6B8; color:#4A3728;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem; color:#20242B;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .star{color:var(--vermillion); font-weight:700;}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:#20242B;}
+  .uncertain-flag{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
+    padding:.05rem .5rem; vertical-align:middle;
+  }
+  .q-result-badge{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    padding:.08rem .55rem; border-radius:999px; vertical-align:middle;
+  }
+  .q-result-badge.correct{color:#2E7D32; background:#E5F3E7; border:1px solid #2E7D32;}
+  .q-result-badge.wrong{color:var(--vermillion); background:#FBEAE3; border:1px solid var(--vermillion);}
+  .q.q-correct{border-color:#2E7D32;}
+  .q.q-wrong{border-color:var(--vermillion);}
+  .opt.opt-correct-answer{background:#E5F3E7; border-color:#2E7D32;}
+  .opt.opt-correct-answer .bubble{background:#2E7D32; border-color:#2E7D32; color:var(--paper);}
+  .opt.opt-wrong-selected{background:#FBEAE3; border-color:var(--vermillion);}
+  .opt.opt-wrong-selected .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.7rem;
+    padding:.6rem .75rem; border-radius:.7rem;
+    cursor:pointer; border:1px solid transparent;
+    background:transparent;
+  }
+  .opt:hover{background:#E6D6B8;}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
+    border:1.5px solid #E6D6B8;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:#5B6472;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:#5B6472;}
+
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--paper-3); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--indigo); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.65rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
+  .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
+  .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--light-accent);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
+  }
+
+  .test-id-badge{
+    display:inline-block; font-size:1.05rem; font-weight:700; letter-spacing:.04em;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.7rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--vermillion); border-color:var(--vermillion);}
+  .timer-badge.timer-over{color:var(--paper); background:var(--vermillion); border-color:var(--vermillion);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="test-id-badge">N2 2015/07　文法等</div>
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">言語知識（文字・語彙・文法）</div>
+        <div class="level-badge">N2</div>
+      </div>
+      <h1>日本語N2模擬テスト 答案用紙</h1>
+      <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+    <div class="brand-logo" title="PHAMKY">PHAMKY</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 54</div>
+    <div class="timer-badge" id="timerBadge">残り時間 45:00</div>
+  </div>
+
+  <main id="form"></main>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+      <p class="result-note">下の各問題にも正解・不正解が表示されます。選択肢を選び直すと、表示が自動的に更新されます。</p>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'phamkyphung@gmail.com',
+    testName: '日本語N2模擬テスト【2015年07月・文字語彙文法】'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '言語知識（文字・語彙）',
+      mondai: [
+        {
+          key: 'm1', title: '問題１',
+          instruction: '＿＿の言葉の読み方として最もよいものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: 'ここは**省略**してもかまわない。', options: ['しようかく','しようらく','しょうじゃく','しょうりゃく'] },
+            { text: '修正内容は、日程も**含めて**、今日中にお知らせします。', options: ['ふくめて','さだめて','かためて','まとめて'] },
+            { text: '慣れるとつい**油断**して失敗してしまう。', options: ['よたん','ゆたん','よだん','ゆだん'] },
+            { text: '明日は学校の**行事**に参加します。', options: ['ぎょうごと','こうごと','ぎょうじ','こうじ'] },
+            { text: 'この世代の人たちはコンピュータの知識が**乏しい**ように思います。', options: ['くわしい','とぼしい','まずしい','あやしい'] }
+          ]
+        },
+        {
+          key: 'm2', title: '問題２',
+          instruction: '＿＿の言葉を漢字で書くとき、最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: 'A地点からB地点までの**きょり**を測った。', options: ['距離','距理','拒離','拒理'] },
+            { text: '**おどろかせて**しまって、すみません。', options: ['怖かせて','焦かせて','驚かせて','騒かせて'] },
+            { text: '森さんは塾の**こうし**をしています。', options: ['構師','構士','講師','講士'] },
+            { text: '今日も**うで**に痛みがあります。', options: ['腹','胸','腰','腕'] },
+            { text: '姉はたくさんの友達に**めぐまれて**いる。', options: ['恵まれて','善まれて','幸まれて','喜まれて'] }
+          ]
+        },
+        {
+          key: 'm3', title: '問題３',
+          instruction: '＿＿に入れるのに、最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '社長の代わりに（　）社長が会見を行った。', options: ['従','準','補','副'] },
+            { text: '彼の発言は（　）責任だと批判された。', options: ['不','無','放','否'] },
+            { text: '週末の遊園地は、子供（　）の客でいっぱいだった。', options: ['連れ','込み','付き','加え'] },
+            { text: '友達にパーティーの招待（　）を送った。', options: ['書','便','状','紙'] },
+            { text: '弟は、買ったばかりの（　）新しい靴を履いて出かけていった。', options: ['実','真','素','本'] }
+          ]
+        },
+        {
+          key: 'm4', title: '問題４',
+          instruction: '＿＿に入れるのに、最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: 'この学校の（　）は、国際交流が盛んなことだ。', options: ['得点','性能','効用','特色'] },
+            { text: 'だんだん雨が激しくなって、傘を差していたのに服が（　）濡れてしまった。', options: ['すっきり','ぎっしり','びっしょり','ぴったり'] },
+            { text: 'このチームは何度も優勝し、（　）成績を残している。', options: ['力強い','輝かしい','分厚い','限りない'] },
+            { text: 'Aホテルは大通りに（　）いて、分かりやすい場所にある。', options: ['当たって','触れて','面して','合わせて'] },
+            { text: 'それは、問題点を的確に捉えた（　）質問だった。', options: ['するどい','にぶい','けわしい','ゆるい'] },
+            { text: 'この椅子は、大きさがちょうどいいし、色や（　）も気に入っている。', options: ['インテリア','スペース','リビング','デザイン'] },
+            { text: '一つの考え方に縛られず、（　）思考を持つことで、新しい発想が生まれるだろう。', options: ['快適な','柔軟な','円満な','順調な'] }
+          ]
+        },
+        {
+          key: 'm5', title: '問題５',
+          instruction: '＿＿の言葉に意味が最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '森さんはこの辺りに店を**所有している**らしい。', options: ['探して','借りて','持って','建てて'] },
+            { text: '佐藤さんは**恐らく**来ないと思う。', options: ['たぶん','当然','やはり','絶対'] },
+            { text: 'まだ**収納していない**物がたくさんある。', options: ['集めて','預けて','返して','しまって'] },
+            { text: '妹は母に似て**小柄**だ。', options: ['声が小さい','力が弱い','体が小さい','心が弱い'] },
+            { text: '鈴木さんは**無口**だ。', options: ['あまり笑わない','あまり話さない','あまり怒らない','あまり食べない'] }
+          ]
+        }
+      ]
+    },
+    {
+      title: '言語知識（文法）',
+      mondai: [
+        {
+          key: 'm6', title: '問題６',
+          instruction: '次の言葉の使い方として最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '**温暖**', options: ['佐藤さんはいつも厳しいが、本当はとても**温暖**な性格の人だ。','冷めるとおいしくないので、なるべく**温暖**なうちに召し上がってください。','この地方は**温暖**で暮らしやすく、野菜や果物などの農産物も豊富だ。','エアコンをつけたら、部屋の中が**温暖**になって眠くなってきた。'] },
+            { text: '振り向く', options: ['だれかに後ろから呼ばれたので振り向いたら、課長だった。','道を渡るときは、左右を振り向いて車が来ないことを確認しよう。','だれかが空を指さしたので、近くにいた人たちが一斉に上を振り向いた。','森さんは私を見ると、恥ずかしそうに下を振り向いたまま顔を上げなかった。'] },
+            { text: '**用途**', options: ['新しい趣味を始めるため、時間の**用途**を工夫することにした。','会社での私の**用途**は、新入社員の指導だ。','鈴木さんの才能は、多くの**用途**に生かされるだろう。','本来の**用途**ではないが、この容器は花瓶にしてもいいと思う。'] },
+            { text: '甘やかす', options: ['今年のA社の就職試験は、昨年より内容が甘やかされている。','林さんは、ずっと親に甘やかされて育ったせいか、わがままで困る。','ひどくなったら大変だから、風邪を甘やかさないほうがいいですよ。','今日は、いつもより多めに砂糖を入れて、コーヒーを甘やかした。'] },
+            { text: '**行方**', options: ['この写真の二人は事件に関係があるらしいが、また**行方**が分からない。','慌てていたので、**行方**を確かめずにバスに乗ってしまった。','交差点を右に曲がると、**行方**に黒い高層ビルが見えた。','日曜日の私の**行方**はいつも決まっていて、近くの喫茶店か図書館だ。'] }
+          ]
+        },
+        {
+          key: 'm7', title: '問題７',
+          instruction: '次の文の（　）に入れるのに最もよいものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '南極の氷を調べること（　）数十万年前の地球の気候を知ることができるそうだ。', options: ['によって','にとって','に関して','に対して'] },
+            { text: 'この曲は、私には難しすぎて（　）弾けそうにない。', options: ['だんだん','今にも','必ず','とても'] },
+            { text: '入社試験の面接で、緊張の（　）、声が震えてしまった。', options: ['わけで','あまり','ことに','中を'] },
+            { text: '森川動物園は、森川駅からバスで30分（　）行ったところにある。', options: ['など','などに','ほど','ほどに'] },
+            { text: '（メールで）\n4月20日に新入生歓迎会を開きますので、ぜひご参加ください。なお、場所は（　）、お知らせします。', options: ['決まったおかげで','決まり次第','決まって以来','決まる一方で'] },
+            { text: 'この地域のみかんの生産量は、2000年から2003年にかけて一時減少した（　）、再び増加し、2010年には過去最高となった。', options: ['として','のかどうか','からには','もの'] },
+            { text: '（育児書で）\n赤ちゃんの熱が少しあると心配になるかもしれませんが、熱が多少あっても、元気に遊んでいるなら、（　）。', options: ['慌てることはありません','慌てざるを得ません','慌てずにはいられません','慌てるに違いありません'] },
+            { text: '（就職説明会で）\n「就職活動とは、企業に応募することです。この企業で働きたいと思っていても、応募（　）、何も進みません。まずは応募しましょう。」', options: ['してみるより','できるといいし','しないことには','するのではなく'] },
+            { text: '先月、エアコンを（　）使っていたら、電気代が2万円を超えてしまった。', options: ['使いすぎて','使ったまま','使いたいだけ','使いつづけたり'] },
+            { text: '山川「ごめんね。田村さんに借りたCD、今日返そうと思っていたのに、持ってくるの忘れちゃった。」\n田村「ああ、別に急がないから、次に会うときに（　）よ。」', options: ['持ってきてくれるはずだ','持ってきてくれればいい','持ってきてくれたほうがいい','持ってきてあげたほうがいい'] },
+            { text: 'まだ読んでいない本が10冊もあるから、しばらく本は（　）と決めていたのに、面白そうな本を見つけて、つい**買って**しまった。', options: ['買うべきじゃなかった','買わないでいたんだ','**買って**いないだろう','買わずにおこう'] },
+            { text: '昨日、天気が良かったので公園に出かけた。春の日差しが暖かく、風が気持ちよくて、ベンチに座っていると、つい（　）。', options: ['眠そうだった','眠ってしまいそうになった','眠そうにしていた','眠っていそうだった'] }
+          ]
+        },
+        {
+          key: 'm8', title: '問題８',
+          instruction: '次の文の　★　に入る最もよいものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '優しい子になってほしい。娘の___ ★ ___込めたからだ。', options: ['「優子」に','そういった願いを','名前を','したのは'] },
+            { text: '日本で携帯電話が発売されて約20年。今や携帯電話は___ ★ ___定着したといえるのではないか。', options: ['に欠かせない','道具','として','生活'] },
+            { text: '私は、スケジュール___ ★ ___常に考えながら作業をしている。', options: ['どうすればいいか','どおりに','には','仕事を進める'] },
+            { text: '筋肉トレーニングを___ ★ ___効果は全く違います。', options: ['今自分がどこを鍛えているのか','しているとき','しないのでは','意識するのと'] },
+            { text: '「みる屋」は、A市に___ ★ ___です。', options: ['有名な','住んでいる人なら','知らない人はいないくらい','お菓子屋さん'] }
+          ]
+        },
+        {
+          key: 'm9', title: '問題９',
+          instruction: '次の文章を読んで、50から54の中に入る最もよいものを、１・２・３・４から一つ選びなさい。',
+          passage: '以下は、留学生が書いた文章である。\n\n「のぼり」\nシルバ　ジョゼ\n\nそれを見たのは、日本に着いた日、空港からホテルへバスで向かっている時だった。高さは（５０）。青い布に白い字で「夏祭り」と書かれた大きな長方形の旗が道路沿いに一定間隔で何本も立っていたのだ。初めて見る、面白い光景だった。\n\nこのとき、「この旗は何だ？」と思った。しかし、街を歩くと、あちこちに似たような旗があり、それらを見ているうちに、「これは広告だ」と気づいた。旗にはそれぞれ、「お弁当」「食べ放題」「本日特売日」といった短い言葉が書かれている。\n\n（５１）旗も色が派手で高さがあり、1本でもよく目立つ。そのため自然と目が行く。また、何本か同じ旗が並んで立っていると、まるで一つの大きな看板のように見える。さらに、旗はどこにでも簡単に立てられるから、街のあちこちで（５２）。私はこの旗に強い関心を持った。\n\n（５３）、この旗は「のぼり」というそうだ。サイズは縦180センチ、横60センチのものが多い。布の上部と片方の端に棒が通してあり、風が吹かなくても見えるようになっている。今の形ののぼりは、600年ぐらい前には既にあり、当時戦いで自分の軍と敵の軍を見分けるために使われていたらしい。時代は変わり、今はそのような目的で使われることはない。だが、今も、情報を一瞬ではっきりと伝えたい時にのぼりを使うのは（５４）。のぼりの特徴を捉え、広告に応用した発想に感心した。',
+          items: [
+            { text: '（５０）に入るものはどれですか。', options: ['2メートルくらいだっただろうか','2メートルくらいだったものなのか','2メートルくらいだと言われたそうだ','2メートルくらいだと思われていたことだ'] },
+            { text: '（５１）に入るものはどれですか。', options: ['このように','あのように','どの','そちらの'] },
+            { text: '（５２）に入るものはどれですか。', options: ['使われている','使っていく','使おう','使わせる'] },
+            { text: '（５３）に入るものはどれですか。', options: ['以上から','旗といえば','しかしながら','調べてみたところ'] },
+            { text: '（５４）に入るものはどれですか。', options: ['変わらないこともない','変わらないようだ','変えないでおきたい','変えなければならない'] }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // 公式解答（2015年07月新日本語能力試験N2答案より）
+  const ANSWER_KEY = {
+    m1_1:4, m1_2:1, m1_3:4, m1_4:3, m1_5:2,
+    m2_1:1, m2_2:3, m2_3:3, m2_4:4, m2_5:1,
+    m3_1:4, m3_2:2, m3_3:1, m3_4:3, m3_5:2,
+    m4_1:4, m4_2:3, m4_3:2, m4_4:3, m4_5:1, m4_6:4, m4_7:2,
+    m5_1:3, m5_2:1, m5_3:4, m5_4:3, m5_5:2,
+    m6_1:3, m6_2:1, m6_3:4, m6_4:2, m6_5:1,
+    m7_1:1, m7_2:4, m7_3:2, m7_4:3, m7_5:2, m7_6:4, m7_7:1, m7_8:3, m7_9:3, m7_10:3, m7_11:4, m7_12:2,
+    m8_1:1, m8_2:2, m8_3:3, m8_4:4, m8_5:1,
+    m9_1:1, m9_2:3, m9_3:1, m9_4:4, m9_5:2
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>')
+      .replace(/_{2,}/g, '<span class="blank">＿＿＿</span>')
+      .replace(/★/g, '<span class="star">★</span>')
+      .replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderOptionHtml(text){
+    return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderPassageHtml(text){
+    return text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/［(\d+)］/g, '<span class="pnum">［$1］</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    const sources = m.clusters
+      ? m.clusters.reduce((acc, c) => acc.concat(c.items), [])
+      : m.items;
+    sources.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    const flag = UNCERTAIN_QIDS.has(qid) ? '<span class="uncertain-flag">要確認</span>' : '';
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + flag + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + renderOptionHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      if (m.passage) {
+        html += '<div class="passage">' + renderPassageHtml(m.passage) + '</div>';
+      }
+
+      if (m.clusters) {
+        let idx = 0;
+        m.clusters.forEach(cluster => {
+          if (cluster.passage) {
+            html += '<div class="passage">' + renderPassageHtml(cluster.passage) + '</div>';
+          }
+          cluster.items.forEach(item => {
+            idx++;
+            totalQuestions++;
+            html += renderQuestionHtml(m, { item: item, idx: idx, qid: m.key + '_' + idx });
+          });
+        });
+      } else {
+        flattenMondaiItems(m).forEach(entry => {
+          totalQuestions++;
+          html += renderQuestionHtml(m, entry);
+        });
+      }
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', function(){
+    updateProgress();
+    if (graded) gradeQuestions();
+  });
+  updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 45 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 300);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      lines.push('■ ' + part.title);
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
+          }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※要確認';
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+  let graded = false;
+
+  function gradeQuestions(){
+    graded = true;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (!qEl || EXCLUDED_QIDS.has(qid)) return;
+      const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+      const answerKey = ANSWER_KEY[qid];
+      const isCorrect = !!checked && parseInt(checked.value, 10) === answerKey;
+
+      qEl.classList.remove('q-correct', 'q-wrong');
+      qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+
+      const oldBadge = qEl.querySelector('.q-result-badge');
+      if (oldBadge) oldBadge.remove();
+      const badge = document.createElement('span');
+      badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+      badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+      qEl.querySelector('.qtext').appendChild(badge);
+
+      qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+        optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+        const optValue = i + 1;
+        if (optValue === answerKey) optEl.classList.add('opt-correct-answer');
+        if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+      });
+    })));
+  }
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    gradeQuestions();
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+
+  function sendReport(auto){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
