@@ -1,0 +1,821 @@
+<title>N3 2016/07　文法等</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#EFF4FC;
+    --paper-3:#DCE7F6;
+    --ink:#20242B;
+    --ink-soft:#5B6472;
+    --indigo:#2F6FE0;
+    --indigo-deep:#1E4FB0;
+    --vermillion:#F2703D;
+    --line:#E3E9F3;
+    --shadow: 0 1px 2px rgba(32,36,43,.05), 0 6px 18px rgba(32,36,43,.06);
+    --q-bg:#F5ECDA;
+    --q-border:#E6D6B8;
+    --mondai-ink:#4A3728;
+    --page-bg:#7A5940;
+    --light-ink:#F3E9D6;
+    --light-ink-soft:#D8C3A0;
+    --light-accent:#9FC4FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181F;
+      --paper-2:#1C222C;
+      --paper-3:#2A3242;
+      --ink:#E7EBF3;
+      --ink-soft:#9AA5B8;
+      --indigo:#6FA0F5;
+      --indigo-deep:#9CC0FF;
+      --vermillion:#FF8A5B;
+      --line:#2E3646;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --q-bg:#2A2115;
+      --q-border:#4A3B26;
+      --mondai-ink:#E8D5B4;
+      --page-bg:#35261A;
+      --light-ink:#F5ECDA;
+      --light-ink-soft:#C9B08A;
+      --light-accent:#9CC0FF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181F;
+    --paper-2:#1C222C;
+    --paper-3:#2A3242;
+    --ink:#E7EBF3;
+    --ink-soft:#9AA5B8;
+    --indigo:#6FA0F5;
+    --indigo-deep:#9CC0FF;
+    --vermillion:#FF8A5B;
+    --line:#2E3646;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --q-bg:#2A2115;
+    --q-border:#4A3B26;
+    --mondai-ink:#E8D5B4;
+    --page-bg:#35261A;
+    --light-ink:#F5ECDA;
+    --light-ink-soft:#C9B08A;
+    --light-accent:#9CC0FF;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:820px; margin:0 auto; padding:2.25rem 1.25rem 6rem;}
+
+  .masthead{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+    padding-bottom:1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.5rem;
+  }
+  .masthead-main{flex:1; min-width:0;}
+  .masthead-top{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:inline-block; font-size:.72rem; letter-spacing:.14em; font-weight:700;
+    color:var(--indigo-deep); background:var(--paper-2);
+    padding:.32rem .8rem; border-radius:999px;
+  }
+  .level-badge{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:.85rem; letter-spacing:.06em; color:var(--paper);
+    background:var(--vermillion); padding:.28rem .85rem; border-radius:999px;
+  }
+  .brand-logo{
+    flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.55rem .9rem;
+    border-radius:.65rem;
+    background:var(--indigo-deep); color:var(--paper);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; letter-spacing:.1em;
+    box-shadow:var(--shadow);
+  }
+  .masthead h1{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:clamp(1.5rem,4vw,2.05rem);
+    margin:.4rem 0 .6rem;
+    text-wrap:balance;
+    color:var(--light-ink);
+  }
+  .masthead p{color:var(--light-ink-soft); font-size:.92rem; line-height:1.75; margin:0;}
+
+  .progress-wrap{
+    position:sticky; top:0; z-index:20;
+    background:var(--page-bg);
+    border-bottom:1px solid var(--line);
+    padding:.65rem 1.25rem;
+    display:flex; align-items:center; gap:.85rem;
+    margin:0 -1.25rem 2rem;
+  }
+  .progress-track{flex:1; height:6px; background:var(--paper-3); border-radius:99px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--indigo),var(--vermillion)); transition:width .35s ease;}
+  .progress-label{font-size:.78rem; color:var(--light-ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .part h2{
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:1.3rem; font-weight:600;
+    color:var(--light-accent);
+    margin:2.6rem 0 1.3rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--light-accent);
+  }
+  .part:first-of-type h2{margin-top:0;}
+
+  .mondai{margin-bottom:2.6rem;}
+  .mondai-head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.4rem;}
+  .mondai-badge{
+    flex-shrink:0; width:2.3rem; height:2.3rem; border-radius:50%;
+    border:1.5px solid var(--vermillion); color:var(--vermillion);
+    font-family:"Shippori Mincho",serif; font-weight:700; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .mondai-title{font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.15rem; color:var(--vermillion);}
+  .mondai-instruction{font-size:.9rem; color:var(--light-ink-soft); line-height:1.7; margin:0 0 1rem 3rem;}
+
+  .passage{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--line);
+    border-radius:.9rem;
+    background:var(--paper-2);
+    font-size:1rem;
+    line-height:1.9;
+  }
+  .passage-p{margin:0 0 1em;}
+  .passage-p:last-child{margin-bottom:0;}
+  .pnum{color:var(--vermillion); font-weight:700; border-bottom:2px solid var(--vermillion); padding:0 .15em;}
+
+  .q{
+    display:flex; gap:1rem;
+    padding:1.3rem 1.3rem;
+    border:1px solid #E6D6B8;
+    border-radius:.9rem;
+    margin-bottom:.9rem;
+    background:#F5ECDA;
+    box-shadow:var(--shadow);
+  }
+  .qnum{
+    flex-shrink:0; width:2rem; height:2rem; border-radius:50%;
+    background:#E6D6B8; color:#4A3728;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem; font-weight:700; font-variant-numeric:tabular-nums;
+    transition:background .15s, color .15s;
+  }
+  .q.answered .qnum{background:var(--indigo-deep); color:var(--paper);}
+  .qbody{flex:1; min-width:0;}
+  .qtext{font-size:1.08rem; line-height:1.9; margin:0 0 .9rem; color:#20242B;}
+  .blank{display:inline-block; min-width:2.3em; border-bottom:2px solid var(--indigo); text-align:center; color:var(--indigo); font-weight:600;}
+  .star{color:var(--vermillion); font-weight:700;}
+  .target-word{text-decoration:underline; text-decoration-color:var(--indigo); text-decoration-thickness:2px; text-underline-offset:3px; font-weight:700; color:#20242B;}
+  .uncertain-flag{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    color:var(--vermillion); border:1px solid var(--vermillion); border-radius:999px;
+    padding:.05rem .5rem; vertical-align:middle;
+  }
+  .q-result-badge{
+    display:inline-block; margin-left:.5rem; font-size:.72rem; font-weight:700;
+    padding:.08rem .55rem; border-radius:999px; vertical-align:middle;
+  }
+  .q-result-badge.correct{color:#2E7D32; background:#E5F3E7; border:1px solid #2E7D32;}
+  .q-result-badge.wrong{color:var(--vermillion); background:#FBEAE3; border:1px solid var(--vermillion);}
+  .q.q-correct{border-color:#2E7D32;}
+  .q.q-wrong{border-color:var(--vermillion);}
+  .opt.opt-correct-answer{background:#E5F3E7; border-color:#2E7D32;}
+  .opt.opt-correct-answer .bubble{background:#2E7D32; border-color:#2E7D32; color:var(--paper);}
+  .opt.opt-wrong-selected{background:#FBEAE3; border-color:var(--vermillion);}
+  .opt.opt-wrong-selected .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+
+  .options{display:flex; flex-direction:column; gap:.5rem;}
+  .opt{
+    position:relative;
+    display:flex; align-items:flex-start; gap:.7rem;
+    padding:.6rem .75rem; border-radius:.7rem;
+    cursor:pointer; border:1px solid transparent;
+    background:transparent;
+  }
+  .opt:hover{background:#E6D6B8;}
+  .opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
+  .bubble{
+    flex-shrink:0; width:1.7rem; height:1.7rem; border-radius:50%;
+    border:1.5px solid #E6D6B8;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.82rem; font-weight:700; color:#5B6472;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt input:checked ~ .bubble{background:var(--vermillion); border-color:var(--vermillion); color:var(--paper);}
+  .opt input:checked ~ .opt-text{color:#20242B; font-weight:600;}
+  .opt input:focus-visible ~ .bubble{outline:2px solid var(--indigo); outline-offset:2px;}
+  .opt-text{font-size:1rem; line-height:1.7; padding-top:.15rem; color:#5B6472;}
+
+  .submit-area{margin-top:3rem; padding-top:2rem; border-top:2px solid var(--light-accent);}
+  .submit-area h2{
+    font-family:"Shippori Mincho",serif; font-size:1.05rem; margin:0 0 1.1rem; color:var(--light-ink);
+  }
+  .field{display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.3rem; max-width:320px;}
+  .field label{font-size:.78rem; color:var(--light-ink-soft); letter-spacing:.02em;}
+  .field input[type=text]{
+    font:inherit; font-size:1rem; padding:.6rem .75rem;
+    border:1px solid var(--paper-3); border-radius:.5rem;
+    background:var(--paper); color:var(--ink);
+  }
+  .field input:focus-visible{outline:2px solid var(--indigo); outline-offset:1px;}
+
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:.9rem;}
+  .btn{
+    font:inherit; font-weight:700; font-size:.92rem;
+    border-radius:.65rem; padding:.75rem 1.5rem;
+    cursor:pointer; border:1.5px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-send{background:var(--vermillion); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-send:active{transform:scale(.97);}
+  .btn-copy{background:transparent; border-color:var(--light-ink-soft); color:var(--light-ink);}
+  .btn-copy:hover{background:rgba(255,255,255,.08);}
+  .btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+  .meta-row{margin-top:.9rem; font-size:.78rem; color:var(--light-ink-soft); line-height:1.7;}
+  .meta-row strong{color:var(--light-ink);}
+  .unanswered-note{color:var(--vermillion); font-weight:600;}
+  .send-status{display:inline-block; font-weight:600;}
+  .send-status-ok{color:var(--light-accent);}
+  .send-status-error{color:var(--vermillion);}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .toast{
+    display:inline-block; margin-left:.5rem; font-size:.8rem; color:var(--light-accent);
+    opacity:0; transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  .result-panel{
+    margin-top:1.6rem;
+    padding:1.5rem 1.6rem;
+    border:1.5px solid var(--indigo-deep);
+    border-radius:1rem;
+    background:var(--paper-2);
+    text-align:center;
+  }
+  .result-label{font-size:.8rem; letter-spacing:.08em; color:var(--ink-soft); font-weight:700;}
+  .result-score{font-family:"Shippori Mincho",serif; margin:.3rem 0 .7rem;}
+  .result-score #scoreNum{font-size:2.6rem; font-weight:700; color:var(--vermillion); font-variant-numeric:tabular-nums;}
+  .result-score .result-slash{font-size:1.4rem; color:var(--ink-soft);}
+  .result-score #scoreTotal{font-size:1.4rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .result-score .result-unit{font-size:1rem; color:var(--ink-soft); margin-left:.15rem;}
+  .result-note{font-size:.76rem; color:var(--ink-soft); line-height:1.7; margin:0; text-align:left;}
+
+  footer.config-note{
+    margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:.72rem; color:var(--light-ink-soft); line-height:1.7;
+  }
+
+  .test-id-badge{
+    display:inline-block; font-size:1.05rem; font-weight:700; letter-spacing:.04em;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.4rem 1.1rem; margin-bottom:.7rem;
+  }
+  .timer-badge{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem;
+    color:var(--light-ink); background:rgba(255,255,255,.1);
+    border:1px solid var(--light-ink-soft); border-radius:999px;
+    padding:.3rem .8rem; white-space:nowrap;
+  }
+  .timer-badge.timer-warn{color:var(--vermillion); border-color:var(--vermillion);}
+  .timer-badge.timer-over{color:var(--paper); background:var(--vermillion); border-color:var(--vermillion);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="test-id-badge">N3 2016/07　文法等</div>
+    <div class="masthead-main">
+      <div class="masthead-top">
+        <div class="kicker">言語知識（文字・語彙・文法）</div>
+        <div class="level-badge">N3</div>
+      </div>
+      <h1>日本語N3模擬テスト 答案用紙</h1>
+      <p>すべての問題に、選択肢の番号（１〜４）を一つずつ選んでください。最後に「お名前」を入力し、下の送信ボタンを押すとメールアプリが開き、その場で自分の点数も表示されます。そのまま送信すれば、解答と点数が先生に届きます。</p>
+    </div>
+    <div class="brand-logo" title="PHAMKY">PHAMKY</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">回答済み: 0 / 58</div>
+    <div class="timer-badge" id="timerBadge">残り時間 40:00</div>
+  </div>
+
+  <main id="form"></main>
+
+  <section class="submit-area">
+    <h2>解答を送信する</h2>
+    <div class="field">
+      <label for="studentName">お名前</label>
+      <input type="text" id="studentName" placeholder="例：山田 太郎" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="studentEmail">メールアドレス（任意・先生からの返信を受け取りたい場合）</label>
+      <input type="email" id="studentEmail" placeholder="例：taro@example.com" autocomplete="email">
+    </div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn btn-send">先生にメール送信</button>
+      <button type="button" id="copyBtn" class="btn btn-copy">解答をコピー</button>
+      <span class="toast" id="toast">コピーしました</span>
+    </div>
+    <div class="meta-row">
+      送信先: <strong id="targetEmailLabel"></strong><br>
+      <span id="unansweredLabel"></span><br>
+      <span id="sendStatus" class="send-status"></span>
+    </div>
+
+    <div class="result-panel" id="resultPanel" hidden>
+      <div class="result-label">採点結果</div>
+      <div class="result-score"><span id="scoreNum">0</span><span class="result-slash"> / </span><span id="scoreTotal">0</span><span class="result-unit">点</span></div>
+      <p class="result-note">下の各問題にも正解・不正解が表示されます。選択肢を選び直すと、表示が自動的に更新されます。</p>
+    </div>
+  </section>
+
+  <footer class="config-note">
+    ※ メールアプリが自動で開かない場合は「解答をコピー」ボタンでコピーし、メール本文に貼り付けてください。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const CONFIG = {
+    teacherEmail: 'phamkyphung@gmail.com',
+    testName: '日本語N3模擬テスト【2016年07月・文字語彙文法】'
+  };
+
+  const TEST_DATA = [
+    {
+      title: '言語知識（文字・語彙）',
+      mondai: [
+        {
+          key: 'm1', title: '問題１',
+          instruction: '＿＿＿＿の言葉の読み方として最も良いものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: 'このビルの**裏**に小さなレストランがあります。', options: ['そば','よこ','かげ','うら'] },
+            { text: 'この**運動場**は個人でも利用できる。', options: ['こうじん','こじん','こにん','こうにん'] },
+            { text: 'この**方向**で間違いない。', options: ['ほうぼう','ほうごう','ほうほう','ほうこう'] },
+            { text: '**申し込み**は明日までです。', options: ['もしくみ','もしこみ','もうしくみ','もうしこみ'] },
+            { text: 'きちんと**測って**ください。', options: ['まもって','しまって','はかって','したがって'] },
+            { text: 'その国は20年前に**独立した**。', options: ['どくりつ','とくりつ','どぐれつ','とくれつ'] },
+            { text: '落とした時に**折れて**しまいました。', options: ['われて','おれて','ぬれて','こわれて'] },
+            { text: 'ごみを減らすためには、一人一人の**努力**が大切だ。', options: ['どりょく','とりょく','きょうりょく','ぎょうりょく'] }
+          ]
+        },
+        {
+          key: 'm2', title: '問題２',
+          instruction: '＿＿＿＿の言葉を漢字で書くとき、最も良いものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '捕まえた魚が**にげて**しまった。', options: ['遠げて','反げて','逃げて','逆げて'] },
+            { text: '数学の**せいせき**が前より良くなった。', options: ['成積','成績','整績','整積'] },
+            { text: '魚を**やいて**食べた。', options: ['爆いて','燃いて','煙いて','焼いて'] },
+            { text: 'その赤いところを**まわして**ください。', options: ['回して','曲して','押して','引して'] },
+            { text: '話し合った内容を**きろく**しておく。', options: ['議録','記禄','記録','議禄'] },
+            { text: '順番に**じょうしゃ**してください。', options: ['下車','乗車','降車','上車'] }
+          ]
+        },
+        {
+          key: 'm3', title: '問題３',
+          instruction: '（　）に入れるのに、最も良いものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '初めて海外に行く弟に、気を付けた方が良いことを（　）してあげた。', options: ['インタビュー','スピーチ','アドバイス','アンケート'] },
+            { text: '鈴木さんは本当に歌が（　）ので、プロの歌手だと思われることもあるらしい。', options: ['なつかしい','えらい','おとなしい','うまい'] },
+            { text: '私はたくさん練習したので、今度のカラオケ大会では優勝する（　）があります。', options: ['関心','自信','印象','興味'] },
+            { text: '昨日病院で目の（　）をしてもらったら、目が少し悪くなっていることが分かった。', options: ['検査','研究','証明','観察'] },
+            { text: '就職が決まったら、苦手だった外国語の勉強に（　）しようと思っている。', options: ['アクセス','チャレンジ','オープン','セット'] },
+            { text: '最近風邪が（　）ようで、学校を休む生徒が多い。', options: ['派手な','活動している','盛んな','流行している'] },
+            { text: '友達に映画を見に行こうと誘われたが、忙しかったので（　）。', options: ['断った','取り消した','否定した','禁止した'] },
+            { text: 'あともう少しで優勝できたのに、1点差で負けてしまって、本当に（　）ですね。', options: ['こわかった','くさかった','まずしかった','おしかった'] },
+            { text: 'さっき転んだ時に足にできた（　）に薬を塗った。', options: ['欠点','汚れ','傷','故障'] },
+            { text: 'この国は石油などの資源がないので、他の国から輸入に（　）いる。', options: ['預けて','頼って','願って','尋ねて'] },
+            { text: '寝坊して、慌てて家を出たので（　）部屋の窓を閉めるのを忘れてしまった。', options: ['やっと','ぐっすり','そっと','うっかり'] }
+          ]
+        },
+        {
+          key: 'm4', title: '問題４',
+          instruction: '＿＿＿＿に意味が最も良いものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: 'この**決まり**について、皆さんはどう思いますか。', options: ['料金','技術','結果','規則'] },
+            { text: '一人でこの山に登るのは**不安**だ。', options: ['心配','寂しい','危険だ','つまらない'] },
+            { text: 'リーさんは日本の映画を**まなんでいる**そうです。', options: ['紹介している','たくさん飾っている','勉強している','たくさん持っている'] },
+            { text: '教室には人が**まったく**いなかった。', options: ['あまり','全然','まだ','もう'] },
+            { text: '今日の講演会は**延期**になった。', options: ['後の別の日にやることになった','始まるのが予定より早くなった','終わるのが予定より遅くなった','後の別の日に続けることになった'] }
+          ]
+        },
+        {
+          key: 'm5', title: '問題５',
+          instruction: '次の言葉の使い方として最も良いものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '**性格**', options: ['明るい**性格**の歌を聞くと、元気になる。','私は、子供のころから走るのが速い**性格**だった。','私と妹は、おしゃべり好きな**性格**が似ている。','静かな**性格**、のレストランで、ゆっくり食事をした。'] },
+            { text: '**募集**', options: ['駅前のスーパーで、アルバイトを**募集**している。','私の趣味は、古い切手を**募集**することです。','この資料は後で**募集**しますので、持ち帰らないでください。','部屋のゴミを**募集**して、ゴミ箱に捨てた。'] },
+            { text: '**似合う**', options: ['何回も練習したのに、みんなとダンスの動きが似合わない。','話し合いのとき、私と高橋さんはいつも意見が似合わない。','水曜日ならみんなの予定が**似合う**ので、その日に海に行きましょう。','その白い帽子、池田さんによく似合っていますね。'] },
+            { text: '**消費**', options: ['私達は、電機などのエネルギーを大量に**消費**して生活している。','今日中に**消費**しなければならない仕事がたくさんある。','一度**消費**されたパソコンの中の情報を前と同じ状態に戻すことは難しい。','食べたものが胃の中で**消費**されるには、時間がかかる。'] },
+            { text: '**空**', options: ['砂糖や牛乳を入れた紅茶も美味しいけど、私は**空**の紅茶の方が好きです。','飲み終わって**空**になったペットボトルは、ここに入れてください。','来週は予定がいっぱいで、**空**の日が一日もない。','こんな仕事の経験は**空**なので、わからないことが多い。'] }
+          ]
+        }
+      ]
+    },
+    {
+      title: '言語知識（文法）・読解',
+      mondai: [
+        {
+          key: 'm6', title: '問題１',
+          instruction: '次の文の（　）に入れるのに最も良いものを１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '私の町の海はとてもきれいなので、たくさんの人（　）見に来てほしい。', options: ['へ','を','に','も'] },
+            { text: 'この大学では、海外に留学する学生（　）奨学金を支給している。', options: ['にとって','にたがって','に対して','に比べて'] },
+            { text: '友達に誘われて有名な画家の展覧会に行ったが、私にはよく分からない絵ばかりで（　）面白くなかった。', options: ['少しも','絶対に','なかなか','せっかく'] },
+            { text: '妹は、初めてのピアノ発表会だったので緊張していたと言っていたが、全然（　）見えなかった。', options: ['こう','そう','こういう','そういう'] },
+            { text: '月曜日の朝、友達に電話したが出なかったので、その日の夜に（　）。', options: ['かけ出した','かけ直した','かけたところだ','かけたばかりだ'] },
+            { text: '明日、全国柔道大会の優勝者が決まる。実力が近い二人の試合なので、どちらの選手が（　）。', options: ['勝つはずだ','勝ったらいい','勝つのではないだろうか','勝っても不思議ではない'] },
+            { text: '（服屋で）\n店員「ご希望のサイズのものが見つからなければ、（　）ください」\n客「あ、ありがとうございます」', options: ['なさって','おっしゃって','お聞きして','申し上げて'] },
+            { text: '佐藤先輩、今日は素敵なプレゼントをありがとうございました。前から欲しかったカップなので、とても嬉しかったです。大切（　）。', options: ['使われております','使っていらっしゃいます','使ってくださいます','使わせていただきます'] },
+            { text: 'クラスメートみんなにメール送ってから一週間も経ったのに、まだ一人（　）返事が来ていない。', options: ['からしか','からでも','でしか','ででも'] },
+            { text: '自分に合う仕事を見つける（　）、時間をかけて探したいと思っている。', options: ['ことにするのは','ことができるのは','ことにするまで','ことができるまで'] },
+            { text: '（不動産屋で）\nA「こちらのアパートはいかがですか」\nB「ううん、家賃は安いけど、駅まで歩いて20分もかかるのかな」\nA「少し家賃が高くても駅に（　）、こちらはどうでしょうか。」', options: ['近い方が良いかどうか','近い過ぎないかどうか','近い方が良ければ','近すぎなければ'] },
+            { text: '歌う前に温かい飲み物を飲んで、喉を温めると高い声も（　）と聞いた。', options: ['出しやすくなる','出すことになった','出し続けてみる','出してみようとした'] },
+            { text: '森「ねえ、来週の金曜日の夜、山下さんも予定を空けて（　）？」\n山下「え、いいけど。どうして？」\n森「新入生に歓迎会をするから、手伝ってほしいんだ」', options: ['いればいい','おいたでしょう','いるんじゃない','おいてくれない'] }
+          ]
+        },
+        {
+          key: 'm7', title: '問題２',
+          instruction: '次の文の　★　に入る最も良いものを、１・２・３・４から一つ選びなさい。',
+          items: [
+            { text: '今日は、久しぶりに実家___ ★ ___過ごした。', options: ['で','を','5人','楽しい休み'] },
+            { text: '駅前の店のラーメンは、濃い___ ___ ★ ___が、私はちょっと苦手だ。', options: ['味が','いい','好きな人には','かも知れない'] },
+            { text: '久しぶりに故郷に帰ったが、昔は何もなかった\n___ ___ ★ ___見て驚いた。', options: ['のを','すっかり','駅の周りが','変わっている'] },
+            { text: 'これまでの人生の中で___ ___ ★ ___日はない。', options: ['日ほど','自分の子供が','嬉しかった','生まれた'] },
+            { text: '今回の彼の新曲、友情がテーマになっている___ ___ ★ ___大きく違う。', options: ['彼の曲と','発表されてきた','という点で','これまでに'] }
+          ]
+        },
+        {
+          key: 'm8', title: '問題３',
+          instruction: '次の文章を読んで、19から23の中に入る最も良いものを、１・２・３・４から一つ選びなさい。',
+          passage: '以下の文章は、留学生が書いた作文である。\n\n「便利」ということ\nソルギョンイル\n\n最近、電気製品の店に行くと、パンが焼ける炊飯器や、部屋の空気もきれいにする掃除機など、一台でいろいろなことができる商品が多いと感じます。私は、一台でいろいろできるのは便利なので、そういう商品が増えるのは良いことだと思っていました。でも、先日、（１９）があって、少し考えが変わりました。\n\nその日、私は店でDVDの機械を見ていました。（２０）、そこに一人の客がやってきて、店員にDVDが見れられる機械が欲しいと相談を始めました。店員は、その人の家にビデオがたくさんあるという話を聞いて、DVDとビデオの両方が見られてダビングでもできるものを紹介しました。私は便利そうだと思いました。でも、その人は、いろいろできるものは使いにくそうだと（２１）。結局、その人はDVDだけが見られる機械を買って行きました。\n\n私は、一台でいろいろなことができるもの（２２）便利だと思います。でも、それを複雑で使いにくいと感じる人もいます。そのことを知って、どういうことを「便利」だと思うかは人によって違うのだと（２３）。',
+          items: [
+            { text: '（１９）に入るものはどれですか。', options: ['こんなこと','こんなもの','そんなこと','そんなもの'] },
+            { text: '（２０）に入るものはどれですか。', options: ['また','すると','だから','そのうえ'] },
+            { text: '（２１）に入るものはどれですか。', options: ['言いました','言ってもらえました','言わせました','言わされました'] },
+            { text: '（２２）に入るものはどれですか。', options: ['よりも','のほかは','までは','の方が'] },
+            { text: '（２３）に入るものはどれですか。', options: ['考えているからです','考えていたのでしょう','考えるようになりました','考えただろうと思います'] }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // 問題冊子内のオレンジ色マークと直接照合して作成（問題24以降の読解は別ファイル「dokkai」。問題14のみ冊子内に色指定なし、文脈から判断）
+  const ANSWER_KEY = {
+    m1_1:4, m1_2:2, m1_3:4, m1_4:4, m1_5:3, m1_6:1, m1_7:2, m1_8:1,
+    m2_1:3, m2_2:2, m2_3:4, m2_4:1, m2_5:3, m2_6:2,
+    m3_1:3, m3_2:4, m3_3:2, m3_4:1, m3_5:2, m3_6:4, m3_7:1, m3_8:4, m3_9:3, m3_10:2, m3_11:4,
+    m4_1:4, m4_2:1, m4_3:3, m4_4:2, m4_5:1,
+    m5_1:3, m5_2:1, m5_3:4, m5_4:1, m5_5:2,
+    m6_1:3, m6_2:3, m6_3:1, m6_4:2, m6_5:2, m6_6:4, m6_7:2, m6_8:4, m6_9:1, m6_10:4, m6_11:3, m6_12:1, m6_13:4,
+    m7_1:4, m7_2:2, m7_3:4, m7_4:1, m7_5:2,
+    m8_1:1, m8_2:2, m8_3:1, m8_4:4, m8_5:3
+  };
+  const UNCERTAIN_QIDS = new Set();
+  const EXCLUDED_QIDS = new Set();
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderPromptHtml(text){
+    return escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/（\s*）/g, '<span class="blank">（　）</span>')
+      .replace(/_{2,}/g, '<span class="blank">＿＿＿</span>')
+      .replace(/★/g, '<span class="star">★</span>')
+      .replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderOptionHtml(text){
+    return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<span class="target-word">$1</span>');
+  }
+
+  function renderPassageHtml(text){
+    return text.split(/\n\n+/).map(function(para){
+      let html = escapeHtml(para)
+        .replace(/\n/g, '<br>')
+        .replace(/（(\d+)）/g, '<span class="pnum">（$1）</span>');
+      return '<p class="passage-p">' + html + '</p>';
+    }).join('');
+  }
+
+  function flattenMondaiItems(m){
+    const list = [];
+    let idx = 0;
+    const sources = m.clusters
+      ? m.clusters.reduce((acc, c) => acc.concat(c.items), [])
+      : m.items;
+    sources.forEach(item => {
+      idx++;
+      list.push({ item: item, idx: idx, qid: m.key + '_' + idx });
+    });
+    return list;
+  }
+
+  function renderQuestionHtml(m, entry){
+    const item = entry.item, idx = entry.idx, qid = entry.qid;
+    const flag = UNCERTAIN_QIDS.has(qid) ? '<span class="uncertain-flag">要確認</span>' : '';
+    let html = '<div class="q" data-qid="' + qid + '">';
+    html += '  <div class="qnum">' + idx + '</div>';
+    html += '  <div class="qbody">';
+    html += '    <p class="qtext">' + renderPromptHtml(item.text) + flag + '</p>';
+    html += '    <div class="options" role="radiogroup" aria-label="' + escapeHtml(m.title) + '(' + idx + ')">';
+    item.options.forEach((opt, i) => {
+      html += '<label class="opt">';
+      html += '  <input type="radio" name="' + qid + '" value="' + (i + 1) + '" data-text="' + escapeHtml(opt) + '">';
+      html += '  <span class="bubble">' + (i + 1) + '</span>';
+      html += '  <span class="opt-text">' + renderOptionHtml(opt) + '</span>';
+      html += '</label>';
+    });
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  const formEl = document.getElementById('form');
+  let totalQuestions = 0;
+
+  TEST_DATA.forEach(part => {
+    const partEl = document.createElement('section');
+    partEl.className = 'part';
+    partEl.innerHTML = '<h2>' + escapeHtml(part.title) + '</h2>';
+
+    part.mondai.forEach(m => {
+      const mEl = document.createElement('div');
+      mEl.className = 'mondai';
+      let html = '';
+      html += '<div class="mondai-head"><div class="mondai-badge">' + m.key.replace('m','') + '</div><div class="mondai-title">' + escapeHtml(m.title) + '</div></div>';
+      html += '<p class="mondai-instruction">' + escapeHtml(m.instruction) + '</p>';
+
+      if (m.passage) {
+        html += '<div class="passage">' + renderPassageHtml(m.passage) + '</div>';
+      }
+
+      if (m.clusters) {
+        let idx = 0;
+        m.clusters.forEach(cluster => {
+          if (cluster.passage) {
+            html += '<div class="passage">' + renderPassageHtml(cluster.passage) + '</div>';
+          }
+          cluster.items.forEach(item => {
+            idx++;
+            totalQuestions++;
+            html += renderQuestionHtml(m, { item: item, idx: idx, qid: m.key + '_' + idx });
+          });
+        });
+      } else {
+        flattenMondaiItems(m).forEach(entry => {
+          totalQuestions++;
+          html += renderQuestionHtml(m, entry);
+        });
+      }
+
+      mEl.innerHTML = html;
+      partEl.appendChild(mEl);
+    });
+
+    formEl.appendChild(partEl);
+  });
+
+  document.getElementById('targetEmailLabel').textContent = CONFIG.teacherEmail;
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const unansweredLabel = document.getElementById('unansweredLabel');
+
+  function updateProgress(){
+    let answered = 0;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (checked) {
+        answered++;
+        if (qEl) qEl.classList.add('answered');
+      } else if (qEl) {
+        qEl.classList.remove('answered');
+      }
+    })));
+    progressFill.style.width = (answered / totalQuestions * 100) + '%';
+    progressLabel.textContent = '回答済み: ' + answered + ' / ' + totalQuestions;
+    const remaining = totalQuestions - answered;
+    unansweredLabel.textContent = remaining > 0 ? ('未回答: ' + remaining + '問') : 'すべて回答済みです';
+    unansweredLabel.className = remaining > 0 ? 'unanswered-note' : '';
+    return answered;
+  }
+
+  formEl.addEventListener('change', function(){
+    updateProgress();
+    if (graded) gradeQuestions();
+  });
+  updateProgress();
+
+  (function(){
+    const timerEl = document.getElementById('timerBadge');
+    if (!timerEl) return;
+    const LIMIT_SECONDS = 40 * 60;
+    const startTime = Date.now();
+    let timerId;
+    function formatTime(sec){
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function tick(){
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = LIMIT_SECONDS - elapsed;
+      if (remaining <= 0) {
+        timerEl.textContent = '残り時間 0:00（時間切れ）';
+        timerEl.classList.add('timer-over');
+        clearInterval(timerId);
+        if (!sendBtn.disabled) sendReport(true);
+        return;
+      }
+      timerEl.textContent = '残り時間 ' + formatTime(remaining);
+      timerEl.classList.toggle('timer-warn', remaining <= 300);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  })();
+
+  function buildReport(){
+    const name = document.getElementById('studentName').value.trim();
+    const lines = [];
+    lines.push(CONFIG.testName + ' 解答');
+    lines.push('お名前: ' + (name || '（未入力）'));
+    lines.push('送信日時: ' + new Date().toLocaleString('ja-JP'));
+    lines.push('');
+    let answered = 0;
+    let correct = 0;
+    let scoredTotal = 0;
+    TEST_DATA.forEach(part => {
+      lines.push('■ ' + part.title);
+      part.mondai.forEach(m => {
+        lines.push('【' + m.title + '】');
+        flattenMondaiItems(m).forEach(entry => {
+          const qid = entry.qid;
+          const checked = formEl.querySelector('input[name="' + qid + '"]:checked');
+          const isExcluded = EXCLUDED_QIDS.has(qid);
+          const answerKey = ANSWER_KEY[qid];
+          if (checked) answered++;
+
+          let mark = '';
+          if (isExcluded) {
+            mark = '（採点対象外）';
+          } else {
+            scoredTotal++;
+            const isCorrect = checked && parseInt(checked.value, 10) === answerKey;
+            if (isCorrect) {
+              correct++;
+              mark = ' ✓';
+            } else {
+              mark = ' ✗（正解: ' + answerKey + '）';
+            }
+          }
+          if (UNCERTAIN_QIDS.has(qid)) mark += ' ※要確認';
+
+          lines.push('(' + entry.idx + ') → ' + (checked ? checked.value + '. ' + checked.dataset.text : '未回答') + mark);
+        });
+        lines.push('');
+      });
+    });
+    lines.push('----');
+    lines.push('回答済み: ' + answered + ' / ' + totalQuestions);
+    lines.push('得点: ' + correct + ' / ' + scoredTotal + '点');
+    return {
+      subject: CONFIG.testName + ' 解答 - ' + (name || '無記名') + '（' + correct + '/' + scoredTotal + '点）',
+      body: lines.join('\n'),
+      answered: answered,
+      correct: correct,
+      scoredTotal: scoredTotal
+    };
+  }
+
+  const resultPanel = document.getElementById('resultPanel');
+  const scoreNumEl = document.getElementById('scoreNum');
+  const scoreTotalEl = document.getElementById('scoreTotal');
+  let graded = false;
+
+  function gradeQuestions(){
+    graded = true;
+    TEST_DATA.forEach(part => part.mondai.forEach(m => flattenMondaiItems(m).forEach(entry => {
+      const qid = entry.qid;
+      const qEl = formEl.querySelector('.q[data-qid="' + qid + '"]');
+      if (!qEl || EXCLUDED_QIDS.has(qid)) return;
+      const checked = qEl.querySelector('input[name="' + qid + '"]:checked');
+      const answerKey = ANSWER_KEY[qid];
+      const isCorrect = !!checked && parseInt(checked.value, 10) === answerKey;
+
+      qEl.classList.remove('q-correct', 'q-wrong');
+      qEl.classList.add(isCorrect ? 'q-correct' : 'q-wrong');
+
+      const oldBadge = qEl.querySelector('.q-result-badge');
+      if (oldBadge) oldBadge.remove();
+      const badge = document.createElement('span');
+      badge.className = 'q-result-badge ' + (isCorrect ? 'correct' : 'wrong');
+      badge.textContent = isCorrect ? '✓ 正解' : '✗ 不正解';
+      qEl.querySelector('.qtext').appendChild(badge);
+
+      qEl.querySelectorAll('.opt').forEach((optEl, i) => {
+        optEl.classList.remove('opt-correct-answer', 'opt-wrong-selected');
+        const optValue = i + 1;
+        if (optValue === answerKey) optEl.classList.add('opt-correct-answer');
+        if (checked && parseInt(checked.value, 10) === optValue && !isCorrect) optEl.classList.add('opt-wrong-selected');
+      });
+    })));
+  }
+
+  function showResult(report){
+    scoreNumEl.textContent = report.correct;
+    scoreTotalEl.textContent = report.scoredTotal;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    gradeQuestions();
+  }
+
+  const sendBtn = document.getElementById('sendBtn');
+  const sendStatus = document.getElementById('sendStatus');
+  const sendBtnDefaultLabel = sendBtn.textContent;
+
+  function sendReport(auto){
+    const report = buildReport();
+    showResult(report);
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = '送信中…';
+    sendStatus.textContent = auto ? '制限時間になったため、自動的に送信しています…' : '';
+    sendStatus.className = 'send-status';
+
+    const studentEmail = document.getElementById('studentEmail').value.trim();
+    const payload = {
+      _subject: report.subject + (auto ? '（制限時間超過による自動送信）' : ''),
+      _captcha: 'false',
+      お名前: document.getElementById('studentName').value.trim() || '無記名',
+      得点: report.correct + ' / ' + report.scoredTotal + '点',
+      解答内容: report.body
+    };
+    if (studentEmail) payload._replyto = studentEmail;
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.teacherEmail), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      return res.json();
+    }).then(function(){
+      sendBtn.textContent = '送信しました ✓';
+      sendStatus.textContent = auto ? '制限時間になったため、自動的に先生へ送信しました。' : '先生に送信しました。';
+      sendStatus.className = 'send-status send-status-ok';
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendBtnDefaultLabel;
+      sendStatus.textContent = '送信に失敗しました。「解答をコピー」ボタンで代わりに送ってください。';
+      sendStatus.className = 'send-status send-status-error';
+    });
+  }
+
+  sendBtn.addEventListener('click', function(){
+    sendReport(false);
+  });
+
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', function(){
+    const report = buildReport();
+    showResult(report);
+    const text = '件名: ' + report.subject + '\n\n' + report.body;
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(() => {
+        window.prompt('以下をコピーしてください:', text);
+      });
+    } else {
+      window.prompt('以下をコピーしてください:', text);
+    }
+  });
+})();
+</script>
